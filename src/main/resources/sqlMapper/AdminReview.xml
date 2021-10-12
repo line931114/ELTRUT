@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 예시입니다. 바뀔수있어요 참고 url
+https://docs.google.com/spreadsheets/d/1hiOiXAhKEaYwWnRQT8_21cMwZljb3FBsDpCIzZpQNFs/edit#gid=58550698
+-->
+<mapper namespace="adminReview">
+
+<select id="reviewList" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+               SELECT ORDER_NUMBER, REVIEW_NUMBER, MEMBER_ID, REVIEW_CONTENT, REVIEW_IMAGE,
+                REVIEW_TITLE,REVIEW_SCORE, REVIEW_REGDATE
+                FROM REVIEW 
+                ORDER BY REVIEW_NUMBER DESC               
+        ]]>
+        </select>
+        
+        <delete id="reviewDelete" parameterType="hashmap">
+                <![CDATA[
+                        DELETE REVIEW
+                        WHERE
+                                REVIEW_NUMBER = #{REVIEW_NUMBER}
+                ]]>
+        </delete>
+        
+        </mapper>
