@@ -1,5 +1,6 @@
 package b21.spring.login;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -73,4 +74,28 @@ public class LoginController {
 	      mv.setViewName("redirect:/main");
 	      return mv;
 	   }
+	   
+	   @RequestMapping(value="/findform")
+		public ModelAndView findForm(HttpServletRequest request, CommandMap commandMap) throws Exception {
+		 	   ModelAndView mav = new ModelAndView();
+			mav.setViewName("findForm");
+			return mav;
+		}
+	   
+	   @RequestMapping(value="/findform1", method = RequestMethod.POST )
+		public ModelAndView findForm1(HttpServletRequest request, CommandMap commandMap) throws Exception {
+		   System.out.println(0);
+		   ModelAndView mav = new ModelAndView();
+		   Map<String, Object> memberMap=new HashMap<String, Object>();
+		   memberMap=commandMap.getMap();
+		   System.out.println(memberMap);
+			
+		   Map<String, Object> findId = loginService.findId(memberMap);
+		   System.out.println(1);
+
+		   mav.addObject("findId", findId);
+		   System.out.println(2);
+		   mav.setViewName("findForm1");
+		   return mav;
+		}
 	}

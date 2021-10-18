@@ -58,16 +58,18 @@
 	
 	
 	<!-- 아이디찾기 -->
-	<select id="findId" parameterType="hashmap" resultType="string">
+	<select id="findId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_NAME = #{MEMBER_NAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}
+		SELECT MEMBER_ID 
+		FROM MEMBER WHERE MEMBER_NAME = #{MEMBER_NAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}
 	]]>
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="findPW" parameterType="hashmap" resultType="string">
+	<select id="findPW" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT MEMBER_PASSWORD FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID} AND MEMBER_NAME = #{MEMBER_NAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}	
+		SELECT MEMBER_PASSWORD 
+		FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID} AND MEMBER_NAME = #{MEMBER_NAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}	
 		]]>
 	</select>
 	
