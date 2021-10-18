@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface JoinService {
 
-	//х╦©Ь╟║ют
+	//х╦О©╫О©╫О©╫О©╫О©╫О©╫
 	void insertMember(Map<String, Object> map, HttpServletRequest request) throws Exception;
 	
 	int checkMember(Map<String, Object> map) throws Exception;

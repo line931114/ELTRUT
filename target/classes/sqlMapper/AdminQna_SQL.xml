@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	
+	<!-- 관리자페이지 QNA리스트 -->
+	
+	<select id="qnaList" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT
+                        CS_NUMBER,
+                         MEMBER_ID,
+                         GOODS_NUMBER,
+                        CS_CATEGORY,
+                        CS_TITLE,
+                         CS_CONTENT,
+                        CS_IMAGE1,
+                        CS_REGDATE,
+                        CS_REPDATE,
+                        CS_REPTITLE,
+                        CS_REPCONTENT,
+                        CS_HITCOUNT,
+                        CS_SECRET,
+                        CS_LEVEL
+                FROM CS 
+                
+                ORDER BY CS_NUMBER DESC
+        ]]>
+        </select>
+        
+        
+        <!-- QNA 상세보기 -->
+        
+        <select id="selectQnaDetail" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT
+                        CS_NUMBER,
+                         MEMBER_ID,
+                         GOODS_NUMBER,
+                        CS_CATEGORY,
+                        CS_TITLE,
+                         CS_CONTENT,
+                        CS_IMAGE1,
+                        CS_REGDATE,
+                        CS_REPDATE,
+                        CS_REPTITLE,
+                        CS_REPCONTENT,
+                        CS_HITCOUNT,
+                        CS_SECRET,
+                        CS_LEVEL
+                        
+                FROM CS 
+                WHERE 
+                CS_NUMBER = #{CS_NUMBER}
+        ]]>
+
+</select>
+
+<!-- 관리자 페이지 답변달기 -->
+	<insert id="insertQnaReply" parameterType="hashmap">
+        <![CDATA[
+                INSERT INTO CS (
+                        CS_NUMBER,
+                         MEMBER_ID,
+                         GOODS_NUMBER,
+                        CS_CATEGORY,
+                        CS_TITLE,
+                         CS_CONTENT,
+                        CS_IMAGE1,
+                        CS_REGDATE,
+                        CS_REPDATE,
+                        CS_REPTITLE,
+                        CS_REPCONTENT,
+                        CS_HITCOUNT,
+                        CS_SECRET,
+                        CS_LEVEL
+)
+                VALUES 
+                        (
+                        CS_NUMBER_SEQ.NEXTVAL,
+                        #{MEMBER_ID},
+                        #{GOODS_NUMBER},
+                        #{CS_CATEGORY},
+                        #{CS_TITLE},
+                        #{CS_CONTENT},
+                        #{CS_IMAGE1},
+                        #{CS_REGDATE},
+                        null,
+                        null,
+                        null,
+                        0,
+                        #{ CS_SECRET},
+                        0
+                        
+                        
+                       
+)
+        ]]>
+</insert>
+	
+</mapper>
