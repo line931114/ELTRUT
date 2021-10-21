@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myPage">
+
+
+<!--회원정보출력  -->
+<select id="info" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID=#{MEMBER_ID}
+	]]>
+	</select>
+	<select id="pwCheck" parameterType="hashmap" resultType="hashmap">
+	SELECT MEMBER_PASSWORD 
+		FROM MEMBER 
+        WHERE MEMBER_PASSWORD =#{MEMBER_PASSWORD}
+	</select>
+	
+	
+	<!--회원정보수정  -->
+	<update  id="memberUpdate" parameterType="hashmap" >
+                <![CDATA[
+                UPDATE MEMBER
+                SET
+                        MEMBER_ZIPCODE = #{MEMBER_ZIPCODE},
+                        MEMBER_ADDRESS1 = #{MEMBER_ADDRESS1},
+                        MEMBER_ADDRESS2 = #{MEMBER_ADDRESS2},
+                        MEMBER_PHONE = #{MEMBER_PHONE},
+                        MEMBER_EMAIL = #{MEMBER_EMAIL},
+                        MEMBER_NAME = #{MEMBER_NAME}
+                WHERE MEMBER_ID = #{MEMBER_ID}
+                ]]>
+        </update>
+	
+	
+	</mapper>

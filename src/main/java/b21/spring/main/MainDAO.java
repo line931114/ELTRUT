@@ -13,4 +13,17 @@ public class MainDAO extends AbstractDAO{
 	public List<Map<String,Object>>selectGoods(Map<String,Object>map)throws Exception{
 		return (List<Map<String,Object>>)selectList("goods.GoodsList",map);
 	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>search(Map<String,Object>map)throws Exception{
+		return (List<Map<String,Object>>)selectList("goods.search",map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> header_baskets(Map<String,Object>map)throws Exception{
+		
+		
+		return (Map<String,Object>) selectOne("member.header_basket",map);
+	}
+	
+	
 }

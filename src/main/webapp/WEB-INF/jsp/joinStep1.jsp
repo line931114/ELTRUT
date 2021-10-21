@@ -64,7 +64,8 @@ function joinform_check() {
   var email = document.getElementById("MEMBER_EMAIL");
   var phone = document.getElementById("MEMBER_PHONE");
   var idDuplication = document.getElementById("idDuplication");
-
+  var agreement = document.getElementById("agreement");
+  
   if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.value)
     alert("아이디를 입력하세요.");
     id.focus(); //focus(): 커서가 깜빡이는 현상, blur(): 커서가 사라지는 현상
@@ -74,7 +75,20 @@ function joinform_check() {
       alert("아이디 중복체크를 해주세요.");
       return false;
   } 
-
+   
+   if(agreement.value != "agCheck"){
+	      alert("이용약관을 동의 해주세요.");
+	      return false;
+	  }; 
+	  
+	  var idRegExp = /^[a-zA-Z0-9]{4,12}$/; //아이디 유효성 검사
+	  if (!idRegExp.test(id.value)) {
+	      alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+	      id.value = "";
+	      id.focus();
+	      return false;
+	  };
+	  
   if (name.value == "") {
     alert("이름을 입력하세요.");
     name.focus();
@@ -135,6 +149,13 @@ function inputIdChk(){
     document.getElementById("idDuplication").value ="idUncheck";
 }
 
+function moveAgreement(){ 
+	winObject = window.open("agreement", "agCheck", "width=400, height=350, scrollbars = yes"); 
+
+	}
+function agreementCheck(){
+    document.getElementById("agreement").value ="agUncheck";
+}
 </script>
 <title>Insert title here</title>
 </head>
@@ -188,6 +209,8 @@ function inputIdChk(){
 	
 
 	</table>
+	<input type="button" value="이용약관동의" onclick="moveAgreement()">
+	<input type="hidden" id="agreement" name="agreement" value="agUncheck" >
 	
 	 <input type="button" value="이전페이지로" onclick="history.back();">
     <input type="button" value="가입하기" onclick="joinform_check();">

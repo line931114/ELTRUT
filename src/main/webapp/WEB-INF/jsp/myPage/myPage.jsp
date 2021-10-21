@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+마이페이지입니다.
+<br><br>
+<a href="memberInfo">개인정보</a>
+<a href="">주소록</a>
+<a href="">구매내역</a>
 
-<tiles:insertAttribute name="header"/>
-
-<tiles:insertAttribute name="body"/>
-
-	
-
-<tiles:insertAttribute name="footer"/>  
 </body>
 </html>

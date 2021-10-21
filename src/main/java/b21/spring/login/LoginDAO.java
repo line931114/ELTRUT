@@ -22,6 +22,14 @@ public class LoginDAO extends AbstractDAO{
 	public Map<String,Object> findPw(Map<String,Object>map) throws Exception{
 		return (Map<String,Object>)selectOne("member.findPw",map);
 	}
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> findFail(Map<String,Object>map) throws Exception{
+		return (Map<String,Object>)selectOne("member.findPw_fail",map);
+	}
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> findFail0(Map<String,Object>map) throws Exception{
+		return (Map<String,Object>)selectOne("member.findId_fail",map);
+	}
 	
 	
 }

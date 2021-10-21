@@ -19,7 +19,7 @@
 		<td>이용약관</td>
 		<td>MON-FRI AM 10:00~PM 06:00</td>
 		<td>#21B_이광호</td>
-		<td><a href="login/login.do">로그인</a></td>
+		<td><a href="/ELTRUT/loginForm">로그인</a></td>
 	</tr>
 	<tr>
 		<td>개인정보보호</td>
@@ -31,7 +31,7 @@
 		<td></td>
 		<td>SAT,SUN,HOLI CLOSED</td>
 		<td>#21B_손수완</td>
-		<td><a href="goods/detail.do">상품페이지 이동</a></td>
+		<td><a href="/ELTRUT/main">메인페이지이동</a></td>
 	</tr>
 	<tr>
 		<td>사업정보확인</td>
@@ -43,7 +43,6 @@
 		<td></td>
 		<td></td>
 		<td>#21B_정원철</td>
-		<td><a href="goods/detail.do">상품페이지 이동</a></td>
 	</tr>
 	<tr>
 		<td></td>

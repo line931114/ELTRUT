@@ -75,27 +75,62 @@ public class LoginController {
 	      return mv;
 	   }
 	   
-	   @RequestMapping(value="/findform")
+	   @RequestMapping(value="/findForm")
 		public ModelAndView findForm(HttpServletRequest request, CommandMap commandMap) throws Exception {
 		 	   ModelAndView mav = new ModelAndView();
 			mav.setViewName("findForm");
 			return mav;
 		}
 	   
-	   @RequestMapping(value="/findform1", method = RequestMethod.POST )
+	   @RequestMapping(value="/findForm1", method = RequestMethod.POST )
 		public ModelAndView findForm1(HttpServletRequest request, CommandMap commandMap) throws Exception {
-		   System.out.println(0);
 		   ModelAndView mav = new ModelAndView();
 		   Map<String, Object> memberMap=new HashMap<String, Object>();
 		   memberMap=commandMap.getMap();
-		   System.out.println(memberMap);
-			
+		   
+		   Map<String, Object> chk = loginService.findFail0(memberMap);
+		      if (chk == null) {	//아이디 값이 없으면
+		         mav.setViewName("findForm");
+		         mav.addObject("message", "조회된 정보가 없습니다. 다시 입력해주세요.");
+		         return mav;
+		      }else {
+		   
 		   Map<String, Object> findId = loginService.findId(memberMap);
-		   System.out.println(1);
 
 		   mav.addObject("findId", findId);
-		   System.out.println(2);
 		   mav.setViewName("findForm1");
 		   return mav;
+		      }
 		}
+	   
+	   @RequestMapping(value="/findForm2")
+		public ModelAndView findForm2(HttpServletRequest request, CommandMap commandMap) throws Exception {
+		 	   ModelAndView mav = new ModelAndView();
+			mav.setViewName("findForm2");
+			return mav;
+		}
+	   
+	   @RequestMapping(value="/findForm3", method = RequestMethod.POST )
+		public ModelAndView findForm3(HttpServletRequest request, CommandMap commandMap) throws Exception {
+		   ModelAndView mav = new ModelAndView();
+		   Map<String, Object> memberMap=new HashMap<String, Object>();
+		   memberMap=commandMap.getMap();
+		   
+		   Map<String, Object> chk = loginService.findFail(memberMap);
+		      if (chk == null) {	//아이디 값이 없으면
+		         mav.setViewName("findForm2");
+		         mav.addObject("message", "조회된 정보가 없습니다. 다시 입력해주세요.");
+		         return mav;
+		      }else {
+				   Map<String, Object> findPw = loginService.findPw(memberMap);
+
+				   mav.addObject("findPw", findPw);
+				   mav.setViewName("fidnForm3");
+				   return mav;	
+		      }
+		   
+
+		}
+	   
+	   
 	}

@@ -14,7 +14,10 @@
 	<!-- 컨트롤러를 자동으로 등록할 수 있도록 -->
 	<context:component-scan base-package="b21"></context:component-scan>
 
-
+	<!--css 자동 등록  -->
+	<mvc:resources location="/css/**" mapping="/css/**"/>
+	
+	
 	<!-- Map을 이용해 데이터를 주고 받을 수 있도록 -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
@@ -41,5 +44,18 @@
 		</property> 
 	</bean>
 	 <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com" />
+    <property name="port" value="587" />
+    <property name="username" value="dlrhkdxod@gmail.com" />
+    <property name="password" value="dlrhkdgh1!" />
+    <property name="javaMailProperties">
+    <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+    </props>
+    </property>
+  </bean>
     
 </beans>

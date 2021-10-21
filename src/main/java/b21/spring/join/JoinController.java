@@ -30,6 +30,13 @@ public class JoinController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/agreement")
+	public ModelAndView agreement() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("agreement");
+		return mav;
+	}
+	
 	@RequestMapping(value="/joinComplete", method=RequestMethod.POST)
 	public ModelAndView joinComplete(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
