@@ -160,5 +160,7 @@ function updateform_check() {
 	</table>
 	</form>
 	 <input type="button" value="회원정보수정하기" onclick="updateform_check()">
+	 <input type="button" value="회원탈퇴하기" onclick="location.href='deleteForm'">
+	 <input type="button" value="이전페이지로" onclick="location.href='myPage'">
 </body>
 </html>

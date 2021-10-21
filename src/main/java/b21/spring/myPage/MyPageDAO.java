@@ -19,4 +19,15 @@ public class MyPageDAO extends AbstractDAO{
 	public Map<String,Object> memberUpdate(Map<String,Object> map) throws Exception{
 		return (Map<String,Object>)selectOne("myPage.memberUpdate",map);
 	}
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> memberDelete(Map<String,Object> map) throws Exception{
+		return (Map<String,Object>)selectOne("myPage.memberDelete",map);
+	}
+	
+	//여기서부터 구매내역
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> orderInfo(Map<String,Object> map) throws Exception{
+		return (List<Map<String,Object>>)selectList("myPage.orderInfo",map);
+	}
 }

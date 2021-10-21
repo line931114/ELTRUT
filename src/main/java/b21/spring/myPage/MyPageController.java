@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.eltrut.CommandMap;
@@ -120,4 +121,55 @@ public class MyPageController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/deleteForm")
+	public ModelAndView deleteForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myPage/deleteForm");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/deleteMember")
+	@ResponseBody
+	public ModelAndView memberDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		Map<String,Object> memberInfo = myPageService.memberInfo(commandMap.getMap());
+		System.out.println("비밀번호 1 : " + memberInfo.get("MEMBER_PASSWORD") + "\n비밀번호 2 : " + commandMap.get("pw"));
+	       
+		if(memberInfo.get("MEMBER_PASSWORD").equals(commandMap.get("pw"))) {
+			myPageService.memberDelete(commandMap.getMap());
+				session.invalidate();
+				mav.setViewName("myPage/deleteForm");
+				mav.addObject("message", "1");
+				return mav;
+						
+		}else {
+			 mav.setViewName("myPage/deleteForm");
+	         mav.addObject("message", "2");
+	         return mav;
+		}		
+	}
+	
+	//여기서 부터 마이페이지->구매내역
+	@RequestMapping(value="/orderInfo")
+	public ModelAndView order(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.orderInfo(commandMap.getMap());
+		System.out.println(orderInfo);
+		
+		mav.addObject("O",orderInfo);
+		mav.setViewName("myPage/orderInfo");
+		return mav;
+	}
 }

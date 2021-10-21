@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>MAIN</title>
+<script>
+if('${message}' != ""){
+	alert('${message}');
+}
+</script>
 </head>
 <body>
 <center><h1>메인입니당</h1></center>

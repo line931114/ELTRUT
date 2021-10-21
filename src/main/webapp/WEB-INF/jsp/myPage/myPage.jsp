@@ -13,7 +13,7 @@
 <br><br>
 <a href="memberInfo">개인정보</a>
 <a href="">주소록</a>
-<a href="">구매내역</a>
+<a href="orderInfo">구매내역</a>
 
 </body>
 </html>

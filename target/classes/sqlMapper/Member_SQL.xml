@@ -6,7 +6,9 @@
 	<!-- 로그인, 회원정보수정 -->
 	<select id="login" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT * FROM MEMBER WHERE MEMBER_ID = #{MEMBER_ID}
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_ID = #{MEMBER_ID} AND MEMBER_GRADE = 0
 	]]>
 	</select>
 	
@@ -252,7 +254,8 @@
 	<!--장바구니 카운트  -->
 	<select id="header_basket" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		select count(*) as c from cart where member_id=#{MEMBER_ID} 
+		select count(*) as c from cart 
+		where MEMBER_ID=#{MEMBER_ID}
 		
 	]]>
 	</select>

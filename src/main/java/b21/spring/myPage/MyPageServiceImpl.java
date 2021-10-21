@@ -21,5 +21,15 @@ public class MyPageServiceImpl implements MyPageService{
 		// TODO Auto-generated method stub
 		return myPageDAO.memberUpdate(map);
 	}
+	@Override
+	public Map<String, Object> memberDelete(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.memberDelete(map);
+	}
+	@Override
+	public List<Map<String,Object>> orderInfo(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.orderInfo(map);
+	}
 
 }

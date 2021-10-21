@@ -34,5 +34,27 @@
                 ]]>
         </update>
 	
+	<!--회원탈퇴  -->
+	<update id="memberDelete" parameterType="hashmap">
+      	<![CDATA[
+          UPDATE MEMBER
+             SET MEMBER_GRADE = 1
+         WHERE MEMBER_NUMBER = #{MEMBER_NUMBER}
+      	]]>
+   		</update>
+	
+	<!--여기서부터 마이페이지-구매내역  -->
+	
+	<select id="orderInfo" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	
+		select goods_thumbnail, order_number, order_state, order_total_price, member_id, order_date
+		from goods a , orderlist b
+		where a.goods_number = b.goods_number and member_id=#{MEMBER_ID}
+	]]>
+	</select>
+	
+	
+	
 	
 	</mapper>
