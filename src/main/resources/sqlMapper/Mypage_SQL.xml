@@ -75,7 +75,7 @@
 	<insert id="cancel" parameterType="hashmap">
 	<![CDATA[
 				INSERT INTO CANCEL
-                (CANCEL_NUMBER, ORDER_NUMBER, CANCEL_CONTENT, CANCEL_REGDATE,
+                (CANCEL_NUMBER, ORDER_NUMBER, CANCEL_CONTENT, TO_CHAR(CANCEL_REGDATE, 'YYYY-MM-DD') AS CANCEL_REGDATE,
                  CANCEL_TITLE, CANCEL_CATEGORY
                  ) VALUES (
                  CS_NUMBER_SEQ.NEXTVAL, #{ORDER_NUMBER}, #{CANCEL_CONTENT}, SYSDATE,
@@ -87,7 +87,8 @@
 	<select id="enquiryCheck" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
-		 select *  from cancel
+		 select CANCEL_NUMBER,ORDER_NUMBER,TO_CHAR(CANCEL_REGDATE, 'YYYY-MM-DD') AS CANCEL_REGDATE ,CANCEL_TITLE,CANCEL_CONTENT,CANCEL_CATEGORY
+		 from cancel
         where order_number in (select order_number 
         						from orderlist
                 				 where member_id=#{MEMBER_ID})
@@ -95,25 +96,79 @@
 	</select>
 	
 	
-	<delete id="enquirydelete" parameterType="hashmap">
+	<delete id="enquiryDelete" parameterType="hashmap">
 	<![CDATA[
 	             delete 
                  from cancel
-                 where cancel_number=${CANCEL_NUMBER}
+                 where cancel_number=#{CANCEL_NUMBER}
 	
 	]]>
 	</delete>
 	
 	
+	<select id="enquiryModifyForm" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	
+			select *
+			from cancel
+			where cancel_number = #{CANCEL_NUMBER}
+	]]>
+	</select>
+	
+	<update  id="enquiryModify" parameterType="hashmap" >
+                <![CDATA[
+            UPDATE CANCEL
+			SET CANCEL_TITLE= #{CANCEL_TITLE}, 
+			CANCEL_CONTENT= #{CANCEL_CONTENT}, 
+			CANCEL_CATEGORY= #{CANCEL_CATEGORY},
+			CANCEL_REGDATE=SYSDATE
+			WHERE CANCEL_NUMBER=#{CANCEL_NUMBER}
+                ]]>
+        </update>
+	
+	
+	<!--내문의사항-QNA 확인  -->
 	
 	
 	
+	<select id="qnaCheck" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	
+			SELECT CS_NUMBER, GOODS_NUMBER, MEMBER_ID, 
+			CS_CATEGORY, CS_TITLE, CS_CONTENT, CS_IMAGE1, TO_CHAR(CS_REGDATE, 'YYYY-MM-DD') as CS_REGDATE
+			FROM CS
+	]]>
+	</select>
+	
+	<delete id="qnaDelete" parameterType="hashmap">
+	<![CDATA[
+	             delete 
+                 from CS
+                 where CS_number=#{CS_NUMBER}
+	
+	]]>
+	</delete>
 	
 	
+	<select id="qnaModifyForm" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
 	
+			select *
+			from CS
+			where cs_number = #{CS_NUMBER}
+	]]>
+	</select>
 	
-	
-	
+	<update  id="qnaModify" parameterType="hashmap" >
+                <![CDATA[
+            UPDATE CS
+			SET CS_TITLE= #{CS_TITLE}, 
+			CS_CONTENT= #{CS_CONTENT}, 
+			CS_CATEGORY= #{CS_CATEGORY},
+			CS_REGDATE=SYSDATE, CS_IMAGE1=#{CS_IMAGE1}
+			WHERE CS_NUMBER=#{CS_NUMBER}
+                ]]>
+     </update>
 	
 	
 	</mapper>

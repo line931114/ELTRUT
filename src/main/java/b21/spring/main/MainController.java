@@ -1,15 +1,19 @@
 package b21.spring.main;
 
-import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.sql.Date;
 
 import javax.annotation.Resource;
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,8 +51,16 @@ public class MainController {
 	public ModelAndView main(CommandMap commandMap,HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		List<Map<String,Object>>goods = mainService.goodsList(commandMap.getMap());
+		
+	
+		
+		System.out.println(goods);
+		
+		
 		mav.setViewName("main");
 		mav.addObject("goods", goods);
+		
+		
 		
 		HttpSession session=request.getSession();
 		String MEMBER_ID=(String) session.getAttribute("MEMBER_ID");
@@ -80,6 +92,11 @@ public class MainController {
 	}
 	
 	
-	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,true));
+	}
+
 	
 }

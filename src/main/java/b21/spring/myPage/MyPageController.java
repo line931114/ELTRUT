@@ -1,5 +1,6 @@
 package b21.spring.myPage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,12 +8,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.SysexMessage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.eltrut.CommandMap;
@@ -253,11 +257,11 @@ public class MyPageController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/enquirydelete")
+	@RequestMapping(value="/enquiryDelete")
 	public ModelAndView enquirydelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		myPageService.enquirydelete(commandMap.getMap());
+		myPageService.enquiryDelete(commandMap.getMap());
 
 		HttpSession session = request.getSession();
 		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
@@ -272,9 +276,22 @@ public class MyPageController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/enquirymodify")
+	@RequestMapping(value="/enquiryModify")
 	public ModelAndView enquirymodify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
+		Map<String, Object> enquiryModifyForm = myPageService.enquiryModifyForm(commandMap.getMap());
+		
+		mav.addObject("O",enquiryModifyForm);
+		mav.setViewName("myPage/enquiryModify");
+		return mav;
+	}
+	
+	@RequestMapping(value="/enquiryModify" ,method = RequestMethod.POST )
+	public ModelAndView enquirymodify1(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		myPageService.enquiryModify(commandMap.getMap());
 		
 		HttpSession session = request.getSession();
 		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
@@ -288,4 +305,82 @@ public class MyPageController {
 		mav.setViewName("myPage/enquiryCheck");
 		return mav;
 	}
+	
+	@RequestMapping(value="/qnaCheck")
+	public ModelAndView qnaCheck(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
+		System.out.println(qnaCheck);
+		mav.addObject("O",qnaCheck);
+		mav.setViewName("myPage/qnaCheck");
+		return mav;
+	}
+	
+	
+	
+	@RequestMapping(value="/qnaDelete")
+	public ModelAndView qnaDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		myPageService.qnaDelete(commandMap.getMap());
+		
+		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
+		System.out.println(qnaCheck);
+		mav.addObject("O",qnaCheck);
+		mav.setViewName("myPage/qnaCheck");
+		return mav;
+	}
+	
+	@RequestMapping(value="/qnaModify")
+	public ModelAndView qnaModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		Map<String, Object> qnaModify = myPageService.qnaModifyForm(commandMap.getMap());
+		
+		mav.addObject("O",qnaModify);
+		mav.setViewName("myPage/qnaModify");
+		return mav;
+	}
+	
+	@RequestMapping(value="/qnaModify" ,method = RequestMethod.POST )
+	public ModelAndView qnaModify1(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		 final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+
+	      if (multipartHttpServletRequest.getFile("CS_IMAGE1").getOriginalFilename() != "") {
+	         MultipartFile file = multipartHttpServletRequest.getFile("CS_IMAGE1");
+	         String fileName = "CS_IMAGE" + commandMap.get("CS_NUMBER").toString();
+	        
+	         String IMAGEExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+	         System.out.println(IMAGEExtension);
+	         
+	         File file1 = new File(filePath);
+	         if (file1.exists() == false) {
+	            file1.mkdirs(); // 폴더가 존재하지 않으면 폴더 생성
+	         }
+
+	         File uploadFile = new File(filePath + fileName + IMAGEExtension);
+	         System.out.println(uploadFile);
+	         try {
+	        	 file.transferTo(uploadFile);
+	         } catch (Exception e) {
+
+	         }
+	         commandMap.put("CS_IMAGE1", fileName + IMAGEExtension);
+	      }else {
+	    	  commandMap.put("CS_IMAGE1","null");
+	    	  //전달되는 이미지가없을경우 null로?? 전달
+	      }
+	   
+		myPageService.qnaModify(commandMap.getMap());
+		
+		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
+		System.out.println(qnaCheck);
+		mav.addObject("O",qnaCheck);
+		mav.setViewName("myPage/qnaCheck");
+		return mav;
+	}
+	
 }

@@ -53,9 +53,40 @@ public class MyPageServiceImpl implements MyPageService{
 		return myPageDAO.enquiryCheck(map);
 	}
 	@Override
-	public void enquirydelete(Map<String, Object> map) throws Exception {
+	public void enquiryDelete(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		myPageDAO.enquirydelete(map);
+		myPageDAO.enquiryDelete(map);
+	}
+	public void enquiryModify(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		myPageDAO.enquiryModify(map);
+	}
+	
+	
+	@Override
+	public Map<String, Object> enquiryModifyForm(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.enquiryModifyForm(map);
+	}
+	@Override
+	public List<Map<String, Object>> qnaCheck(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.qnaCheck(map);
+	}
+	@Override
+	public void qnaDelete(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		myPageDAO.qnaDelete(map);
+	}
+	@Override
+	public void qnaModify(Map<String, Object> map) throws Exception {
+		myPageDAO.qnaModify(map);
+		
+	}
+	@Override
+	public Map<String, Object> qnaModifyForm(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.qnaModifyForm(map);
 	}
 
 }

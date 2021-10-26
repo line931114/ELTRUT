@@ -34,8 +34,27 @@ public interface MyPageService {
 	//마이페이지- 내 문의사항
 	List<Map<String,Object>> enquiryCheck(Map<String,Object>map)throws Exception;
 
-		//마이페이지-내문의사항-문의내용 삭제하기
-		public void enquirydelete(Map<String,Object>map)throws Exception;
+	//마이페이지-내문의사항-반품교환문의 삭제하기
+	public void enquiryDelete(Map<String,Object>map)throws Exception;
+	
+	//마이페이지-내문의사항-수정
+	public void enquiryModify(Map<String,Object>map)throws Exception;
 		
+	//마이페이지-내문의사항 확인하기 cancel_number
+	Map<String,Object> enquiryModifyForm(Map<String,Object>map)throws Exception;
 
+	
+	List<Map<String,Object>> qnaCheck(Map<String,Object>map)throws Exception;
+
+	//마이페이지-내문의사항-QNA 삭제하기
+	public void qnaDelete(Map<String,Object>map)throws Exception;
+		
+	
+	//마이페이지-내문의사항-QNA 수정
+	public void qnaModify(Map<String,Object>map)throws Exception;
+	
+	
+	Map<String,Object> qnaModifyForm(Map<String,Object>map)throws Exception;
+
+	
 }
