@@ -18,7 +18,9 @@
     <li>
         회원 관리
         <ul>
-            <li>회원 목록</li>
+            <li><a href ="adminMemberList">회원 목록 </a></li>
+            <li><a href ="adminMemberList1">탈퇴한 회원 목록 </a></li>
+           
         </ul>   
     </li>
     <li>
@@ -49,6 +51,6 @@
     </li> 
 </ul>
 </div>
-<a href="logout.do">관리자 계정 로그 아웃</a>
+<a href="logout">관리자 계정 로그 아웃</a>
 </body>
 </html>

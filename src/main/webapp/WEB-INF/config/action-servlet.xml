@@ -17,7 +17,7 @@
 	<!--css 자동 등록  -->
 	<mvc:resources location="/css/**" mapping="/css/**"/>
 	<mvc:resources location="/file/**" mapping="/file/**" />
-	
+	<mvc:resources location="/js/**" mapping="/js/**"/>
 	
 	<!-- Map을 이용해 데이터를 주고 받을 수 있도록 -->
 	<mvc:annotation-driven>

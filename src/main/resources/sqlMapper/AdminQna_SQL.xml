@@ -19,9 +19,7 @@
                         CS_REPDATE,
                         CS_REPTITLE,
                         CS_REPCONTENT,
-                        CS_HITCOUNT,
-                        CS_SECRET,
-                        CS_LEVEL
+                        CS_HITCOUNT,CS_repstate
                 FROM CS 
                 
                 ORDER BY CS_NUMBER DESC
@@ -46,8 +44,7 @@
                         CS_REPTITLE,
                         CS_REPCONTENT,
                         CS_HITCOUNT,
-                        CS_SECRET,
-                        CS_LEVEL
+                        CS_repstate
                         
                 FROM CS 
                 WHERE 
@@ -72,8 +69,7 @@
                         CS_REPTITLE,
                         CS_REPCONTENT,
                         CS_HITCOUNT,
-                        CS_SECRET,
-                        CS_LEVEL
+                       CS_repstate
 )
                 VALUES 
                         (
@@ -89,13 +85,185 @@
                         null,
                         null,
                         0,
-                        #{ CS_SECRET},
-                        0
+                        #{CS_REPSTATE}
                         
                         
                        
 )
         ]]>
 </insert>
+
+
+<!-- 답변 상태에 따른 목록 조회  -->
+<select id="qnaRepState" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT 
+                   CS_NUMBER,
+                         MEMBER_ID,
+                         GOODS_NUMBER,
+                        CS_CATEGORY,
+                        CS_TITLE,
+                         CS_CONTENT,
+                        CS_IMAGE1,
+                        CS_REGDATE,
+                        CS_REPDATE,
+                        CS_REPTITLE,
+                        CS_REPCONTENT,
+                        CS_HITCOUNT,
+                        CS_repstate
+                FROM CS 
+                WHERE 
+                 C.CS_LEVEL = #{isSearch}
+                ORDER BY CS_NUMBER DESC
+        ]]>
+</select>
+
+<!-- 답변상태 완료로 변경 -->
+<update id="updateReplyStep" parameterType="hashmap">
+        <![CDATA[
+                UPDATE CS
+                SET 
+                        CS_REPCONTENT=#{CS_REPCONTENT}, 
+                        CS_REPDATE=SYSDATE, 
+                        CS_LEVEL=1
+                WHERE CS_NUMBER = ${CS_NUMBER}
+        ]]>
+</update>
+
+<!-- qna 수정 -->
+<update id="qnaModify" parameterType="hashmap" >
+        <![CDATA[
+                UPDATE CS
+                SET
+                        CS_TITLE = #{CS_TITLE},
+                        CS_CONTENT = #{CS_CONTENT},
+                        CS_IMAGE1 = #{CS_IMAGE1}
+                WHERE CS_NUMBER = #{CS_NUMBER}
+        ]]>
+</update>
+
+<!-- qna 삭제 -->
+<delete id="qnaDelete" parameterType="hashmap" >
+        <![CDATA[
+                DELETE CS
+                WHERE CS_NUMBER = #{CS_NUMBER}
+        ]]>
+</delete>
+
+<!-- qna 답변 삭제 -->
+<update id="qnaReplyDelete" parameterType="hashmap" >
+        <![CDATA[
+                UPDATE CS
+                SET
+                        CS_REPCONTENT = null, 
+                        CS_REPSTATE = '답변대기', 
+                        CS_REPDATE = null
+                WHERE CS_NUMBER = #{CS_NUMBER}
+        ]]>
+</update>
+
+<!-- 멤버ID로 Q&A 목록 조회 -->
+	<select id="qnaSearchMemberList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT 
+			C.CS_NUMBER,
+		        C.CS_CATEGORY,
+		        C.GOODS_NUMBER,
+ 	  	        C.CS_CONTENT,
+  		        C.CS_IMAGE1,
+		        C.CS_REGDATE,
+		        C.CS_HITCOUNT,
+		        C.CS_TITLE,
+		        C.CS_REPDATE,
+		        C.CS_REPSTATE,
+		        C.CS_REPCONTENT,
+		        M.MEMBER_ID
+		FROM CS C, MEMBER M
+		WHERE C.MEMBER_NUMBER = M.MEMBER_NUMBER
+		AND M.MEMBER_ID like '%' || #{MEMBER_ID} || '%'
+		ORDER BY CS_NUMBER DESC
+	]]>
+	</select>
 	
+	<!-- 제목으로 Q&A 목록 조회 -->
+	<select id="qnaSearchTitleList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				C.CS_NUMBER,
+		        C.CS_CATEGORY,
+		        C.GOODS_NUMBER,
+		        C.CS_CONTENT,
+		        C.CS_IMAGE1,
+		        C.CS_REGDATE,
+		        C.CS_HITCOUNT,
+		        C.CS_TITLE,
+		        C.CS_REPDATE,
+		        C.CS_REPSTATE,
+		        C.CS_REPCONTENT,
+		        M.MEMBER_ID
+			FROM CS C, MEMBER M
+			WHERE C.MEMBER_NUMBER = M.MEMBER_NUMBER
+			AND C.CS_TITLE like '%' || #{CS_TITLE} || '%'
+			ORDER BY CS_NUMBER DESC
+		]]>
+	</select>
+	
+	<!-- Q&A 카테고리 검색 -->
+	<select id="qnaCategoryList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				C.CS_NUMBER,
+			    C.CS_CATEGORY,
+			    C.GOODS_NUMBER,
+			    C.CS_CONTENT,
+			    C.CS_IMAGE1,
+			    C.CS_REGDATE,
+			    C.CS_HITCOUNT,
+			    C.CS_TITLE,
+			    C.CS_REPDATE,
+			    C.CS_REPSTATE,
+			    C.CS_REPCONTENT,
+			    M.MEMBER_ID
+			FROM CS C, MEMBER M
+			WHERE C.MEMBER_NUMBER = M.MEMBER_NUMBER
+			AND C.CS_CATEGORY = #{CS_CATEGORY}
+			ORDER BY CS_NUMBER DESC
+		]]>
+	</select>
+	
+	<!-- Q&A 제목 검색 -->
+	<select id="qnaTitleList" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT 
+				C.CS_NUMBER,
+			    C.CS_CATEGORY,
+			    C.GOODS_NUMBER,
+			    C.CS_CONTENT,
+			    C.CS_IMAGE1,
+			    C.CS_REGDATE,
+			    C.CS_HITCOUNT,
+			    C.CS_TITLE,
+			    C.CS_REPDATE,
+			    C.CS_REPSTATE,
+			    C.CS_REPCONTENT,
+			    M.MEMBER_ID
+		    FROM CS C, MEMBER M
+		    WHERE C.MEMBER_NUMBER = M.MEMBER_NUMBER
+		    AND C.CS_CATEGORY = #{CS_CATEGORY}
+		    AND C.CS_TITLE like '%' || #{CS_TITLE} || '%'
+		    ORDER BY CS_NUMBER DESC
+		]]>
+	</select>
+	
+	
+
+	<!-- QNA조회수 증가 -->
+	
+	<update id="selectQnaCount" parameterType="hashmap">
+        <![CDATA[
+                UPDATE CS
+                SET CS_HITCOUNT = CS_HITCOUNT + 1
+                WHERE CS_NUMBER = #{CS_NUMBER}
+        ]]>
+</update>
 </mapper>

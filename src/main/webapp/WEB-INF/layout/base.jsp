@@ -11,7 +11,9 @@
 <body>
 	<tiles:insertAttribute name="header"/>
 
+	<tiles:insertAttribute name="body"/>
 
+	
 
 	
 <div style="float:left;">

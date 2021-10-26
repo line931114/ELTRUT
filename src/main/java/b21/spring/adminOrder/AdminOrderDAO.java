@@ -149,4 +149,13 @@ public class AdminOrderDAO extends AbstractDAO {
 	public List<Map<String, Object>> allExchangeSearch5(Map<String, Object> map) throws Exception {
 		return (List<Map<String, Object>>) selectList("adminOrderCancel.allExchangeSearch5", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> adminOrderUpdate(Map<String, Object> map) throws Exception {
+		return (Map<String, Object>) selectOne("adminOrder.adminOrderUpdate", map);
+	}
+	
+	
+	
+	
 }

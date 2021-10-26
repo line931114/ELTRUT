@@ -11,8 +11,8 @@
 <body>
 마이페이지입니다.
 <br><br>
-<a href="memberInfo">개인정보</a>
-<a href="">주소록</a>
+<a href="memberInfo">개인정보</a><br>
+<a href="enquiryCheck">내 문의사항확인</a><br>
 <a href="orderInfo">구매내역</a>
 
 </body>

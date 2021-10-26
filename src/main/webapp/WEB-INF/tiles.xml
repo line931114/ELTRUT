@@ -15,6 +15,38 @@
 		<put-attribute name="body" value="" />
 	</definition>
 	
+	<definition name="adminMemberList" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/member/adminMemberList.jsp" />
+	</definition>
+	
+	<definition name="adminMemberList1" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/member/adminMemberList1.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<definition name="main_layout" template="/WEB-INF/layout/main_base.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main_header.jsp" />
@@ -30,6 +62,11 @@
 	<definition name="main" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/main.jsp" />
+	</definition>
+	
+	<definition name="loginForm" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/loginForm.jsp" />
 	</definition>
 	
 	

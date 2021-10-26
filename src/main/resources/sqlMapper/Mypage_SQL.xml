@@ -55,6 +55,65 @@
 	</select>
 	
 	
+	<select id="orderExchange" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	
+			select a.goods_number, goods_name, order_total_price, order_amount, order_number
+			from goods a , orderlist b
+			where a.goods_number=b.goods_number and order_number=#{ORDER_NUMBER}
+	]]>
+	</select>
+	
+	<delete id="orderCancle" parameterType="hashmap">
+	<![CDATA[
+			delete 
+			from orderlist
+			where order_number=${ORDER_NUMBER}	
+	]]>
+	</delete>
+	
+	<insert id="cancel" parameterType="hashmap">
+	<![CDATA[
+				INSERT INTO CANCEL
+                (CANCEL_NUMBER, ORDER_NUMBER, CANCEL_CONTENT, CANCEL_REGDATE,
+                 CANCEL_TITLE, CANCEL_CATEGORY
+                 ) VALUES (
+                 CS_NUMBER_SEQ.NEXTVAL, #{ORDER_NUMBER}, #{CANCEL_CONTENT}, SYSDATE,
+                 #{CANCEL_TITLE}, #{CANCEL_CATEGORY}
+                 )
+	]]>
+	</insert>
+
+	<select id="enquiryCheck" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+	
+		 select *  from cancel
+        where order_number in (select order_number 
+        						from orderlist
+                				 where member_id=#{MEMBER_ID})
+	]]>
+	</select>
+	
+	
+	<delete id="enquirydelete" parameterType="hashmap">
+	<![CDATA[
+	             delete 
+                 from cancel
+                 where cancel_number=${CANCEL_NUMBER}
+	
+	]]>
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	</mapper>

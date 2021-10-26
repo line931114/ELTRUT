@@ -31,5 +31,31 @@ public class MyPageServiceImpl implements MyPageService{
 		// TODO Auto-generated method stub
 		return myPageDAO.orderInfo(map);
 	}
+	
+	
+	@Override
+	public void orderCancel(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		 myPageDAO.orderCancle(map);
+	}
+	public Map<String, Object> orderExchange(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.orderExchange(map);
+	}
+	@Override
+	public void cancel(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		myPageDAO.cancel(map);
+	}
+	@Override
+	public List<Map<String, Object>> enquiryCheck(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return myPageDAO.enquiryCheck(map);
+	}
+	@Override
+	public void enquirydelete(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		myPageDAO.enquirydelete(map);
+	}
 
 }

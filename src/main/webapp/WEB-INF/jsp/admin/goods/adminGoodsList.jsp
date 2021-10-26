@@ -1,70 +1,214 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <head>
-<meta charset="EUC-KR">
-<title>»óÇ° ¸ñ·Ï</title>
+<script type="text/javascript">
+//ì£¼ë¬¸ë²ˆí˜¸ ê°™ì€ ì—´ í•©ì¹˜ëŠ” Jquery
+$( document ).ready(function() {
+	$('#dataTables-example').rowspan(0);
+	$('#dataTables-example').rowspan(1);
+	$('#dataTables-example').rowspan(2);
+	$('#dataTables-example').rowspan(3);
+	$('#dataTables-example').rowspan(4);
+	$('#dataTables-example').rowspan(5);
+	$('#dataTables-example').rowspan(9);
+	$('#dataTables-example').rowspan(10);
+});
+
+$.fn.rowspan = function(colIdx, isStats) {       
+	return this.each(function(){      
+		var that;     
+		$('tr', this).each(function(row) {      
+			$('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
+				
+				if ($(this).html() == $(that).html()
+					&& (!isStats 
+							|| isStats && $(this).prev().html() == $(that).prev().html()
+							)
+					) {            
+					rowspan = $(that).attr("rowspan") || 1;
+					rowspan = Number(rowspan)+1;
+
+					$(that).attr("rowspan",rowspan);
+					
+					// do your action for the colspan cell here            
+					$(this).hide();
+					
+					//$(this).remove(); 
+					// do your action for the old cell here
+					
+				} else {            
+					that = this;         
+				}          
+				
+				// set the that if not already set
+				that = (that == null) ? this : that;      
+			});     
+		});    
+	});  
+}; 
+function delchk(){
+    return confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+    
+    
+}
+</script>
+
+<script type="text/javascript">
+function delchk(){
+    return confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
+}
+</script>
+
+
+<style type="text/css">
+.paging{text-align:center;height:32px;margin-top:5px;margin-bottom:15px;}
+.paging a,
+.paging strong{display:inline-block;width:36px;height:32px;line-height:28px;font-size:14px;border:1px solid #e0e0e0;margin-left:5px;
+-webkit-border-radius:3px;
+   -moz-border-radius:3px;
+		border-radius:3px;
+-webkit-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+	-moz-box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+		  box-shadow:1px 1px 1px 0px rgba(235,235,235,1);
+}
+.paging a:first-child{margin-left:0;}
+.paging strong{color:#fff;background:#337AB7;border:1px solid #337AB7;}
+.paging .page_arw{font-size:11px;line-height:30px;}
+</style>
 </head>
-<body>
-    <form method="post" name="frm" action="/ELTRUT/adminGoodsList">    
-    <table border="1">
-    <h3>»óÇ°¸ñ·Ï</h3>
-    
-    <tr>
-    <td><strong>»óÇ°¹øÈ£</strong></td>
-    <td><input type="text" name="" id="GOODS_NUMBER" value="" maxlength="20" label="»óÇ°¹øÈ£"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>»óÇ° »çÁø</strong></td>
-    <td><input type="text" name="GOODS" id="MEMBER_NAME" value="" maxlength="20" label="»óÇ°»çÁø"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>Ä«Å×°í¸®</strong></td>
-    <td><input type="text" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="" maxlength="20" label="Ä«Å×°í¸®"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>»óÇ°¸í</strong></td>
-    <td><input type="password" name="MEMBER_PASSWORD" id="MEMBER_PASSWORD" value="" maxlength="21" label="»óÇ°¸í"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>°¡°İ</strong></td>
-    <td><input type="text" name="MEMBER_ZIPCODE" id="MEMBER_ZIPCODE" value="" maxlength="20" label="°¡°İ"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>»ö»ó</strong></td>
-    <td><input type="text" name="MEMBER_ADDRESS1" id="MEMBER_ADDRESS1" value="" maxlength="20" label="»ö»ó"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>»çÀÌÁî</strong></td>
-    <td><input type="text" name="MEMBER_PHONE" id="MEMBER_PHONE" value="" maxlength="20" label="»çÀÌÁî"></td>
-    </tr>
-    </table>
-    
-    <tr>
-    <td><strong>¼ö·®</strong></td>
-    <td><input type="text" name="MEMBER_ZIPCODE" id="MEMBER_ZIPCODE" value="" maxlength="20" label="¼ö·®"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>ÆÇ¸Å·®</strong></td>
-    <td><input type="text" name="MEMBER_ZIPCODE" id="MEMBER_ZIPCODE" value="" maxlength="20" label="ÆÇ¸Å·®"></td>
-    </tr>
-    
-    <tr>
-    <td><strong>µî·ÏÀÏ</strong></td>
-    <td><input type="text" name="MEMBER_ZIPCODE" id="MEMBER_ZIPCODE" value="" maxlength="20" label="µî·ÏÀÏ"></td>
-    </tr>
-    
-    <input type="submit" value="Àü¼Û">
-    </form>
-</body>
-</html>
+
+<div class="row" style="padding-left:15px;width:900px;">    
+	<h1 class="page-header">ìƒí’ˆëª©ë¡</h1>
+<a href="/ELTRUT/adminGoods/adminGoodsInsertForm">ìƒí’ˆì¶”ê°€</a>
+
+</div> 
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+                         [ìƒí’ˆëª©ë¡í˜ì´ì§€] ìƒí’ˆì„ ê²€ìƒ‰, ìˆ˜ì •, ì‚­ì œ ê¸°ëŠ¥í•˜ëŠ” í˜ì´ì§€ì…ë‹ˆë‹¤.  
+        </div>
+        <div class="panel-body">
+			<div class="dataTable_wrapper">
+				<div id="dataTables-example_wrapper"
+					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+					<div class="row" style="margin-bottom:5px;">
+						<div class="col-sm-6">
+							<a href="/ELTRUT/adminGoods/adminGoodsList"><button type="button" class="btn btn-outline btn-default">ì „ì²´</button></a>
+							<select class="form-control" name="select" onchange="window.open(value,'_self');">
+								<option value ="">--ì¹´í…Œê³ ë¦¬--</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=OUTER">OUTER</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=TOP">TOP</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=DRESS">DRESS</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=KNIT">KNIT</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=T-SHIRTS">T-SHIRTS</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=PANTS">PANTS</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=SKIRTS">SKIRTS</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=SHOES">SHOES</option>
+								
+							</select>
+							<select class="form-control" name="select" onchange="window.open(value,'_self');">
+								<option value ="">--ìƒí’ˆêµ¬ë¶„--</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=3&isSearch=0">íŒë§¤ì¤‘</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=4&isSearch=">í’ˆì ˆìƒí’ˆ</option>
+							</select>			
+							<select class="form-control" name="select" onchange="window.open(value,'_self');">
+								<option value ="">--ìƒí’ˆì •ë ¬--</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=5&isSearch=GOODS_AMOUNT">íŒë§¤ìˆ˜ëŸ‰ìˆœ</option>
+								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=6&isSearch=GOODS_COUNT">ì¡°íšŒìˆœ</option>
+							</select>											
+						</div>
+						<div class="col-sm-6" style="text-align:right;">
+							<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">ì´ ìƒí’ˆìˆ˜ : ${totalCount}</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table
+								class="table  table-bordered table-hover dataTable no-footer"
+								id="dataTables-example" role="grid"
+								aria-describedby="dataTables-example_info">
+								<thead>
+									<tr role="row" style="vertical-align:middle;">
+										<th style="width: 5%; text-align:center;vertical-align:middle;">ìƒí’ˆë²ˆí˜¸</th>
+										<th style="width: 8%; text-align:center;vertical-align:middle;">ìƒí’ˆ ì‚¬ì§„</th>										
+										<th style="width: 7%; text-align:center;vertical-align:middle;">ì¹´í…Œê³ ë¦¬</th>
+										<th style="width: 20%; text-align:center;vertical-align:middle;">ìƒí’ˆëª…</th>
+										<th style="width: 8%; text-align:center;vertical-align:middle;">ê°€ê²©</th>
+										<th style="width: 7%; text-align:center;vertical-align:middle;">ìƒ‰ìƒ</th>
+										<th style="width: 6%; text-align:center;vertical-align:middle;">ì‚¬ì´ì¦ˆ</th>
+										<th style="width: 7%; text-align:center;vertical-align:middle;">ìˆ˜ëŸ‰</th>
+										<th style="width: 7%; text-align:center;vertical-align:middle;">íŒë§¤ëŸ‰</th>
+										<th style="width: 12%; text-align:center;vertical-align:middle;">ë“±ë¡ì¼ì</th>									
+										<th style="width: 13%; text-align:center;vertical-align:middle;">ê´€ë¦¬</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="adminGoodsList"  items="${adminGoodsList}" varStatus="stat">
+								<c:url var="viewURL" value="/adminGoods/goodsModifyForm" >
+									<c:param name="GOODS_NUMBER" value="${adminGoodsList.GOODS_NUMBER }" />
+								</c:url>									
+									<tr class="gradeA even" role="row">
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_NUMBER}<div style='display:none;'>${goodsList.GOODS_NUMBER}</div></td>										
+										<td style="text-align:center;vertical-align:middle;"><img src="/ELTRUT/file/goodsFile/${adminGoodsList.GOODS_THUMBNAIL}" width="60" height="60" alt=""  onerror="this.src='/ELTRUT/file/dresswhite.png'" /><div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_CATEGORY1}/<br/>${adminGoodsList.GOODS_CATEGORY2 }<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_NAME}<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_PRICE}<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+							
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_COLOR}<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_SIZE}<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_AMOUNT}ê°œ<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;">${adminGoodsList.GOODS_SELLCOUNT}ê°œ<div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>
+										<td style="text-align:center;vertical-align:middle;"><fmt:formatDate value="${adminGoodsList.GOODS_DATE}" pattern="YY.MM.dd HH:mm" /><div style='display:none;'>${adminGoodsList.GOODS_NUMBER}</div></td>										
+										<td style="text-align:center;vertical-align:middle;">
+										
+										<a href="${viewURL}">
+											<input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png"></a>&nbsp;&nbsp;
+										
+										
+										<c:url var="viewURL2" value="adminGoodsDelete" >
+											<c:param name="GOODS_NUMBER" value="${adminGoodsList.GOODS_NUMBER }" />							
+										</c:url>	
+										 <a href="${viewURL2}">
+											<input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/32px-Trash_font_awesome.svg.png" onclick="return delchk()">
+										</a>
+										</td>																	
+									</tr>
+								</c:forEach>
+								<!--  ë“±ë¡ëœ ìƒí’ˆì´ ì—†ì„ë•Œ -->
+									<c:if test="${fn:length(adminGoodsList) le 0}">
+										<tr><td colspan="11" style="text-align:center;">ë“±ë¡ëœ ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤</td></tr>
+									</c:if> 
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="paging">
+						${pagingHtml}
+					</div>
+					<div class="row">
+							<div style="text-align:center;">
+								<div id="dataTables-example_filter" class="dataTables_filter">
+									<form action="">
+									<select class="form-control" name="searchNum" id="searchNum">
+										<option value="0">ìƒí’ˆëª…</option>
+										<option value="1">ìƒí’ˆë²ˆí˜¸</option>
+									</select>
+										<input class="form-control" type="text" name="isSearch" id="isSearch"/>
+										<span>
+										<button type="submit" class="btn btn-default">ê²€ìƒ‰</button>
+										</span>
+									</form>
+								</div>							
+							</div>
+							
+					</div>
+				</div>
+			</div>
+			<!-- /.table-responsive -->							
+		</div>
+	</div>
+        <!-- /.panel -->   
+</div>

@@ -64,4 +64,7 @@ public interface AdminOrderService {
 	public List<Map<String, Object>> allExchangeSearch4(Map<String, Object> map) throws Exception;
 
 	public List<Map<String, Object>> allExchangeSearch5(Map<String, Object> map) throws Exception;
+	
+	public Map<String, Object> adminOrderUpdate(Map<String, Object> map) throws Exception;
+	
 }

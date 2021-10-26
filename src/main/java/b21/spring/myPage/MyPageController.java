@@ -172,4 +172,120 @@ public class MyPageController {
 		mav.setViewName("myPage/orderInfo");
 		return mav;
 	}
+	
+	
+
+	
+	//상품취소	
+	@RequestMapping(value="/orderCancle")
+	public ModelAndView orderCancle1(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		myPageService.orderCancel(commandMap.getMap());
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.orderInfo(commandMap.getMap());
+		System.out.println(orderInfo);
+		
+		mav.addObject("O",orderInfo);
+	
+		
+		mav.setViewName("myPage/orderInfo");
+		return mav;
+}
+	
+	
+	//상품교환,환불
+	@RequestMapping(value="/orderExchange")
+	public ModelAndView orderExchange(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(commandMap.get("ORDER_NUMBER"));
+	
+		Map<String,Object> orderExchange = myPageService.orderExchange(commandMap.getMap());
+		
+		mav.addObject("o", commandMap.get("ORDER_NUMBER"));
+		mav.addObject("oc", orderExchange);
+		mav.setViewName("myPage/orderExchange");
+		return mav;
+	}
+	
+	
+	//상품 교환,환불후 넘어가는 페이지
+	@RequestMapping(value="/cancel", method = RequestMethod.POST)
+	public ModelAndView orderExchange1(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(commandMap.getMap());
+		myPageService.cancel(commandMap.getMap());
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.enquiryCheck(commandMap.getMap());
+		System.out.println(orderInfo+" ");
+		
+		mav.addObject("O",orderInfo);
+		mav.setViewName("myPage/enquiryCheck");
+		return mav;
+	}
+	
+	
+	//마이페이지 - 내 문의사항 확인
+	@RequestMapping(value="/enquiryCheck")
+	public ModelAndView enquiryCheck(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.enquiryCheck(commandMap.getMap());
+		System.out.println(orderInfo+" ");
+		
+		mav.addObject("O",orderInfo);
+		mav.setViewName("myPage/enquiryCheck");
+		return mav;
+	}
+	
+	@RequestMapping(value="/enquirydelete")
+	public ModelAndView enquirydelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		myPageService.enquirydelete(commandMap.getMap());
+
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.enquiryCheck(commandMap.getMap());
+		System.out.println(orderInfo+" ");
+		
+		mav.addObject("O",orderInfo);
+		mav.setViewName("myPage/enquiryCheck");
+		return mav;
+	}
+	
+	@RequestMapping(value="/enquirymodify")
+	public ModelAndView enquirymodify(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String MEMBER_ID = (String) session.getAttribute("MEMBER_ID");
+		mav.addObject("MEMBER_ID",MEMBER_ID);
+		commandMap.put("MEMBER_ID", MEMBER_ID);
+		
+		List<Map<String, Object>> orderInfo = myPageService.enquiryCheck(commandMap.getMap());
+		System.out.println(orderInfo+" ");
+		
+		mav.addObject("O",orderInfo);
+		mav.setViewName("myPage/enquiryCheck");
+		return mav;
+	}
 }

@@ -1,5 +1,7 @@
 package b21.spring.admin;
 
-public interface AdminService {
+import java.util.Map;
 
+public interface AdminService {
+	
 }

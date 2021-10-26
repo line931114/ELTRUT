@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,11 @@
 		<td>이용약관</td>
 		<td>MON-FRI AM 10:00~PM 06:00</td>
 		<td>#21B_이광호</td>
+	<c:choose>
+		<c:when test="${empty MEMBER_ID}">
 		<td><a href="/ELTRUT/loginForm">로그인</a></td>
+		</c:when>
+	</c:choose>		
 	</tr>
 	<tr>
 		<td>개인정보보호</td>

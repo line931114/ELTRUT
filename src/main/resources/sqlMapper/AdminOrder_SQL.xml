@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminOrder">
+
+	 <!-- 전체 주문 리스트 -->
+	<select id="allOrderList" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.MEMBER_ID, A.GOODS_NUMBER, A.ORDER_DATE,
+                      A.ORDER_PAY_STATE, A.ORDER_STATE,E.GOODS_NAME,A.ORDER_TOTAL_PRICE
+                FROM ORDERLIST A,   GOODS E 
+                WHERE  E.GOODS_NUMBER = A.GOODS_NUMBER 
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]> 
+</select>
+	<!-- 주문 상세 보기 -->
+<select id="orderDetail" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.MEMBER_ID, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                       C.DELIVERY_MESSAGE,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE 
+                FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER AND C.ORDER_NUMBER = #{ORDER_NUMBER}
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+	<!-- 결제 상태 변경 -->
+<update id="updateGoodsPayState" parameterType="hashmap">
+        <![CDATA[
+                UPDATE ORDERLIST 
+                SET ORDER_PAY_STATE = #{ORDER_PAY_STATE}, ORDER_STATE = #{ORDER_STATE} 
+                WHERE ORDER_NUMBER= #{ORDER_NUMBER}
+        ]]>
+</update>
+	<!-- 주문 상태 변경 -->
+	<update id="updateGoodsState" parameterType="hashmap">
+        <![CDATA[
+                UPDATE ORDERLIST
+                SET ORDER_STATE = #{ORDER_STATE}
+                WHERE ORDER_NUMBER= #{ORDER_NUMBER}
+        ]]>
+</update>
+<!-- 주문 삭제 -->
+<delete id="orderDelete" parameterType="hashmap">
+        <![CDATA[
+                DELETE FROM DELIVERY 
+                WHERE ORDER_NUMBER= #{ORDER_NUMBER}
+        ]]>
+</delete>
+<!-- 주문번호로 검색 -->
+<select id="adminOrderSearch0" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                      C.DELIVERY_MESSAGE, A.MEMBER_ID,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE 
+             FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER 
+         AND A.ORDER_NUMBER LIKE '%'||#{isSearch}||'%'
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+<!-- 아이디로 검색 -->
+<select id="adminOrderSearch1" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                       C.DELIVERY_MESSAGE, A.MEMBER_ID,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE 
+             FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER 
+         AND   A.MEMBER_ID LIKE '%'||#{isSearch}||'%'
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+<!-- 상품명으로 검색 -->
+<select id="adminOrderSearch2" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                     C.DELIVERY_MESSAGE,A.MEMBER_ID,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE 
+             FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER 
+         AND  E.GOODS_NAME LIKE '%'||#{isSearch}||'%'
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+
+<!-- 결제상태로 검색 -->
+<select id="adminOrderSearch3" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                      C.DELIVERY_MESSAGE, A.MEMBER_ID,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE
+             FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER 
+                AND A.ORDER_PAY_STATE = #{isSearch} 
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+<!-- 주문 상태로 검색 -->
+<select id="adminOrderSearch4" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+                SELECT A.ORDER_NUMBER, A.GOODS_NUMBER, A.ORDER_AMOUNT, A.ORDER_DATE,
+                      A.ORDER_TOTAL_PRICE, A.ORDER_PAY_STATE, A.ORDER_STATE,
+                        C.BUYER_NAME, C.BUYER_ZIPCODE, C.BUYER_ADDRESS1, C.BUYER_ADDRESS2, C.RECEIVER_NAME, C.BUYER_EMAIL,
+                       C.DELIVERY_MESSAGE, A.MEMBER_ID,
+                        E.GOODS_THUMBNAIL, E.GOODS_NAME, E.GOODS_CATEGORY1, E.GOODS_CATEGORY2,
+                        E.GOODS_COLOR, E.GOODS_SIZE
+             FROM ORDERLIST A, DELIVERY C, GOODS E
+                WHERE A.ORDER_NUMBER= C.ORDER_NUMBER
+                AND E.GOODS_NUMBER = A.GOODS_NUMBER 
+                AND A.ORDER_STATE = #{isSearch} 
+                ORDER BY ORDER_DATE DESC, ORDER_NUMBER DESC
+        ]]>
+</select>
+
+<select id="adminOrderUpdate" resultType="hashmap">
+        <![CDATA[
+			select order_number, buyer_name, member_id
+			from delivery
+			where order_number= #{ORDER_NUMBER}
+        ]]> 
+</select>
+
+
+
+
+</mapper>

@@ -15,16 +15,16 @@ if('${message}' != ""){
 </script>
 </head>
 <body>
-<center><h1>메인입니당</h1></center>
-<div align="right">
+<center><h1>ELTRUT</h1></center>
+<%-- <div align="right">
 <c:if test="${empty sessionScope.MEMBER_ID }"> <!-- sessionScopre.id가 없으면 -->
 	<a href="/ELTRUT/loginForm">로그인</a><br/>
 </c:if>
 <c:if test="${not empty sessionScope.MEMBER_ID }"> <!-- sessionScopre.id가 있으면 -->
-	${sessionScope.MEMBER_NAME } 님 방가방가<br/>
+	${sessionScope.MEMBER_NAME } 님 <br/>
 	<a href="/ELTRUT/logout">로그아웃</a><br/>
 </c:if>
-</div>
+</div> --%>
 <table align="center" border="1">
 <tr>
 			<th>상품번호</th>
@@ -44,7 +44,7 @@ if('${message}' != ""){
 				<c:forEach items="${goods }" var="G">
 					<tr>
 						<td>${G.GOODS_NUMBER }</td>
-						<td>${G.GOODS_THUMBNAIL }</td>
+						<td><img src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}" width="60" height="60" alt=""  onerror="this.src='/ELTRUT/file/noimg_130.gif'" /></td>
 						<td>
 							<a href="#this" id="GoodsName" name="GoodsName">${G.GOODS_NAME }</a>
 							<input type="hidden" id="GOODS_NUMBER" value="${G.GOODS_NUMBER }">
