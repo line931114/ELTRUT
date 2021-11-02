@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review">
+
+<!--상품후기  -->
+	<select id="goodsReview" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+        SELECT *
+		FROM REVIEW
+		WHERE GOODS_NUMBER=${GOODS_NUMBER}
+        ]]>
+	</select>
+	
+	
+	<!--MEBER_ID, REVIEW_NUMBER 조건에 따른 리뷰 SELECT  -->
+	<select id="reviewSelect" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT *
+			FROM REVIEW
+			WHERE MEMBER_ID=#{MEMBER_ID} AND REVIEW_NUMBER=#{REVIEW_NUMBER}
+        ]]>
+	</select>
+	
+	
+	
+	
+	<update id="reviewModify" parameterType="hashMap" >
+		<![CDATA[
+      UPDATE REVIEW
+	  SET REVIEW_TITLE = #{REVIEW_TITLE}, 
+	  REVIEW_CONTENT = #{REVIEW_CONTENT}, 
+	  REVIEW_IMAGE=#{REVIEW_IMAGE}
+	  WHERE MEMBER_ID = #{MEMBER_ID} 
+	  AND REVIEW_NUMBER= #{REVIEW_NUMBER}
+        ]]>
+	</update>
+	
+	<delete id="reviewDelete" parameterType="hashmap">
+	<![CDATA[
+			delete 
+			from review
+			where review_number=#{REVIEW_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
+	]]>
+	</delete>
+	
+	
+	<select id="reviewInsertCheck" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT *
+			FROM REVIEW
+			WHERE MEMBER_ID=(SELECT MEMBER_ID
+                 		 	 FROM ORDERLIST
+                		 	 WHERE ORDER_STATE=2) AND MEMBER_ID=#{MEMBER_ID} AND GOODS_NUMBER=#{GOODS_NUMBER}       ]]>
+	</select>
+			
+			
+			
+	<insert id="reviewInsert" parameterType="hashMap">
+		<![CDATA[
+        	INSERT INTO REVIEW
+			(ORDER_NUMBER,
+			MEMBER_ID,
+			REVIEW_NUMBER,
+			REVIEW_TITLE,
+			REVIEW_CONTENT,
+			REVIEW_IMAGE,
+			REVIEW_REGDATE,
+			REVIEW_SCORE,
+			REVIEW_HITCOUNT,
+			REVIEW_REPDATE,
+			GOODS_NUMBER,
+			REVIEW_REPSTATE
+			)VALUES(
+			#{ORDER_NUMBER},
+			#{MEMBER_ID},
+			REVIEW_NUMBER_SEQ.CURRVAL,
+			#{REVIEW_TITLE},
+			#{REVIEW_CONTENT},
+			#{REVIEW_IMAGE},
+			SYSDATE,
+			5,
+			0,
+			SYSDATE,
+			#{GOODS_NUMBER},
+			'미답변')
+]]>
+	</insert>		
+	
+	
+	<select id="reviewNumber" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			 SELECT REVIEW_NUMBER_SEQ.NEXTVAL AS REVIEW_NUMBER
+			  FROM DUAL	]]>
+	</select>
+			
+	<select id="goodsQna" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+
+		select *
+		from cs
+		where goods_number=#{GOODS_NUMBER}			
+
+	]]>
+	</select>
+			
+	
+	<delete id="goodsQnaDelete" parameterType="hashmap">
+	<![CDATA[
+			delete 
+			from cs
+			where cs_number=#{CS_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
+	]]>
+	</delete>
+	
+	<update id="goodsQnaModify" parameterType="hashMap" >
+		<![CDATA[
+      UPDATE CS
+	  SET CS_TITLE = #{CS_TITLE}, 
+	  CS_CONTENT = #{CS_CONTENT}, 
+	  CS_IMAGE1=#{CS_IMAGE1},
+	  CS_CATEGORY=#{CS_CATEGORY}
+	  WHERE MEMBER_ID = #{MEMBER_ID} 
+	  AND CS_NUMBER= #{CS_NUMBER}
+        ]]>
+	</update>
+	
+	<!--MEBER_ID, CS_NUMBER 조건에 따른 리뷰 SELECT  -->
+	<select id="qnaSelect" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT *
+			FROM CS
+			WHERE MEMBER_ID=#{MEMBER_ID} AND CS_NUMBER=#{CS_NUMBER}
+        ]]>
+	</select>
+	
+
+	<insert id="goodsQnaInsert" parameterType="hashMap">
+		<![CDATA[
+        	INSERT INTO CS(
+			CS_NUMBER,
+			MEMBER_ID,
+			GOODS_NUMBER,
+			CS_CATEGORY,
+			CS_TITLE,
+			CS_CONTENT,
+			CS_IMAGE1,
+			CS_REGDATE,
+			CS_REPDATE,
+			CS_REPTITLE,
+			CS_REPCONTENT,
+			CS_HITCOUNT,
+			CS_REPSTATE)
+			VALUES(
+			CS_NUMBER_SEQ.NEXTVAL,
+			#{MEMBER_ID},
+			#{GOODS_NUMBER},
+			#{CS_CATEGORY},
+			#{CS_TITLE},
+			#{CS_CONTENT},
+			#{CS_IMAGE1},
+			SYSDATE,
+			'',
+			'',
+			'',
+			0,
+			'답변대기')
+		]]>
+	</insert>	
+	
+	<select id="qnaNumber" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			 SELECT CS_NUMBER_SEQ.NEXTVAL AS CS_NUMBER
+			  FROM DUAL	]]>
+	</select>
+	
+	
+	</mapper>

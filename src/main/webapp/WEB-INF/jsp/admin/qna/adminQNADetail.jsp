@@ -164,7 +164,7 @@
 					<button type="submit" class="btn btn-success" onclick="button1_click();">답변수정</button>
 					<button type="submit" class="btn btn-success" onclick="button2_click();">답변삭제</button>
 				</c:if>
-				<a href="/ELTRUT/adminQna/adminQnaList">
+				<a href="/ELTRUT/adminQnaList">
 					<button type="button" class="btn btn-outline btn-default">목록으로</button>
 				</a>
 			</form:form>

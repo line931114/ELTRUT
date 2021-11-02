@@ -62,6 +62,11 @@ function orderExchange(number,state){
 	}
 }
 
+function orderDetail(number){
+	var gn = document.getElementById("GOODS_NUMBER");
+	location.href="/ELTRUT/goodsDetail?GOODS_NUMBER="+number.value;
+}
+
 </script>
 </head>
 
@@ -87,7 +92,7 @@ function orderExchange(number,state){
 				</tr>
 				
 				<tr>
-				<td>주문번호 : ${O.ORDER_NUMBER }</td>
+				<td>주문번호 : ${O.ORDER_NUMBER }</td> 
 				</tr>
 				
 			<tr>
@@ -148,8 +153,10 @@ function orderExchange(number,state){
 				
 				<input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="${O.MEMBER_ID }">
 				
+				<input type="hidden" name="goodsNumber${status.index }" id="GOODS_NUMBER" value="${O.GOODS_NUMBER }">
+				
 				<!--제품 상세보기를 누르면, 해당상품의 상품detail로 넘어가도록 맵핑하는 방법을 시도하면좋을듯. 상품번호로 매칭을 시켜서??  -->
-				<input type="button" value="제품상세보기">
+				<input type="button" value="제품상세보기" onclick="orderDetail(goodsNumber${status.index });">
 				<input type="button" value="주문취소" onclick="orderCancle(currentNumber${status.index },currentState${status.index});">				
 				<input type="button" value="반품,교환" onclick="orderExchange(currentNumber${status.index },currentState${status.index});">
 				

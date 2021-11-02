@@ -44,5 +44,11 @@ public interface AdminGoodsService {
 		
 		//주문 취소시 상품 수량 복구
 		public void addAmount(Map<String, Object> map) throws Exception;
+		
+		public List<Map<String, Object>> TotalSales(Map<String, Object> map) throws Exception;
+		
+		public List<Map<String, Object>> CategorySales(Map<String, Object> map) throws Exception;
+		
+		public List<Map<String, Object>> DateSales(Map<String, Object> map) throws Exception;
 	
 }

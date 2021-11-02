@@ -62,7 +62,7 @@
 	<!-- 아이디찾기 -->
 	<select id="findId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
-		SELECT MEMBER_ID 
+		SELECT MEMBER_ID,MEMBER_NAME 
 		FROM MEMBER WHERE MEMBER_NAME = #{MEMBER_NAME} AND MEMBER_EMAIL = #{MEMBER_EMAIL}
 	]]>
 	</select>

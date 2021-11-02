@@ -11,8 +11,10 @@
 
 <tiles:insertAttribute name="header"/>
 
-<tiles:insertAttribute name="body"/>
 
+<div style="margin-top: 124px;">
+<tiles:insertAttribute name="body"/>
+</div>
 	
 
 <tiles:insertAttribute name="footer"/>  

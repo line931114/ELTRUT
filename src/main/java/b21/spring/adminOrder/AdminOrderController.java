@@ -38,10 +38,10 @@ public class AdminOrderController {
 	private Paging page;
 
 	// 주문 리스트
-	@RequestMapping(value = "/order/orderList")
+	@RequestMapping(value = "orderList")
 	public ModelAndView orderList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
-		ModelAndView mv = new ModelAndView("/admin/order/adminOrderList");
+		ModelAndView mv = new ModelAndView("orderList");
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
 				|| request.getParameter("currentPage").equals("0")
@@ -92,7 +92,7 @@ public class AdminOrderController {
 			mv.addObject("pagingHtml", pagingHtml);
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("orderList", orderList);
-			mv.setViewName("/admin/order/adminOrderList");
+			mv.setViewName("orderList");
 			return mv;
 		}
 
@@ -117,7 +117,7 @@ public class AdminOrderController {
 
 
 	// 주문 상세보기
-	@RequestMapping(value = "/order/adminOrderDetail")
+	@RequestMapping(value = "adminOrderDetail")
 	public ModelAndView orderDetail(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
@@ -134,7 +134,7 @@ public class AdminOrderController {
 			mv.addObject("orderCancel", confirmCancel);
 		}
 
-		mv.setViewName("/admin/order/adminOrderDetail");
+		mv.setViewName("adminOrderDetail");
 		return mv;
 	}
 
@@ -143,7 +143,7 @@ public class AdminOrderController {
 	
 
 	// adminorderupdate
-	@RequestMapping(value="/order/adminOrderUpdateForm")
+	@RequestMapping(value="adminOrderUpdate")
 	public ModelAndView updateBoard(CommandMap commandMap) throws Exception{
 		ModelAndView mv = new ModelAndView();
 //		//결제상태
@@ -153,17 +153,17 @@ public class AdminOrderController {
 		System.out.println(commandMap.getMap());
 		Map<String, Object> orderList = adminOrderService.adminOrderUpdate(commandMap.getMap());
 		mv.addObject("order", orderList);
-		mv.setViewName("/admin/order/adminOrderUpdate");
+		mv.setViewName("adminOrderUpdate");
 		return mv;
 	}
 	
 	// adminorderDetail / mv.adminorderList 
-	@RequestMapping(value = "/order/adminOrderUpdate",method = RequestMethod.POST )
+	@RequestMapping(value = "adminOrderUpdate",method = RequestMethod.POST )
 	public ModelAndView orderDetail1(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(commandMap.getMap());
 		adminOrderService.updateGoodsPayState(commandMap.getMap());
-		mv.setViewName("redirect:/order/orderList");
+		mv.setViewName("redirect:/orderList");
 		return mv;
 	// detail수정누름 -> 업데이트 폼 에서 수정 -> dao -> service -> serviceimpl -> controller -> adminorderupdate 쿼리작업 해서. 된걸 -> redirect 보내줌. 
 	}

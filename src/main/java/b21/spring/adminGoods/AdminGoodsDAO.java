@@ -51,7 +51,20 @@ public class AdminGoodsDAO extends AbstractDAO {
 	public List<Map<String, Object>> adminGoodsSearch5(String isSearch) {
 		return (List<Map<String, Object>>) selectList("admin.adminGoodsSearch5", isSearch);
 	}
-
+	 	@SuppressWarnings("unchecked")
+		public List<Map<String, Object>> totalsales(Map<String, Object> map) throws Exception {
+			return (List<Map<String, Object>>) selectList("adminOrder.totalsales", map);
+		}
+		
+		@SuppressWarnings("unchecked")
+		public List<Map<String, Object>> categorysales(Map<String, Object> map) throws Exception {
+			return (List<Map<String, Object>>) selectList("adminOrder.categorysales", map);
+		}
+		
+		@SuppressWarnings("unchecked")
+		public List<Map<String, Object>> datesales(Map<String, Object> map) throws Exception {
+			return (List<Map<String, Object>>) selectList("adminOrder.datesales", map);
+		}
 	// 상품 등록
 	   public void insertAdminGoods(Map<String, Object> map) throws Exception {
 	      insert("admin.insertAdminGoods", map);
@@ -131,6 +144,7 @@ public class AdminGoodsDAO extends AbstractDAO {
 	   public void addAmount(Map<String, Object> map) throws Exception {
 	      update("admin.addAmount", map);
 	   }
+	  
 	}
 	
 		

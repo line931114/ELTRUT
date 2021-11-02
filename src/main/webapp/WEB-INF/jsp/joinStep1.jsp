@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<jsp:include page="../cssUrl.jsp"/>
+<style> .centered { position: absolute; left: 40%; transform: translateX(-50%); } </style>
 <!-- 주소API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script><script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
 <script>
@@ -160,60 +161,140 @@ function agreementCheck(){
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" name="join_form" action="/ELTRUT/joinComplete">	
-	<table border="1">
-	<h3>회원정보</h3>
-	
-	<tr>
-	<td><strong>아이디</strong></td>
-	<td><input type="text" name="MEMBER_ID" id="MEMBER_ID" maxlength="20" label="아이디" onkeydown="inputIdChk()">
-	<input type="button" value="ID중복확인" onclick="idCheck()">
-	<input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck" >
-	</td>
-	</tr>
-	
-	<tr>
-	<td><strong>이름</strong></td>
-	<td><input type="text" name="MEMBER_NAME" id="MEMBER_NAME" value="" maxlength="20" label="이름"></td>
-	</tr>
-	
-	<tr>
-	<td><strong>이메일</strong></td>
-	<td><input type="text" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="" maxlength="20" label="이메일"></td>
-	</tr>
-	
-	<tr>
-	<td><strong>핸드폰번호</strong></td>
-	<td><input type="text" name="MEMBER_PHONE" id="MEMBER_PHONE" value="" maxlength="20" label="핸드폰번호"></td>
-	</tr>
-	<tr>
-	<td><strong>비밀번호</strong></td>
-	<td><input type="password" name="MEMBER_PASSWORD" id="MEMBER_PASSWORD" value="" maxlength="21" label="비밀번호"></td>
-	</tr>
-	<tr>
-	<td><strong>비밀번호확인</strong></td>
-	<td><input type="password" name="MEMBER_PASSWORD2" id="MEMBER_PASSWORD2" value="" maxlength="21" label="비밀번호"></td>
-	</tr>
-	
-	<tr>
-	<td><strong>
-	<input type="button"value="주소찾기" onclick="sample6_execDaumPostcode()"></strong></td></tr>
-	
-	<tr>
-	<td><input type="text" id="sample6_postcode"  name="MEMBER_ZIPCODE" readonly  value="" maxlength="6" required=""></td>
-	</tr>
-	<tr>
-	<td><input type="text" id="sample6_address"  name="MEMBER_ADDRESS1"  readonly value="" size="48" readonly></td>
-	<td><input type="text" id="sample6_address2"  name="MEMBER_ADDRESS2" value="" label="주소" ></td>
-	</tr>
-	
 
-	</table>
-	<input type="button" value="이용약관동의" onclick="moveAgreement()">
-	<input type="hidden" id="agreement" name="agreement" value="agUncheck" >
+
+
+<body class="bg-light"> 
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+       <h2>회원가입</h2>
+      <p class="lead">ELTRUT 페이지에서 오신 것을 환영합니다, 상품을 구매하기 위해선 회원가입을 진행해주세요.</p>
+    </div>
+		    <hr class="my-4">
+      <div class="col-md-7 col-lg-8" style="line-height: 2;">
+        <h4 class="mb-3">회원정보</h4>
+      <form method="post" name="join_form" action="/ELTRUT/joinComplete">	
+	   <div class="row g-5">
+            <div class="col-sm-6">
+              	<label for="firstName" class="form-label">아이디</label>
+              	<input type="text" class="form-control" name="MEMBER_ID" id="MEMBER_ID" maxlength="20" label="아이디" onkeydown="inputIdChk()"> 
+            </div>
+            
+            <div class="col-sm-6" style="width:100%; word-break:break-all;word-wrap:break-word; margin-top: 7px;"">
+            <br>
+              <input type="button" value="ID중복확인" onclick="idCheck()" class="btn btn-secondary btn-sm">
+			  <input type="hidden" id="idDuplication" name="idDuplication" value="idUncheck" >   
+            </div>
+        	
+            <div class="col-sm-6 "> &nbsp;
+              <label for="username" class="form-label">이름</label>
+              <div>
+            	  <input type="text" class="form-control" maxlength="100" name="MEMBER_NAME" id="MEMBER_NAME" value="" maxlength="20" label="이름"></td>
+              </div>
+            </div>
 	
-	 <input type="button" value="이전페이지로" onclick="history.back();">
-    <input type="button" value="가입하기" onclick="joinform_check();">
+			<div class="col-sm-6"></div>
+
+            <div class="col-sm-6">
+              <label for="email" class="form-label">이메일</label>
+               <div>
+              	<input type="email" class="form-control" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="" maxlength="20" placeholder="your@example.com">  
+               </div>
+            </div>
+            
+            <div class="col-sm-6"></div>
+            
+            <div class="col-sm-6">
+              <label for="text" class="form-label">핸드폰번호</label>
+             	 <div>
+           		   <input type="text" class="form-control" name="MEMBER_PHONE" id="MEMBER_PHONE" value="" maxlength="20" label="핸드폰번호"> 
+            	</div>
+            </div>
+            
+            <div class="col-sm-6"></div>
+           
+
+            <div class="col-sm-6">
+              <label for="text" class="form-label">비밀번호</label>
+              	<div>
+             		 <input type="password" class="form-control" name="MEMBER_PASSWORD" id="MEMBER_PASSWORD" value="" maxlength="21" label="비밀번호"> 
+            	</div>
+            </div>
+            
+            <div class="col-sm-6"></div>
+           
+            
+            
+            <div class="col-sm-6">
+              <label for="text" class="form-label">비밀번호확인</label>
+              	<div>
+              		<input type="password" class="form-control" name="MEMBER_PASSWORD2" id="MEMBER_PASSWORD2" value="" maxlength="21" label="비밀번호확인"> 
+            	</div>
+            </div>
+            
+            <div class="col-sm-6"></div>
+            			
+            <div class="col-12" style="margin-top:1px;">
+            <br>
+            <input type="button"value="주소찾기" onclick="sample6_execDaumPostcode()" class="btn btn-secondary btn-sm" >
+            </div>
+            
+            
+            <div class="col-sm-6">
+              <label for="text" class="form-label">우편번호</label>
+              	<div>
+            	  	<input type="text" id="sample6_postcode"  name="MEMBER_ZIPCODE" readonly  value="" maxlength="6" required="">  	
+            	</div>
+            </div>
+            
+            <div class="col-sm-6"></div>
+            
+            
+            <div class="col-sm-8">
+              <label for="text" class="form-label">주소</label>
+              	<div>
+            	  	<input type="text" id="sample6_address"  name="MEMBER_ADDRESS1"  readonly value="" size="48" readonly>  	
+            	</div>
+            </div>
+                   
+            <div class="col-sm-3">
+              <label for="text" class="form-label">상세 주소</label>
+              	<div>
+            	  	<input type="text" id="sample6_address2"  name="MEMBER_ADDRESS2" value="" label="주소" placeholder="나머지주소"> 	
+            	</div>
+            </div>
+          </div>
+
+
+		<div class="row gy-3" style="margin-top:30px"> 
+        
+          <hr class="my-4">
+
+            <div class="col-sm-8"> 
+           		 	<input type="button" value="이용약관동의" onclick="moveAgreement()" class="btn btn-secondary btn-sm" >
+					<input type="hidden" id="agreement" name="agreement" value="agUncheck" >
+			</div>
+			
+            <div class="col-sm-2" >
+         	  	<input type="button" value="이전페이지로" onclick="history.back();" class="btn btn-secondary btn-sm">
+   			</div>
+			
+            <div class="col-sm-2" > 
+       			 <input type="button" value="가입하기" onclick="joinform_check();" class="btn btn-secondary btn-sm">
+			</div>
+		</div>
 	</form>
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">© 2021–2022 #21B ELTRUT</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</div>
+
 </body>
 </html>

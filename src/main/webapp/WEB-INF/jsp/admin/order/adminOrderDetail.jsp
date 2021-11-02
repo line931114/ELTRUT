@@ -51,7 +51,7 @@
        <c:when test="${fn:length(orderDetail)>0 }">
  		 	<c:forEach var="list" items="${orderDetail }" varStatus="status">
 		        <tr>
-		          <th><a href="/ELTRUT/order/adminOrderUpdateForm?ORDER_NUMBER=${list.ORDER_NUMBER }"> ${list.ORDER_NUMBER}> </a></th>
+		          <th><a href="/ELTRUT/adminOrderUpdate?ORDER_NUMBER=${list.ORDER_NUMBER }"> ${list.ORDER_NUMBER}> </a></th>
 		 		  <td>${list.ORDER_DATE}</td>
 		          <td>${list.GOODS_NAME}</td>
 		          <td>${list.GOODS_SIZE}</td>

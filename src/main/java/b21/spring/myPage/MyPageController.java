@@ -31,7 +31,7 @@ public class MyPageController {
 	@RequestMapping(value="/myPage")
 	public ModelAndView myPage() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myPage/myPage");
+		mav.setViewName("myPage");
 		return mav;
 	}
 	
@@ -47,7 +47,7 @@ public class MyPageController {
 		Map<String,Object> memberInfo = myPageService.memberInfo(commandMap.getMap());
 		 System.out.println(memberInfo);
 		 mav.addObject("M",memberInfo);
-		mav.setViewName("myPage/memberInfo");
+		mav.setViewName("memberInfo");
 		return mav;
 	}
 	
@@ -55,7 +55,7 @@ public class MyPageController {
 	@RequestMapping(value="/pwCheck")
 	public ModelAndView pwCheck(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		  ModelAndView mav = new ModelAndView();
-	      mav.setViewName("myPage/pwCheck");
+	      mav.setViewName("pwCheck");
 	      return mav;
 	}
 	
@@ -77,11 +77,11 @@ public class MyPageController {
 	         			//멤버 비밀번호가 입력한 비밀번호 값이 같으면
 	         if (String.valueOf(chk.get("MEMBER_PASSWORD")).equals(commandMap.get("MEMBER_PASSWORD"))) {
 	        	 mav.addObject("M",chk);
-	        	 mav.setViewName("myPage/memberUpdateForm");
+	        	 mav.setViewName("redirect:/memberUpdateForm");
 	            return mav;
 	        
 	         } else {	//비밀번호 틀렸을때
-	  	        	mav.setViewName("myPage/pwCheck");
+	  	        	mav.setViewName("pwCheck");
 	  	            mav.addObject("message", "비밀번호를 확인해 주세요.");
 	  	            return mav;
 	  	     }
@@ -102,7 +102,7 @@ public class MyPageController {
 		 System.out.println(memberInfo);
 		 mav.addObject("M",memberInfo);
 		
-		mav.setViewName("myPage/memberUpdateForm");
+		mav.setViewName("memberUpdateForm");
 		return mav;
 	}
 	
@@ -121,14 +121,14 @@ public class MyPageController {
 		 mav.addObject("M",memberInfo);
 		
 		
-		mav.setViewName("myPage/memberInfo");
+		mav.setViewName("memberInfo");
 		return mav;
 	}
 	
 	@RequestMapping(value="/deleteForm")
 	public ModelAndView deleteForm() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myPage/deleteForm");
+		mav.setViewName("deleteForm");
 		return mav;
 	}
 	
@@ -148,12 +148,12 @@ public class MyPageController {
 		if(memberInfo.get("MEMBER_PASSWORD").equals(commandMap.get("pw"))) {
 			myPageService.memberDelete(commandMap.getMap());
 				session.invalidate();
-				mav.setViewName("myPage/deleteForm");
+				mav.setViewName("deleteForm");
 				mav.addObject("message", "1");
 				return mav;
 						
 		}else {
-			 mav.setViewName("myPage/deleteForm");
+			 mav.setViewName("deleteForm");
 	         mav.addObject("message", "2");
 	         return mav;
 		}		
@@ -173,12 +173,10 @@ public class MyPageController {
 		System.out.println(orderInfo);
 		
 		mav.addObject("O",orderInfo);
-		mav.setViewName("myPage/orderInfo");
+		mav.setViewName("orderInfo");
 		return mav;
 	}
 	
-	
-
 	
 	//상품취소	
 	@RequestMapping(value="/orderCancle")
@@ -198,7 +196,7 @@ public class MyPageController {
 		mav.addObject("O",orderInfo);
 	
 		
-		mav.setViewName("myPage/orderInfo");
+		mav.setViewName("orderInfo");
 		return mav;
 }
 	
@@ -213,7 +211,7 @@ public class MyPageController {
 		
 		mav.addObject("o", commandMap.get("ORDER_NUMBER"));
 		mav.addObject("oc", orderExchange);
-		mav.setViewName("myPage/orderExchange");
+		mav.setViewName("orderExchange");
 		return mav;
 	}
 	
@@ -234,7 +232,7 @@ public class MyPageController {
 		System.out.println(orderInfo+" ");
 		
 		mav.addObject("O",orderInfo);
-		mav.setViewName("myPage/enquiryCheck");
+		mav.setViewName("enquiryCheck");
 		return mav;
 	}
 	
@@ -253,7 +251,7 @@ public class MyPageController {
 		System.out.println(orderInfo+" ");
 		
 		mav.addObject("O",orderInfo);
-		mav.setViewName("myPage/enquiryCheck");
+		mav.setViewName("enquiryCheck");
 		return mav;
 	}
 	
@@ -272,7 +270,7 @@ public class MyPageController {
 		System.out.println(orderInfo+" ");
 		
 		mav.addObject("O",orderInfo);
-		mav.setViewName("myPage/enquiryCheck");
+		mav.setViewName("enquiryCheck");
 		return mav;
 	}
 	
@@ -283,7 +281,7 @@ public class MyPageController {
 		Map<String, Object> enquiryModifyForm = myPageService.enquiryModifyForm(commandMap.getMap());
 		
 		mav.addObject("O",enquiryModifyForm);
-		mav.setViewName("myPage/enquiryModify");
+		mav.setViewName("enquiryModify");
 		return mav;
 	}
 	
@@ -302,7 +300,7 @@ public class MyPageController {
 		System.out.println(orderInfo+" ");
 		
 		mav.addObject("O",orderInfo);
-		mav.setViewName("myPage/enquiryCheck");
+		mav.setViewName("enquiryCheck");
 		return mav;
 	}
 	
@@ -313,7 +311,7 @@ public class MyPageController {
 		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
 		System.out.println(qnaCheck);
 		mav.addObject("O",qnaCheck);
-		mav.setViewName("myPage/qnaCheck");
+		mav.setViewName("qnaCheck");
 		return mav;
 	}
 	
@@ -328,7 +326,7 @@ public class MyPageController {
 		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
 		System.out.println(qnaCheck);
 		mav.addObject("O",qnaCheck);
-		mav.setViewName("myPage/qnaCheck");
+		mav.setViewName("qnaCheck");
 		return mav;
 	}
 	
@@ -339,7 +337,7 @@ public class MyPageController {
 		Map<String, Object> qnaModify = myPageService.qnaModifyForm(commandMap.getMap());
 		
 		mav.addObject("O",qnaModify);
-		mav.setViewName("myPage/qnaModify");
+		mav.setViewName("qnaModify");
 		return mav;
 	}
 	
@@ -379,7 +377,7 @@ public class MyPageController {
 		List<Map<String, Object>> qnaCheck = myPageService.qnaCheck(commandMap.getMap());
 		System.out.println(qnaCheck);
 		mav.addObject("O",qnaCheck);
-		mav.setViewName("myPage/qnaCheck");
+		mav.setViewName("qnaCheck");
 		return mav;
 	}
 	

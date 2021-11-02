@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cart">
+<!-- 회원 장바구니 인서트 -->
+	<insert id="insertCart">
+        <!-- useGeneratedKeys="true" keyProperty="CART_NUMBER"<selectKey keyProperty="CART_NUMBER" resultType="integer"
+                        order="BEFORE">
+                        SELECT CART_NUMBER_SEQ.NEXTVAL FROM DUAL
+                </selectKey> -->
+                <![CDATA[
+                        INSERT INTO CART ( 
+                       CART_NUMBER, MEMBER_ID, GOODS_NUMBER, CART_REG_DATE, CART_AMOUNT) 
+                        VALUES (CART_SEQ.NEXTVAL,#{MEMBER_ID}, #{GOODS_NUMBER}, SYSDATE, #{CART_AMOUNT})
+]]>
+	</insert>
+
+	<!-- 회원 장바구니 조회 -->
+	<select id="selectMyCart" parameterType="hashmap" resultType="hashmap">
+		<![CDATA[
+			SELECT ROWNUM,X.* 
+            FROM( SELECT A.CART_NUMBER, A.GOODS_NUMBER, A.MEMBER_ID,
+			A.CART_REG_DATE, A.CART_AMOUNT, D.GOODS_AMOUNT,
+			D.GOODS_SIZE, D.GOODS_COLOR, D.GOODS_NAME, D.GOODS_PRICE, 
+			D.GOODS_THUMBNAIL,D.GOODS_CATEGORY1, D.GOODS_CATEGORY2
+			FROM CART A, GOODS D 
+			WHERE A.MEMBER_ID=#{MEMBER_ID}
+			AND A.GOODS_NUMBER=D.GOODS_NUMBER 
+			ORDER BY A.CART_REG_DATE ASC)X
+		]]>
+	</select>
+	
+	<!-- 장바구니 수량 수정 -->
+	<update id="updateCarts" parameterType="hashmap">
+		<![CDATA[
+			UPDATE CART SET CART_AMOUNT=#{CART_AMOUNT}, CART_REG_DATE=SYSDATE
+			WHERE CART_NUMBER=#{CART_NUMBER}
+		]]>
+	</update>
+
+	<!-- 장바구니 삭제 -->
+
+	<!-- 멤버가 직접삭제 -->
+	<delete id="deleteMyCart" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM CART WHERE MEMBER_ID=#{MEMBER_ID} AND CART_NUMBER=#{CART_NUMBER}
+		]]>
+	</delete>
+	
+	</mapper>

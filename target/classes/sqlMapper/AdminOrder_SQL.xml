@@ -141,6 +141,35 @@
         ]]> 
 </select>
 
+<select id="totalsales" resultType="hashmap">
+        <![CDATA[
+                select goods_sellcount*goods_price as sales from goods
+        ]]>
+</select>
+
+<select id="categorysales" resultType="hashmap">
+        <![CDATA[
+                select goods_sellcount*goods_price as sales from goods where goods_category1=#{goods_category1}
+        ]]>
+</select>
+
+
+<select id="datesales" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+               select TO_CHAR(ORDER_DATE, 'YYYY-MM-DD') as ORDER_DATE ,sum(ORDER_TOTAL_PRICE) AS ORDER_TOTAL_PRICE from orderlist 
+where order_date BETWEEN #{order_date_start} AND #{order_date_end} group by TO_CHAR(ORDER_DATE, 'YYYY-MM-DD')
+        ]]>
+</select>
+
+
+
+
+
+
+
+
+
+
 
 
 

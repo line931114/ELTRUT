@@ -13,6 +13,7 @@ import javax.sound.midi.SysexMessage;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.adminGoods.AdminGoodsService;
@@ -38,7 +39,7 @@ Logger log = Logger.getLogger(this.getClass());
 		private Paging page;
 	
 	// Goods 목록보기
-	@RequestMapping(value="/adminGoods/adminGoodsList")
+	@RequestMapping(value="/adminGoodsList")
 	public ModelAndView adminGoodsList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
@@ -48,7 +49,7 @@ Logger log = Logger.getLogger(this.getClass());
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		ModelAndView mv = new ModelAndView("admin/goods/adminGoodsList");
+		ModelAndView mv = new ModelAndView("adminGoodsList");
 
 		List<Map<String, Object>> adminGoodsList = adminGoodsService.adminGoodsList(commandMap.getMap());
 		
@@ -123,17 +124,16 @@ Logger log = Logger.getLogger(this.getClass());
 
 	
 	// 상품 등록폼으로 이동
-		@RequestMapping(value = "/adminGoods/adminGoodsInsertForm")
-		public ModelAndView adminGoodsInsertForm() {
+		@RequestMapping(value = "/adminGoodsInsertForm")
+		public ModelAndView adminGoodsInsertForm(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("admin/goods/adminInsertGoods");
-
+			mv.setViewName("adminGoodsInsertForm");
 			return mv;
 		}
 
 		// 상품 등록
-		@RequestMapping(value = "/adminGoods/adminGoodsInsert")
+		@RequestMapping(value = "/adminGoodsInsertForm", method = RequestMethod.POST)
 		public ModelAndView adminGoodsInsert(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 			 ModelAndView mv = new ModelAndView("redirect:adminGoodsList");
@@ -145,10 +145,10 @@ Logger log = Logger.getLogger(this.getClass());
 		}
 	
 		// 상품 수정폼으로 이동
-		@RequestMapping(value = "/adminGoods/goodsModifyForm")
+		@RequestMapping(value = "adminModifyGoods")
 		public ModelAndView goodsModifyForm(CommandMap commandMap) throws Exception {
 
-			ModelAndView mv = new ModelAndView("/admin/goods/adminModifyGoods");
+			ModelAndView mv = new ModelAndView("adminModifyGoods");
 
 			Map<String, Object> adminGoodsDetail = adminGoodsService.modifyGoodsForm(commandMap.getMap());
 			mv.addObject("adminGoodsDetail", adminGoodsDetail);
@@ -165,7 +165,7 @@ Logger log = Logger.getLogger(this.getClass());
 		}
 
 		// 상품 수정
-		@RequestMapping(value = "/adminGoods/adminGoodsModify")
+		@RequestMapping(value = "adminModifyGoods", method = RequestMethod.POST)
 		public ModelAndView goodsModify(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 			ModelAndView mv = new ModelAndView("redirect:adminGoodsList");
@@ -188,4 +188,121 @@ Logger log = Logger.getLogger(this.getClass());
 			return mv;
 		}
 	
+		@RequestMapping("/adminSales")
+		public ModelAndView main(CommandMap commandMap) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			Date date=new Date();
+			List<Map<String,Object>>chk = adminGoodsService.TotalSales(commandMap.getMap());
+			int sum=0;
+			System.out.println("map객체 ㅁㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㄹㅁㄴㅇㄹㅇ"+chk);
+			for(Map<String,Object> map : chk) {
+			    System.out.println("한줄씩 ㅇㅁㄴㄹㄴㄹㅁㅇㄴㄹㅇㅁㄴㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㄴㅇㅁㄹㄴㅇ"+map);
+			    System.out.println("변환한 값 ㄴㅁㅇㄴㄹㅁㅇㄴㄹㅇㄴㅁㄹㄴ"+ Integer.parseInt(  map.get("SALES").toString()));
+			    sum+= Integer.parseInt(  map.get("SALES").toString());
+			   
+			  
+			}
+			 System.out.println("sum=**********************"+ sum);
+			mav.addObject("totalsales",sum);
+			mav.addObject("sysdate",date);
+			mav.setViewName("adminSales");
+			return mav;
+			
+		}
+		
+		@RequestMapping(value = "/adminSales", method = RequestMethod.POST)
+		
+		public ModelAndView CategoeySales(CommandMap commandMap, HttpServletRequest request) throws Exception {
+						
+			Date date=new Date();
+				
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			ModelAndView mav = new ModelAndView();
+			System.out.println("**************************"+commandMap);
+					
+			List<Map<String,Object>>chk = adminGoodsService.TotalSales(commandMap.getMap());
+			int sum=0;
+			System.out.println("map객체 ㅁㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㄹㅁㄴㅇㄹㅇ"+chk);
+			for(Map<String,Object> map : chk) {
+			    System.out.println("한줄씩 ㅇㅁㄴㄹㄴㄹㅁㅇㄴㄹㅇㅁㄴㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㄴㅇㅁㄹㄴㅇ"+map);
+			    System.out.println("변환한 값 ㄴㅁㅇㄴㄹㅁㅇㄴㄹㅇㄴㅁㄹㄴ"+ Integer.parseInt(  map.get("SALES").toString()));
+			    sum+= Integer.parseInt(  map.get("SALES").toString());
+			   
+			  
+			}
+			mav.addObject("totalsales",sum);
+			
+			
+			
+			Date firstdate;
+			Date enddate;
+			
+			 
+			 if(request.getParameter("jung").equals("1")) {//일주일
+				 Date d=new Date();
+				 int D=d.getDate();
+				 d.setDate(D-7);
+				 
+				  firstdate= d;
+				  enddate= new Date();
+			 }
+			 else if(request.getParameter("jung").equals("2")) {//1개월
+				 Date d=new Date();
+				 int m=d.getMonth();
+				 d.setMonth(m-1);
+				  firstdate= d;
+				  enddate= new Date();
+				 
+				 
+			 }
+			 else if(request.getParameter("jung").equals("3")) {//3개월
+				 Date d=new Date();
+				 int m=d.getMonth();
+				 d.setMonth(m-3);
+				  firstdate= d;
+				  enddate= new Date();
+				 
+				 
+			 }
+			 else if(request.getParameter("jung").equals("4")) {//전체
+				 Date d=new Date();
+				 int m=d.getYear();
+				 d.setYear(m-50);
+				  firstdate= d;
+				  enddate= new Date();
+			 }
+			 else {//기간 검색
+				  firstdate= format.parse(commandMap.get("order_date_start").toString());
+				  enddate= format.parse(commandMap.get("order_date_end").toString());
+				  
+				  
+				  
+				  System.out.println("*************order_date_start="+firstdate);
+				  System.out.println("*************order_date_end="+commandMap.get("order_date_end").toString());
+			 }
+			
+			 
+			 
+			 System.out.println("*************firstdate="+firstdate);
+			 System.out.println("*************enddate="+enddate);
+			
+			commandMap.put("order_date_start", firstdate);
+			 commandMap.put("order_date_end",enddate);
+			 List<Map<String,Object>>List = adminGoodsService.DateSales(commandMap.getMap());
+			 
+			 System.out.println("*******************"+chk);
+			 mav.addObject("List",List);
+			 mav.setViewName("adminSales");
+			
+			
+			
+			 mav.addObject("sysdate",date);
+			return mav;
+			
+			
+			
+		}
+		
+
+		
 }

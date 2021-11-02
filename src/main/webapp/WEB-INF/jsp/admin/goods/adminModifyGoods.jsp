@@ -77,7 +77,7 @@ function GOODS_CATEGORY1Change() {
 <div class="row" style="padding-left:15px;width:900px;">
 	<h1 class="page-header">상품수정</h1>
 </div>
-	<form id="frm" name="frm" enctype="multipart/form-data">
+	<form id="frm" name="frm" action="adminModifyGoods" enctype="multipart/form-data">
 		<table class="board_view">
 			<colgroup>
 				<col width="13%">
@@ -370,13 +370,13 @@ function GOODS_CATEGORY1Change() {
 		
 		function fn_openGoodsList(){
 			var comSubmit = new ComSubmit();
-			comSubmit.setUrl("<c:url value='/adminGoods/adminGoodsList' />");
+			comSubmit.setUrl("<c:url value='/adminGoodsList' />");
 			comSubmit.submit();
 		}
 		
 		function fn_insertGood(){
-			var comSubmit = new ComSubmit("frm");
-			comSubmit.setUrl("<c:url value='/adminGoods/adminGoodsModify' />");
+			var comSubmit = new ComSubmit("frm");/* 
+			comSubmit.setUrl("<c:url value='/adminGoods/adminGoodsModify' />"); */
 			comSubmit.submit();
 		}
 		

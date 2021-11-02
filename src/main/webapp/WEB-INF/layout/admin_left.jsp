@@ -9,10 +9,12 @@
 <body>
 <div id="container">
 <ul>
+	<li><a href ="main">쇼핑몰로 이동</a>
+		</li>
     <li>상품관리
     	 <ul>
-            <li>상품 목록</li>
-            <li>상품 추가</li>
+            <li><a href ="adminGoodsList">상품 목록</a></li>
+            <li><a href ="adminGoodsInsertForm">상품 추가</a></li>
         </ul>   
      </li>
     <li>
@@ -26,27 +28,20 @@
     <li>
        매출 관리
         <ul>
-            <li>매출 정산</li>
-        </ul>   
-    </li>
-    <li>
-      재고 관리
-        <ul>
-            <li>재고 확인</li>
+            <li><a href ="adminSales">매출 정산</a></li>
         </ul>   
     </li>
    <li>
        게시판 관리
         <ul>
-            <li>구매후기</li>
-             <li>Q&A</li>
+            <li><a href ="adminReviewList">구매후기</a></li>
+             <li><a href="adminQNAList">Q&A</a></li>
         </ul>   
     </li>    
     <li>
        주문 관리
         <ul>
-            <li>주문 목록</li>
-            <li>교환/취소/반품</li>
+            <li><a href="orderList">주문 목록</a></li>
         </ul>   
     </li> 
 </ul>

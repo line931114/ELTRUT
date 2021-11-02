@@ -81,7 +81,7 @@ function delchk(){
 
 <div class="row" style="padding-left:15px;width:900px;">    
 	<h1 class="page-header">상품목록</h1>
-<a href="/ELTRUT/adminGoods/adminGoodsInsertForm">상품추가</a>
+<a href="adminGoodsInsertForm">상품추가</a>
 
 </div> 
 <div class="row">
@@ -95,7 +95,7 @@ function delchk(){
 					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 					<div class="row" style="margin-bottom:5px;">
 						<div class="col-sm-6">
-							<a href="/ELTRUT/adminGoods/adminGoodsList"><button type="button" class="btn btn-outline btn-default">전체</button></a>
+							<a href="/ELTRUT/adminGoodsList"><button type="button" class="btn btn-outline btn-default">전체</button></a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--카테고리--</option>
 								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=OUTER">OUTER</option>
@@ -147,7 +147,7 @@ function delchk(){
 								</thead>
 								<tbody>
 								<c:forEach var="adminGoodsList"  items="${adminGoodsList}" varStatus="stat">
-								<c:url var="viewURL" value="/adminGoods/goodsModifyForm" >
+								<c:url var="viewURL" value="goodsModifyForm" >
 									<c:param name="GOODS_NUMBER" value="${adminGoodsList.GOODS_NUMBER }" />
 								</c:url>									
 									<tr class="gradeA even" role="row">

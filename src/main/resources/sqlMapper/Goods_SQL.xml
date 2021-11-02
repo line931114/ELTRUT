@@ -4,7 +4,7 @@
 <select id="GoodsList" parameterType="hashmap" resultType="hashmap">
                 <![CDATA[
                         SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
-                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,TO_CHAR(GOODS_DATE, 'YYYY-MM-DD') AS GOODS_DATE,
+                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
                       decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
                       FROM GOODS  
                         ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
@@ -22,4 +22,114 @@
                         ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
                 ]]>
 </select> 
+
+<!-- 상품 상세보기 - 상품 가져오기 -->
+	<select id="selectOneGoods" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT A.*,
+			decode(A.GOODS_SIZE, 'xxs', '1','XXS', '1', 'xs', '2','XS', '2', 's', '3','S', '3', 'm', '4','M', '4',  'l', '5','L', '5', 'xl', '6','XL', '6', 'xxl', '7','XXL', '7','free', '8','FREE', '8','Free', '8') as SIZE_ORDER 
+			FROM GOODS A
+			WHERE A.GOODS_NUMBER=#{GOODS_NUMBER}
+			ORDER BY GOODS_COLOR ASC, SIZE_ORDER ASC
+		]]>
+	</select>
+	
+	<!-- 회원/비회원 상품 주문하기 -->
+	<!-- [1단계 상품상세보기에서 구매하기 눌렀을때 -> 선택한 상품/회원정보 보여주는 orderform
+		주문자정보 가져오기 + 포인트테이블에서 개별 포인트 sum해서 가져오기
+		1)구매자정보,배송지정보에 맴버테이블에서 꺼내온 값 보여주고
+		2)배송지정보에서 수정한 내역은 RECEIVER_ 로 수정해서 컨트롤러로 전송
+	-->
+	<select id="orderMember" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+        SELECT 
+                        M.MEMBER_ID,
+                        M.MEMBER_NAME,
+                        M.MEMBER_PHONE,
+                        M.MEMBER_EMAIL,
+                        M.MEMBER_ZIPCODE,
+                        M.MEMBER_ADDRESS1,
+                        M.MEMBER_ADDRESS2
+                FROM MEMBER M
+                WHERE M.MEMBER_ID = #{MEMBER_ID}
+                GROUP BY 
+                        M.MEMBER_ID, 
+                        M.MEMBER_NAME,
+                        M.MEMBER_PHONE,
+                        M.MEMBER_EMAIL,
+                        M.MEMBER_ZIPCODE,
+                        M.MEMBER_ADDRESS1,
+                        M.MEMBER_ADDRESS2
+        ]]>
+	</select>
+	
+
+	<!-- orderGoods = orderService.orderGoods(commandMap.getMap()); -->
+	<select id="orderGoods" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			SELECT 
+				G.GOODS_NUMBER,
+				G.GOODS_NAME,
+				G.GOODS_PRICE,
+				G.GOODS_THUMBNAIL,
+				G.GOODS_AMOUNT,
+				G.GOODS_SIZE,
+				G.GOODS_COLOR,
+				G.GOODS_PRICE * #{EA} TOTALPRICE
+			FROM GOODS G
+			WHERE G.GOODS_NUMBER = ${GOODS_NUMBER}
+		]]>
+	</select>
+	
+	<!-- 배송내역 생성 -->
+	<insert id="createDeliveryList" parameterType="hashMap">
+		<![CDATA[
+        INSERT INTO DELIVERY 
+        (ORDER_NUMBER,
+        MEMBER_ID,
+        BUYER_ZIPCODE,
+        BUYER_ADDRESS1,
+        BUYER_ADDRESS2,
+        BUYER_NAME,
+        RECEIVER_NAME,
+        BUYER_NUMBER,
+        BUYER_EMAIL,
+        DELIVERY_MESSAGE) VALUES 
+        (${ORDER_NUMBER},
+        '${MEMBER_ID}',
+        '${BUYER_ZIPCODE}',
+        '${BUYER_ADDRESS1}',
+        '${BUYER_ADDRESS2}',
+        '${BUYER_NAME}',
+        '${RECEIVER_NAME}',
+        ${BUYER_NUMBER},
+        '${BUYER_EMAIL}',
+        '${DELIVERY_MESSAGE}')
+]]>
+	</insert>
+	
+	<!-- 주문내역 생성 -->
+	<insert id="createOrderList" parameterType="hashMap">
+		<![CDATA[
+               INSERT INTO ORDERLIST (
+        ORDER_NUMBER,
+        MEMBER_ID,
+        GOODS_NUMBER,
+        ORDER_AMOUNT,
+        ORDER_DATE,
+        ORDER_TOTAL_PRICE,
+        ORDER_PAY_STATE,
+        ORDER_STATE
+        ) VALUES (
+        ${ORDER_NUMBER},
+        '${MEMBER_ID}',
+        '${GOODS_NUMBER}',
+        '${ORDER_AMOUNT}',
+        SYSDATE,
+        '${ORDER_TOTAL_PRICE}',
+        '0',
+        '0'
+        )
+]]>
+	</insert>
 </mapper>

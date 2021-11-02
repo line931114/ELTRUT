@@ -8,11 +8,26 @@
 <tiles-definitions>
 
 
-  <definition name="layout" template="/WEB-INF/layout/base.jsp">
+  <definition name="layout" template="/WEB-INF/layout/admin_base.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/admin_header.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/layout/admin_footer.jsp" />
+		<put-attribute name="footer" value="" />
 		<put-attribute name="left" value="/WEB-INF/layout/admin_left.jsp" />
 		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="adminGoodsList" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/goods/adminGoodsList.jsp" />
+	</definition>
+	
+	<definition name="adminGoodsInsertForm" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/goods/adminInsertGoods.jsp" />
+	</definition>
+	
+	<definition name="adminModifyGoods" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/goods/adminModifyGoods.jsp" />
 	</definition>
 	
 	<definition name="adminMemberList" extends="layout">		
@@ -25,21 +40,60 @@
 			value="/WEB-INF/jsp/admin/member/adminMemberList1.jsp" />
 	</definition>
 	
+	<definition name="adminQNAList" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/qna/adminQNAList.jsp" />
+	</definition>
 	
+	<definition name="adminQNADetail" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/qna/adminQNADetail.jsp" />
+	</definition>
 	
+	<definition name="adminQNAReply" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/qna/adminQNAReply.jsp" />
+	</definition>
 	
+	<definition name="orderList" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/order/adminOrderList.jsp" />
+	</definition>
 	
+	<definition name="adminOrderDetail" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/order/adminOrderDetail.jsp" />
+	</definition>
 	
+	<definition name="adminOrderUpdate" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/order/adminOrderUpdate.jsp" />
+	</definition>
+
+	<definition name="adminSales" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/adminSales.jsp" />
+	</definition>
 	
+	<definition name="index" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/cancle.jsp" />
+	</definition>
 	
+	<definition name="adminReviewList" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/review/adminReviewList.jsp" />
+	</definition>
 	
+	<definition name="adminReviewDetail" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/review/adminReviewDetail.jsp" />
+	</definition>
 	
-	
-	
-	
-	
-	
-	
+	<definition name="adminReviewReply" extends="layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/review/adminReviewReply.jsp" />
+	</definition>
 	
 	
 	
@@ -50,15 +104,16 @@
 	
 	<definition name="main_layout" template="/WEB-INF/layout/main_base.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main_header.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/layout/admin_footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main_footer.jsp" />
 		<put-attribute name="body" value="" />
 	</definition>
 	
-	<definition name="joinStep1" extends="main_layout">		
-		<put-attribute name="body"
-			value="/WEB-INF/jsp/joinStep1.jsp" />
-	</definition>
 	
+	<definition name="main0" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/main0.jsp" />
+	</definition>
+
 	<definition name="main" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/main.jsp" />
@@ -67,6 +122,163 @@
 	<definition name="loginForm" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/loginForm.jsp" />
+	</definition>
+	
+	<definition name="joinStep1" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/joinStep1.jsp" />
+	</definition>
+	
+	<definition name="findForm" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/findForm.jsp" />
+	</definition>
+	
+	<definition name="findForm1" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/findForm1.jsp" />
+	</definition>
+	
+	<definition name="findForm2" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/findForm2.jsp" />
+	</definition>
+	
+	<definition name="findForm3" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/findForm3.jsp" />
+	</definition>
+	
+	<definition name="findForm3" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/findForm3.jsp" />
+	</definition>
+	
+	<!--마이페이지 타일즈시작  -->
+	<definition name="myPage" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/myPage.jsp" />
+	</definition>
+	
+	<definition name="memberInfo" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/memberInfo.jsp" />
+	</definition>
+
+	<definition name="pwCheck" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/pwCheck.jsp" />
+	</definition>
+	
+	<definition name="memberUpdateForm" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/memberUpdateForm.jsp" />
+	</definition>
+	
+	
+	<definition name="deleteForm" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/deleteForm.jsp" />
+	</definition>
+	
+	
+	<!--마이페이지 orderInfo 주문정보  -->
+	<definition name="orderInfo" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/orderInfo.jsp" />
+	</definition>
+	
+	
+	<definition name="orderExchange" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/orderExchange.jsp" />
+	</definition>
+	
+	<!--마이페이지->CANCEL 페이지이동  -->
+	<definition name="enquiryCheck" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/enquiryCheck.jsp" />
+	</definition>
+	
+	<definition name="enquiryModify" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/enquiryModify.jsp" />
+	</definition>
+	
+	<!--마이페이지-> CS테이블 QNA-->
+	<definition name="qnaCheck" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/qnaCheck.jsp" />
+	</definition>
+	
+	<definition name="qnaModify" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/myPage/qnaModify.jsp" />
+	</definition>
+	
+	
+	
+	
+	<!--상품 디테일,후기,문의  -->
+	<definition name="goods/goodsDetail" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/goodsDetail.jsp" />
+	</definition>
+	
+	<definition name="goodsReview" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/goodsReview.jsp" />
+	</definition>
+	
+	
+	<definition name="reviewModify" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/reviewModify.jsp" />
+	</definition>
+	
+	<definition name="reviewInsert" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/reviewInsert.jsp" />
+	</definition>
+	
+	
+	<definition name="goodsQna" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/goodsQna.jsp" />
+	</definition>
+	
+	
+	<definition name="goodsQnaModify" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/goodsQnaModify.jsp" />
+	</definition>
+	
+	<definition name="goodsQnaInsert" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/goods/goodsQnaInsert.jsp" />
+	</definition>
+	
+	
+	<!--장바구니 -->
+	<definition name="cartList" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cart/cartList.jsp" />
+	</definition>
+	
+	<!--상품주문 -->
+	<definition name="order" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/order/orderForm.jsp" />
+	</definition>
+	
+	<definition name="orderDetail" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/order/orderDetail.jsp" />
+	</definition>
+	
+	<definition name="orderEnd" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/order/orderEnd.jsp" />
 	</definition>
 	
 	

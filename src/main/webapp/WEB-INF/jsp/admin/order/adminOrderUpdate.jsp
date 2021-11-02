@@ -10,7 +10,7 @@
 
   </head>
   <body>
-  	<form action="/ELTRUT/order/adminOrderUpdate" method="post">
+  	<form action="/ELTRUT/adminOrderUpdate" method="post">
      <h1>수정</h1>
       
 		주문번호:<input type="text" name="ORDER_NUMBER" value="${order.ORDER_NUMBER}"><br/>

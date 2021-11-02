@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="adminOrderCancel">
+<!-- 해당 주문 번호에 대한 캔슬 유무 확인 -->
 <select id="confirmCancel" resultType="hashmap" parameterType="hashmap">
         <![CDATA[
                 SELECT CANCEL_CONTENT, CANCEL_REGDATE 
@@ -8,4 +10,30 @@
                 WHERE ORDER_NUMBER = #{ORDER_NUMBER }
         ]]>
 </select>
+<!-- 주문 관리 목록(취소/교환/환불) -->
+<select id="allCancelList" resultType="hashmap" parameterType="hashmap">
+        <![CDATA[
+               SELECT a.CANCEL_NUMBER, a.ORDER_NUMBER, a.CANCEL_CONTENT, 
+TO_CHAR(a.CANCEL_REGDATE, 'YYYY-MM-DD') as CANCEL_REGDATE, a.CANCEL_TITLE, a.CANCEL_CATEGORY,c.goods_name,b.order_state
+                FROM CANCEL a,orderlist b,goods c
+                WHERE a.order_number=b.order_number and b.goods_number=c.goods_number
+                ORDER BY ORDER_NUMBER DESC
+        ]]>
+</select>
+<!--   주문 취소 삭제 -->
+<delete id="cancelDelete" parameterType="hashmap">
+        <![CDATA[
+                DELETE CANCEL 
+                WHERE ORDER_NUMBER = #{ORDER_NUMBER}
+        ]]>
+</delete>
+
+<update id="updatecancle" parameterType="hashmap">
+        <![CDATA[
+                UPDATE ORDERLIST
+                SET ORDER_STATE = #{cancle_cat}
+                WHERE ORDER_NUMBER= #{cancle_ordernumber}
+        ]]>
+</update>
+
 </mapper>

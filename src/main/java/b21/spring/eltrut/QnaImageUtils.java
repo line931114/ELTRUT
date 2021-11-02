@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component("qnaImageUtils")
 public class QnaImageUtils {
-	 private static final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+	 private static final String filePath =  "C:\\Users\\82109\\Desktop\\21B프로젝트\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
 	 
 	 public Map<String, Object> qnaImage(Map<String, Object> map, HttpServletRequest request) throws Exception {
 

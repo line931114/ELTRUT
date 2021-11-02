@@ -48,7 +48,7 @@
 	<select id="orderInfo" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
-		select goods_thumbnail, order_number, order_state, order_total_price, member_id, order_date
+		select goods_thumbnail, order_number, order_state, order_total_price, member_id, order_date, a.goods_number
 		from goods a , orderlist b
 		where a.goods_number = b.goods_number and member_id=#{MEMBER_ID}
 	]]>
@@ -68,14 +68,14 @@
 	<![CDATA[
 			delete 
 			from orderlist
-			where order_number=${ORDER_NUMBER}	
+			where order_number=#{ORDER_NUMBER}	
 	]]>
 	</delete>
 	
 	<insert id="cancel" parameterType="hashmap">
 	<![CDATA[
 				INSERT INTO CANCEL
-                (CANCEL_NUMBER, ORDER_NUMBER, CANCEL_CONTENT, TO_CHAR(CANCEL_REGDATE, 'YYYY-MM-DD') AS CANCEL_REGDATE,
+                (CANCEL_NUMBER, ORDER_NUMBER, CANCEL_CONTENT, CANCEL_REGDATE,
                  CANCEL_TITLE, CANCEL_CATEGORY
                  ) VALUES (
                  CS_NUMBER_SEQ.NEXTVAL, #{ORDER_NUMBER}, #{CANCEL_CONTENT}, SYSDATE,

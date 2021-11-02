@@ -46,6 +46,40 @@ public class MainController {
 //		
 //	}
 	
+	@RequestMapping("/main0")
+	public ModelAndView main0(CommandMap commandMap,HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<Map<String,Object>>goods = mainService.goodsList(commandMap.getMap());
+		
+	
+		
+		System.out.println(goods);
+		
+		
+		mav.setViewName("main0");
+		mav.addObject("goods", goods);
+		
+
+		HttpSession session=request.getSession();
+		String MEMBER_ID=(String) session.getAttribute("MEMBER_ID");
+		if(MEMBER_ID==null) {
+			mav.addObject("MEMBER_ID",null);
+		}
+		else {
+			System.out.println("***********************************************\n"+MEMBER_ID);
+			mav.addObject("MEMBER_ID",MEMBER_ID);
+			commandMap.put("MEMBER_ID", MEMBER_ID);
+			Map<String,Object> header_basket=mainService.header_baskets(commandMap.getMap());
+			mav.addObject("header_basket",header_basket);
+		}
+		
+		
+		return mav;
+		
+	}
+	
+	
+	
 	
 	@RequestMapping("/main")
 	public ModelAndView main(CommandMap commandMap,HttpServletRequest request) throws Exception {
@@ -92,10 +126,11 @@ public class MainController {
 	}
 	
 	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,true));
+	@RequestMapping(value="/privacy")
+	public ModelAndView footer0(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/privacy");
+		return mv;
 	}
 
 	

@@ -42,7 +42,7 @@ function delchk(){
 					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 					<div class="row" style="margin-bottom:5px;">
 						<div class="col-sm-6">
-							<a href="/ELTRUT/adminQna/adminQnaList">
+							<a href="/ELTRUT/adminQnaList">
 								<button type="button" class="btn btn-outline btn-default">전체</button>
 							</a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">

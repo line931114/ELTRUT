@@ -36,7 +36,7 @@ function cancle_Exchange() {
 </head>
 <body>
 <h3>상품교환,환불 페이지</h3>
-	<form method="post" name="cancel" action="/ELTRUT/cancel" onsubmit ="return cancel_Exchange()">
+	<form method="post" name="cancel" action="/ELTRUT/enquiryCheck" onsubmit ="return cancel_Exchange()">
 		<table border="1" height="100%">
 
 			<tr>

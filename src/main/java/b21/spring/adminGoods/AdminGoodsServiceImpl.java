@@ -260,4 +260,19 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 		AdminGoodsDAO.addAmount(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> TotalSales(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return AdminGoodsDAO.totalsales(map);
+	}
+	@Override
+	public List<Map<String, Object>> CategorySales(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return AdminGoodsDAO.categorysales(map);
+	}
+	
+	public List<Map<String, Object>> DateSales(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return AdminGoodsDAO.datesales(map);
+	}
 }
