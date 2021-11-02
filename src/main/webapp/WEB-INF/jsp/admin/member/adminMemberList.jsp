@@ -9,6 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 목록 조회</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <br>
 <br>
@@ -17,8 +23,7 @@
       table {
         width: 100%;
       }
-      table, th, td {
-        border: 1px solid #bcbcbc;
+     
       }
       td {
         text-align: center;
@@ -26,7 +31,8 @@
 
     </style>
 <body>
-<table>
+<table class="table table-striped">
+
       <caption><h1>회원 전체 목록</h1></caption>
       <thead>
         <tr>
@@ -62,20 +68,28 @@
 <div class="paging">
          	<ul class="inline">
                   ${pagingHtml}
-                  <div id="dataTables-example_filter" class="dataTables_filter">
-								<form action="">
+                  <div id="dataTables-example_filter" class="dataTables_filter" style="width:600px;">
+								<form action=""> 
+									<div style="float: left; width: 20%">
 									<select class="form-control" name="searchNum" id="searchNum">
 										<option value="0">아이디</option>
 										<option value="1">이름</option>
 										<option value="2">휴대폰 번호</option>
 										<option value="3">이메일</option>
 									</select> 
+									</div>
+									<div style="float: left; width: 70%;">
 									<input class="form-control" type="text" name="isSearch" id="isSearch" /> 
+									</div>
 									<span>
+									<div style="float: left; width: 10%;">
 										<button type="submit" class="btn btn-default">검색</button>
+									</div>
 									</span>
+									
 								</form>
 							</div>
+							
             </ul>
         </div>
 </body>

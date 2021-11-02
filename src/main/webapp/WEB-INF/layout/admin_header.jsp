@@ -30,7 +30,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        <img src="/ELTRUT/file/ad.logo.png"/>
+        <img src="/ELTRUT/file/ADLOGO.png" class="img-fluid">
       </a>
      <p class="navbar-text navbar-right">Signed in as <a href="#logout" class="navbar-link"> 21B</a></p>
     </div>

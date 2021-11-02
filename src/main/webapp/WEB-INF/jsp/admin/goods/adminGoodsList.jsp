@@ -81,7 +81,6 @@ function delchk(){
 
 <div class="row" style="padding-left:15px;width:900px;">    
 	<h1 class="page-header">상품목록</h1>
-<a href="adminGoodsInsertForm">상품추가</a>
 
 </div> 
 <div class="row">
@@ -95,7 +94,7 @@ function delchk(){
 					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 					<div class="row" style="margin-bottom:5px;">
 						<div class="col-sm-6">
-							<a href="/ELTRUT/adminGoodsList"><button type="button" class="btn btn-outline btn-default">전체</button></a>
+							<a href="/ELTRUT/adminGoods/adminGoodsList"><button type="button" class="btn btn-outline btn-default">전체</button></a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--카테고리--</option>
 								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=2&isSearch=OUTER">OUTER</option>
@@ -117,8 +116,11 @@ function delchk(){
 								<option value ="">--상품정렬--</option>
 								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=5&isSearch=GOODS_AMOUNT">판매수량순</option>
 								<option value ="/ELTRUT/admin/goods/adminGoodsList?searchNum=6&isSearch=GOODS_COUNT">조회순</option>
-							</select>											
+							</select>	
+							
+							<a href="/ELTRUT/adminGoods/adminGoodsInsertForm"><button type="button" class="btn btn-outline btn-default">상품추가</button></a>										
 						</div>
+						
 						<div class="col-sm-6" style="text-align:right;">
 							<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">총 상품수 : ${totalCount}</div>
 						</div>
@@ -126,8 +128,9 @@ function delchk(){
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
+						
 							<table
-								class="table  table-bordered table-hover dataTable no-footer"
+								class="table table-striped"
 								id="dataTables-example" role="grid"
 								aria-describedby="dataTables-example_info">
 								<thead>
@@ -147,7 +150,7 @@ function delchk(){
 								</thead>
 								<tbody>
 								<c:forEach var="adminGoodsList"  items="${adminGoodsList}" varStatus="stat">
-								<c:url var="viewURL" value="goodsModifyForm" >
+								<c:url var="viewURL" value="/adminGoods/goodsModifyForm" >
 									<c:param name="GOODS_NUMBER" value="${adminGoodsList.GOODS_NUMBER }" />
 								</c:url>									
 									<tr class="gradeA even" role="row">

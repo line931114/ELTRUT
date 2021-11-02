@@ -176,7 +176,6 @@ Logger log = Logger.getLogger(this.getClass());
 			return mv;
 		}
 		
-	
 		// 상품 삭제
 		@RequestMapping(value = "/adminGoods/adminGoodsDelete")
 		public ModelAndView goodsDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
@@ -184,10 +183,10 @@ Logger log = Logger.getLogger(this.getClass());
 			ModelAndView mv = new ModelAndView("redirect:adminGoodsList");
 			
 			adminGoodsService.deleteGoods(commandMap.getMap());
-			
 			return mv;
 		}
-	
+		
+		
 		@RequestMapping("/adminSales")
 		public ModelAndView main(CommandMap commandMap) throws Exception {
 			ModelAndView mav = new ModelAndView();

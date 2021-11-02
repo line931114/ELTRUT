@@ -4,18 +4,20 @@
 <mapper namespace="myPage">
 
 
-<!--회원정보출력  -->
-<select id="info" parameterType="hashmap" resultType="hashmap">
+	<!--회원정보출력  -->
+	<select id="info" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT *
 		FROM MEMBER
 		WHERE MEMBER_ID=#{MEMBER_ID}
 	]]>
 	</select>
+	
+	
 	<select id="pwCheck" parameterType="hashmap" resultType="hashmap">
-	SELECT MEMBER_PASSWORD 
+		SELECT MEMBER_PASSWORD 
 		FROM MEMBER 
-        WHERE MEMBER_PASSWORD =#{MEMBER_PASSWORD}
+		WHERE	MEMBER_PASSWORD=#{MEMBER_PASSWORD}
 	</select>
 	
 	
@@ -54,7 +56,7 @@
 	]]>
 	</select>
 	
-	
+	<!--상품교환,환불하기위한 select문  -->
 	<select id="orderExchange" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
@@ -64,6 +66,7 @@
 	]]>
 	</select>
 	
+	<!--배송대기상태 상품 취소  -->
 	<delete id="orderCancle" parameterType="hashmap">
 	<![CDATA[
 			delete 
@@ -72,6 +75,7 @@
 	]]>
 	</delete>
 	
+	<!--배송취소 사유적기-->
 	<insert id="cancel" parameterType="hashmap">
 	<![CDATA[
 				INSERT INTO CANCEL
@@ -83,7 +87,8 @@
                  )
 	]]>
 	</insert>
-
+	
+	<!--내 문의사항 확인하기-->
 	<select id="enquiryCheck" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
@@ -96,16 +101,17 @@
 	</select>
 	
 	
+	<!--내 문의사항 삭제하기-->
 	<delete id="enquiryDelete" parameterType="hashmap">
 	<![CDATA[
-	             delete 
-                 from cancel
-                 where cancel_number=#{CANCEL_NUMBER}
+		delete 
+		from cancel
+		where cancel_number=#{CANCEL_NUMBER}
 	
 	]]>
 	</delete>
 	
-	
+	<!--내 문의사항 select 하기-->
 	<select id="enquiryModifyForm" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
@@ -115,6 +121,7 @@
 	]]>
 	</select>
 	
+	<!--내 문의사항 수정 하기-->
 	<update  id="enquiryModify" parameterType="hashmap" >
                 <![CDATA[
             UPDATE CANCEL
@@ -124,13 +131,10 @@
 			CANCEL_REGDATE=SYSDATE
 			WHERE CANCEL_NUMBER=#{CANCEL_NUMBER}
                 ]]>
-        </update>
+	</update>
 	
 	
 	<!--내문의사항-QNA 확인  -->
-	
-	
-	
 	<select id="qnaCheck" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	
@@ -149,7 +153,7 @@
 	]]>
 	</delete>
 	
-	
+	<!--내문의사항-QNA 조회하기  -->
 	<select id="qnaModifyForm" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 	

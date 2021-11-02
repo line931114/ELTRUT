@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>회원정보수정</title>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
 
 <!-- 주소API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script><script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
@@ -110,57 +109,75 @@ function updateform_check() {
 }
 </script>
 
+<title>회원정보수정</title>
 </head>
-<body>
-회원정보수정
-	<form method="post" name="updateForm" action="memberUpdateForm">	
-	<table border="1">
-	
-	<tr>
-	<td><strong>아이디</strong></td>
-	<td><input type="text" readonly name="MEMBER_ID" id="MEMBER_ID" value="${M.MEMBER_ID }" maxlength="20" label="이름"></td>
-	</tr>
+<body class="bg-light">
+    
+<div class="container">
+  <main>  
+    <div class="row g-5">
+      
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">회원정보수정</h4>
+        <form class="needs-validation" method="post" name="updateForm" action="memberUpdateForm" >
+          <div class="row g-3">
+            <div class="col-7">
+              <label for="firstName" class="form-label">회원 ID</label>
+              <input type="text" class="form-control" readonly name="MEMBER_ID" id="MEMBER_ID" value="${M.MEMBER_ID }" maxlength="20">
+              
+            </div>
 
-	<tr>
-	<td><strong>이름</strong></td>
-	<td><input type="text" name="MEMBER_NAME" id="MEMBER_NAME" value="${M.MEMBER_NAME }" maxlength="20" label="이름"></td>
-	</tr>
-		
-	<tr>
-	<td><strong>이메일</strong></td>
-	<td><input type="text"  name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="${M.MEMBER_EMAIL }" maxlength="20" label="이름"></td>
-	</tr>
-	<tr>
-	<td><strong>핸드폰 번호</strong></td>
-	<td><input type="text"  name="MEMBER_PHONE" id="MEMBER_PHONE" value="${M.MEMBER_PHONE }" maxlength="20" label="이름"></td>
-	</tr>
-	
-<!-- 	<tr>
-	<td><strong>비밀번호</strong></td>
-	<td><input type="password" name="MEMBER_PASSWORD" id="MEMBER_PASSWORD" value="" maxlength="21" label="비밀번호"></td>
-	</tr>
-	<tr>
-	<td><strong>비밀번호확인</strong></td>
-	<td><input type="password" name="MEMBER_PASSWORD2" id="MEMBER_PASSWORD2" value="" maxlength="21" label="비밀번호"></td>
-	</tr> -->
-	
-	<tr>
-	<td><strong>
-	<input type="button"value="주소찾기" onclick="sample6_execDaumPostcode()"></strong></td></tr>
-	
-	<tr>
-	<td><input type="text" id="sample6_postcode"  name="MEMBER_ZIPCODE" readonly  value="${M.MEMBER_ZIPCODE }" maxlength="6" required=""></td>
-	</tr>
-	<tr>
-	<td><input type="text" id="sample6_address"  name="MEMBER_ADDRESS1"  readonly value="${M.MEMBER_ADDRESS1 }" size="48" readonly></td>
-	<td><input type="text" id="sample6_address2"  name="MEMBER_ADDRESS2" value="${M.MEMBER_ADDRESS2 }" label="주소" ></td>
-	</tr>
-	
-	
-	</table>
-	</form>
-	 <input type="button" value="회원정보수정하기" onclick="updateform_check()">
-	 <input type="button" value="회원탈퇴하기" onclick="location.href='deleteForm'">
-	 <input type="button" value="이전페이지로" onclick="location.href='myPage'">
+            <div class="col-7">
+              <label for="lastName" class="form-label">회원 이름</label>
+              <input type="text" class="form-control" name="MEMBER_NAME" id="MEMBER_NAME" value="${M.MEMBER_NAME }" maxlength="20" >
+              
+            </div>
+
+            <div class="col-7">
+              <label for="username" class="form-label">회원 연락처</label>
+                <input type="text" class="form-control" name="MEMBER_PHONE" id="MEMBER_PHONE" value="${M.MEMBER_PHONE }" maxlength="20">
+              
+              </div>
+
+            <div class="col-7">
+              <label for="email" class="form-label">Email </label>
+              <input type="email" class="form-control" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="${M.MEMBER_EMAIL }" maxlength="20">
+              
+            </div>
+
+            <div class="col-7">
+              <label for="address" class="form-label">우편번호</label>
+            <button class="btn btn-primary btn-lg" type="button" onclick="sample6_execDaumPostcode()" style="float: right;">주소찾기</button>
+              <input type="text" class="form-control" id="sample6_postcode"  name="MEMBER_ZIPCODE" readonly  value="${M.MEMBER_ZIPCODE }" maxlength="6" required="">
+              
+            </div>
+
+            <div class="col-7">
+              <label for="address2" class="form-label">주소</label>
+              <input type="text" class="form-control" id="sample6_address"  name="MEMBER_ADDRESS1"  readonly value="${M.MEMBER_ADDRESS1 }" size="48" readonly>
+              <input type="text" class="form-control" id="sample6_address2"  name="MEMBER_ADDRESS2" value="${M.MEMBER_ADDRESS2 }">
+            </div>
+          </div><br/>
+          <hr class="my-4">
+          <div style="text-align: -webkit-center;">
+          <button class="btn btn-primary btn-lg" type="button" onclick="updateform_check()" style="max-width: max-content;">회원정보수정하기</button>
+          <button class="btn btn-primary btn-lg" type="button" onclick="location.href='deleteForm'" style="max-width: max-content;">회원탈퇴하기</button>
+          <button class="btn btn-primary btn-lg" type="button" onclick="location.href='myPage'" style="max-width: max-content;">이전페이지로</button>
+          </div>
+		        
+        </form>
+      </div>
+    </div>
+  </main>
+
+  
+</div>
+
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      <script src="form-validation.js"></script>
+  
+
 </body>
 </html>

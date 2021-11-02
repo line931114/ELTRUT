@@ -18,13 +18,13 @@
 <nav style="width: 20%; float: left; margin-top: 70px">
 <tiles:insertAttribute name="left"/> 
 </nav>
+<article>
 
 
 <div style="width: 80%; float: left;">
 <tiles:insertAttribute name="body"/> 
 </div>
-
-
+</article>
 <footer style="width: 100%; float: left;">
  	<tiles:insertAttribute name="footer"/> 
  </footer> 

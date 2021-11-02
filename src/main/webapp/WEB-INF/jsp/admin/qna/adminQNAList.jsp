@@ -66,7 +66,7 @@ function delchk(){
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid"
+							<table class="table table-striped" id="dataTables-example" role="grid"
 								aria-describedby="dataTables-example_info">
 								<thead>
 									<tr role="row">

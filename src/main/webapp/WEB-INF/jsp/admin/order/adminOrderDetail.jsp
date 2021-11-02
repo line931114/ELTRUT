@@ -10,6 +10,14 @@
 <head>
 <meta charset="EUC-KR">
 <title>주문목록</title>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
  <br>
@@ -18,17 +26,17 @@
       table {
         width: 100%;
       }
-      table, th, td {
-        border: 1px solid #bcbcbc;
-      }
+      
       td {
         text-align: center;
       }
 
     </style>
+    
+    
   </head>
   <body>
-    <table>
+   <table class="table table-striped">
       <caption><h1>주문상세보기</h1></caption>
       <thead>
         <tr>
@@ -51,7 +59,7 @@
        <c:when test="${fn:length(orderDetail)>0 }">
  		 	<c:forEach var="list" items="${orderDetail }" varStatus="status">
 		        <tr>
-		          <th><a href="/ELTRUT/adminOrderUpdate?ORDER_NUMBER=${list.ORDER_NUMBER }"> ${list.ORDER_NUMBER}> </a></th>
+		          <th><a href="adminOrderUpdate?ORDER_NUMBER=${list.ORDER_NUMBER }"> ${list.ORDER_NUMBER}> </a></th>
 		 		  <td>${list.ORDER_DATE}</td>
 		          <td>${list.GOODS_NAME}</td>
 		          <td>${list.GOODS_SIZE}</td>

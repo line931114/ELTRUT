@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>È¸¿øÅ»Åð</title>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
+<title>íšŒì›íƒˆí‡´</title>
 <script>
 
 if('${message}' == "2"){
-	alert('ºñ¹Ð¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');
+	alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');
 }
 if('${message}' == "1"){
-	alert('È¸¿øÅ»Åð µÇ¾ú½À´Ï´Ù.')
+	alert('íšŒì›íƒˆí‡´ ë˜ì—ˆìŠµë‹ˆë‹¤.')
 	location.href="/ELTRUT/main";
 }
 
@@ -19,7 +19,7 @@ function deleteform_check() {
 	var pw = document.getElementById("pw");
 
 	if (pw.value == "") {
-	    alert("ºñ¹Ð¹øÈ£¸¦À» ÀÔ·ÂÇÏ¼¼¿ä.");
+	    alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ì„ ìž…ë ¥í•˜ì„¸ìš”.");
 	    pw.focus();
 	    return false;
 	  };
@@ -31,45 +31,52 @@ function deleteform_check() {
 
 </head>
 <body>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+  <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+    <h2>ì•Œë ¤ë“œë¦½ë‹ˆë‹¤</h2>
+    </a>
+  </header>
 
-			<h3>¾Ë·Áµå¸³´Ï´Ù</h3>
-		
-			<ul class="list">
-				<li>Á¦7Á¶(È¸¿ø Å»Åð ¹× ÀÚ°Ý »ó½Ç µî) <br/>
-						¨ç È¸¿øÀº ¡°ELTRUT¡±¿¡ ¾ðÁ¦µçÁö Å»Åð¸¦ ¿äÃ»ÇÒ ¼ö ÀÖÀ¸¸ç ¡°ELTRUT¡±Àº Áï½Ã È¸¿øÅ»Åð¸¦ Ã³¸®ÇÕ´Ï´Ù.<br/>
-						¨è È¸¿øÀÌ ´ÙÀ½ °¢ È£ÀÇ »çÀ¯¿¡ ÇØ´çÇÏ´Â °æ¿ì, ¡°ELTRUT¡±Àº È¸¿øÀÚ°ÝÀ» Á¦ÇÑ ¹× Á¤Áö½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.<br/>
-						&nbsp;&nbsp;1. °¡ÀÔ ½ÅÃ» ½Ã¿¡ ÇãÀ§ ³»¿ëÀ» µî·ÏÇÑ °æ¿ì<br/>
-						&nbsp;&nbsp;2. ¡°ELTRUT¡±À» ÀÌ¿ëÇÏ¿© ±¸ÀÔÇÑ ÀçÈ­ µîÀÇ ´ë±Ý, ±âÅ¸ ¡°ELTRUT¡±ÀÌ¿ë¿¡ °ü·ÃÇÏ¿© È¸¿øÀÌ ºÎ´ãÇÏ´Â Ã¤¹«¸¦ ±âÀÏ¿¡ Áö±ÞÇÏÁö ¾Ê´Â °æ¿ì<br/>
-						&nbsp;&nbsp;3. ´Ù¸¥ »ç¶÷ÀÇ ¡°ELTRUT¡± ÀÌ¿ëÀ» ¹æÇØÇÏ°Å³ª ±× Á¤º¸¸¦ µµ¿ëÇÏ´Â µî ÀüÀÚ»ó°Å·¡ Áú¼­¸¦ À§ÇùÇÏ´Â °æ¿ì<br/>
-						&nbsp;&nbsp;4. ¡°ELTRUT¡±À» ÀÌ¿ëÇÏ¿© ¹ý·É ¶Ç´Â ÀÌ ¾à°üÀÌ ±ÝÁöÇÏ°Å³ª °ø¼­¾ç¼Ó¿¡ ¹ÝÇÏ´Â ÇàÀ§¸¦ ÇÏ´Â °æ¿ì<br/>
-						¨é ¡°ELTRUT¡±ÀÌ È¸¿ø ÀÚ°ÝÀ» Á¦ÇÑ?Á¤Áö ½ÃÅ² ÈÄ, µ¿ÀÏÇÑ ÇàÀ§°¡ 2È¸ ÀÌ»ó ¹Ýº¹µÇ°Å³ª 30ÀÏ ÀÌ³»¿¡ ±× »çÀ¯°¡<br/>
- 						&nbsp;&nbsp;½ÃÁ¤µÇÁö ¾Æ´ÏÇÏ´Â °æ¿ì ¡°ELTRUT¡±Àº È¸¿øÀÚ°ÝÀ» »ó½Ç½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.<br/>
-						¨ê ¡°ELTRUT¡±ÀÌ È¸¿øÀÚ°ÝÀ» »ó½Ç½ÃÅ°´Â °æ¿ì¿¡´Â È¸¿øµî·ÏÀ» ¸»¼ÒÇÕ´Ï´Ù. ÀÌ °æ¿ì È¸¿ø¿¡°Ô ÀÌ¸¦ ÅëÁöÇÏ°í,<br/>
- 						&nbsp;&nbsp;È¸¿øµî·Ï ¸»¼Ò Àü¿¡ ÃÖ¼ÒÇÑ 30ÀÏ ÀÌ»óÀÇ ±â°£À» Á¤ÇÏ¿© ¼Ò¸íÇÒ ±âÈ¸¸¦ ºÎ¿©ÇÕ´Ï´Ù.
-				</li>
-			</ul>
-	<table border=1>
-		<tr>
-	<td><h4>¾ÆÀÌµð =${sessionScope.MEMBER_ID}</h4></td>
-		</tr>
-		<tr>
-	<td><h5>${sessionScope.MEMBER_NAME} 'È¸¿ø´Ô' È¸¿øÅ»Åð¸¦ ÁøÇàÇÏ½Ã·Á¸é ¾Æ·¡ ºñ¹Ð¹øÈ£¸¦ ³Ö°í È®ÀÎÇØ¹öÆ°À» ´­·¯ÁÖ¼¼¿ä</h5></td>
-		</tr>
-		</table>
-		
-<form method="post" id="frm"  name="frm" action="/ELTRUT/deleteMember">
+  <main>
+    <h4>ì œ7ì¡°(íšŒì› íƒˆí‡´ ë° ìžê²© ìƒì‹¤ ë“±)</h4>
+    <p class="fs-5 col-md-8">â‘  íšŒì›ì€ â€œELTRUTâ€ì— ì–¸ì œë“ ì§€ íƒˆí‡´ë¥¼ ìš”ì²­í•  ìˆ˜ ìžˆìœ¼ë©° â€œELTRUTâ€ì€ ì¦‰ì‹œ íšŒì›íƒˆí‡´ë¥¼ ì²˜ë¦¬í•©ë‹ˆë‹¤.<br/>
+â‘¡ íšŒì›ì´ ë‹¤ìŒ ê° í˜¸ì˜ ì‚¬ìœ ì— í•´ë‹¹í•˜ëŠ” ê²½ìš°, â€œELTRUTâ€ì€ íšŒì›ìžê²©ì„ ì œí•œ ë° ì •ì§€ì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.<br/>
+  1. ê°€ìž… ì‹ ì²­ ì‹œì— í—ˆìœ„ ë‚´ìš©ì„ ë“±ë¡í•œ ê²½ìš°<br/>
+  2. â€œELTRUTâ€ì„ ì´ìš©í•˜ì—¬ êµ¬ìž…í•œ ìž¬í™” ë“±ì˜ ëŒ€ê¸ˆ, ê¸°íƒ€ â€œELTRUTâ€ì´ìš©ì— ê´€ë ¨í•˜ì—¬ íšŒì›ì´ ë¶€ë‹´í•˜ëŠ” ì±„ë¬´ë¥¼ ê¸°ì¼ì— ì§€ê¸‰í•˜ì§€ ì•ŠëŠ” ê²½ìš°<br/>
+  3. ë‹¤ë¥¸ ì‚¬ëžŒì˜ â€œELTRUTâ€ ì´ìš©ì„ ë°©í•´í•˜ê±°ë‚˜ ê·¸ ì •ë³´ë¥¼ ë„ìš©í•˜ëŠ” ë“± ì „ìžìƒê±°ëž˜ ì§ˆì„œë¥¼ ìœ„í˜‘í•˜ëŠ” ê²½ìš°<br/>
+  4. â€œELTRUTâ€ì„ ì´ìš©í•˜ì—¬ ë²•ë ¹ ë˜ëŠ” ì´ ì•½ê´€ì´ ê¸ˆì§€í•˜ê±°ë‚˜ ê³µì„œì–‘ì†ì— ë°˜í•˜ëŠ” í–‰ìœ„ë¥¼ í•˜ëŠ” ê²½ìš°<br/>
+â‘¢ â€œELTRUTâ€ì´ íšŒì› ìžê²©ì„ ì œí•œ?ì •ì§€ ì‹œí‚¨ í›„, ë™ì¼í•œ í–‰ìœ„ê°€ 2íšŒ ì´ìƒ ë°˜ë³µë˜ê±°ë‚˜ 30ì¼ ì´ë‚´ì— ê·¸ ì‚¬ìœ ê°€
+  ì‹œì •ë˜ì§€ ì•„ë‹ˆí•˜ëŠ” ê²½ìš° â€œELTRUTâ€ì€ íšŒì›ìžê²©ì„ ìƒì‹¤ì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.<br/>
+â‘£ â€œELTRUTâ€ì´ íšŒì›ìžê²©ì„ ìƒì‹¤ì‹œí‚¤ëŠ” ê²½ìš°ì—ëŠ” íšŒì›ë“±ë¡ì„ ë§ì†Œí•©ë‹ˆë‹¤. ì´ ê²½ìš° íšŒì›ì—ê²Œ ì´ë¥¼ í†µì§€í•˜ê³ ,
+  íšŒì›ë“±ë¡ ë§ì†Œ ì „ì— ìµœì†Œí•œ 30ì¼ ì´ìƒì˜ ê¸°ê°„ì„ ì •í•˜ì—¬ ì†Œëª…í•  ê¸°íšŒë¥¼ ë¶€ì—¬í•©ë‹ˆë‹¤.</p>
+
+    
+
+    <hr class="col-3 col-md-2 mb-5" style="max-width: -webkit-fill-available;">
+
+    <div class="row g-5">
+      <div class="col-md-6" style="min-width: fit-content;">
+        <h4>${sessionScope.MEMBER_NAME} 'íšŒì›ë‹˜' íšŒì›íƒˆí‡´ë¥¼ ì§„í–‰í•˜ì‹œë ¤ë©´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•˜ê³  í™•ì¸ë²„íŠ¼ì„ ëˆŒëŸ¬ì£¼ì„¸ìš”</h4>
+        <h5>íšŒì› ID = ${sessionScope.MEMBER_ID}</h5>
+      </div>
+<form class="needs-validation" method="post" id="frm"  name="frm" action="/ELTRUT/deleteMember" style="text-align: -webkit-center;">
 <input type="hidden" id="MEMBER_NUMBER" name="MEMBER_NUMBER" value="${sessionScope.MEMBER_NUMBER }">
-		
-<table>
- 	<tr>
-	<td><strong>ºñ¹Ð¹øÈ£</strong></td>
-	<td><input type="password"  name="pw" id="pw" size="28" type="text" required="required"> </td>
-	</tr>
-</table>
+    <label for="address2" class="form-label">ë¹„ë°€ë²ˆí˜¸</label>
+       <input type="password" class="form-control" name="pw" id="pw" size="28" type="text" required="required" style="max-width: max-content;">
+      <hr class="col-3 col-md-2 mb-5" style="max-width: -webkit-fill-available;">
+      <button class="btn btn-primary btn-lg" type="button" onclick="deleteform_check()" style="max-width: max-content;">í™•ì¸</button>
+      <button class="btn btn-primary btn-lg" type="button" onclick="location.href='myPage'" style="max-width: max-content;">ë§ˆì´íŽ˜ì´ì§€ë¡œ ëŒì•„ê°€ê¸°</button>
+    </div>
+  </main>
+  
+</div>
 
 
-	<input type="button" value="È®ÀÎ" onclick="deleteform_check()">
-	<input type="button" value="¸¶ÀÌÆäÀÌÁö·Î µ¹¾Æ°¡±â" onclick="location.href='myPage'"> 
-	</form>
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      
+  
+
 </body>
 </html>

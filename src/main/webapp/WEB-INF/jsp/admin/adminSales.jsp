@@ -54,6 +54,11 @@
     </script>
   
 <body>
+<div style="margin-bottom: 20px;">
+<caption><h1> 매출 정산</h1></caption>
+</div>
+
+
 <form action="adminSales" method="post">
 <input type="date" value="2021-10-26" min="1900-01-01" max="9999-12-31" name="order_date_start" id="order_date_start">
 ~
@@ -63,46 +68,50 @@
 <input type="submit" value="검색" onsubmit="check();">
 </span>
 </form>
+<div style="width:200px; margin-top: 5px; margin-bottom: 100px;">
+<div style="width: 25%; float: left;">
 <form action="adminSales" method="post">
 <input type="hidden" value="1" name="jung">
 <input type="submit" value="1주일">
 </form>
+</div>
+<div style="width: 25%; float: left;">
 <form action="adminSales" method="post">
 <input type="hidden" value="2" name="jung">
 <input type="submit" value="1개월" onclick="">
 </form>
+</div>
+<div style="width: 25%; float: left;">
 <form action="adminSales" method="post">
 <input type="hidden" value="3" name="jung">
 <input type="submit" value="3개월" onclick="">
 </form>
+</div>
+<div style="width: 25%; float: left;">
 <form action="adminSales" method="post">
 <input type="hidden" value="4" name="jung">
 <input type="submit" value="전체" onclick="">
 </form>
+</div>
+</div>
 
 
 
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
 <table class="table table-striped">
 <tr>
 <th>매출액</th>
-<th>총 정산금액 쿼리문</th>
-<th>매출 원가</th>
 </tr>
 <tr>
 <td>${totalsales}</td>
 </table>
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
  <table class="table table-striped">
-      <caption><h1>매출정산</h1></caption>
+      
       <thead>
         <tr>
           <th>날짜</th>
-          <th>순번</th>
           <th>매출액</th>
-          <th>매출원가</th>
-          <th>매출 총 이익</th>
-          <th>관리</th>
         </tr>
       </thead>
       <tbody>
@@ -116,7 +125,7 @@
 	        </c:forEach>
 	    </c:when>
 	     <c:otherwise>
-		 조회된결과 없음
+		
 		 </c:otherwise>
 	   </c:choose>
       </tbody>
