@@ -111,7 +111,7 @@ function orderPay(){
 		</c:choose>
 </div>
 	<div style="float:right; margin-right:20px;">
-		<img src="/ELTRUT/file/payment_icon_yellow_small.png" onclick="orderPay(); this.onclick=null;">
+		<img src="/ELTRUT/file/kakaopay.png" onclick="orderPay(); this.onclick=null;">
 		<input type="submit" value="결제완료" style="margin-left:20px;" class="btn btn-dark">
 	</div>
 </form>

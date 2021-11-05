@@ -144,7 +144,7 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 
 		// 상품 썸네일 수정
 		if (multipartHttpServletRequest.getFile("GOODS_THUMBNAIL").getSize() > 0) {
-			map = goodsImageUtils.parseUpdateThumbImage(map, request);
+			map = goodsImageUtils.goodsThumbnail(map, request);
 			AdminGoodsDAO.insertGoodsThumnail(map);
 		}
 

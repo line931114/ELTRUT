@@ -88,8 +88,7 @@
 									</span>
 									
 								</form>
-							</div>
-							
+							</div>					
             </ul>
         </div>
 </body>

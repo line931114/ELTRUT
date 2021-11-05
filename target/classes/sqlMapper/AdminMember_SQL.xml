@@ -16,7 +16,7 @@
                         M.MEMBER_ADDRESS1,
                         M.MEMBER_ADDRESS2
                 FROM MEMBER M
-                WHERE MEMBER_ADMIN= '0'
+                WHERE MEMBER_ADMIN= '0' and member_grade=0 
                 GROUP BY 
                         M.MEMBER_NUMBER,
                         M.MEMBER_ID, 

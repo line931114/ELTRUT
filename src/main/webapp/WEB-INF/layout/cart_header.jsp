@@ -4,6 +4,10 @@
 <jsp:include page="../cssUrl.jsp"/>
 <!DOCTYPE html>
 <html>
+<style>
+a { color: #000; }
+</style>
+
 <head>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +67,7 @@
 <nav class="navbar fixed-bottom navbar-white bg-white">
   <div class="container-fluid">
  
-    <div class="col-12"><input type="button" class="btn float-right btn-dark btn-sm" value="쇼핑계속" onclick=""/>
+    <div class="col-12"><input type="button" class="btn float-right btn-dark btn-sm" value="쇼핑계속" onclick="location.href='main'"/>
    
    <div class="col-12"><input type="button" class="btn float-right btn-dark btn-sm" value="구매" onclick='return submit2();' style="margin-right:1%"/></div>
   </div>

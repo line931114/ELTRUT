@@ -206,13 +206,11 @@ function GOODS_CATEGORY1Change() {
 					<td colspan="4" class="view_text">
 						<textarea rows="5" cols="100" title="내용" id="CONTENTS" name="GOODS_SHORTDESC" >${goodsBasic.GOODS_SHORTDESC}</textarea>
 						<br/><br/>
-						<textarea rows="10" cols="100" title="내용" id="CONTENTS" name="GOODS_DESC" >${goodsBasic.GOODS_DESC}</textarea>
 					</td>
 				</tr>
 	
 				<tr>
 					<td colspan="2">
-					<a href="#this" class="btn" id="addKind">컬러/사이즈/재고 추가</a><br/>
 						<div id="kindDiv">
 							<p>
 							<br>
@@ -239,7 +237,6 @@ function GOODS_CATEGORY1Change() {
 							<!-- <input type="text" placeholder='색상' id="text" name="GOODS_COLOR"> -->
 							<input type="text" placeholder='사이즈' id="GOODS_SIZE" name="GOODS_SIZE"> 
 							<input type="text" placeholder='수량' id="GOODS_AMOUNT" name="GOODS_AMOUNT">
-							<a href="#this" class="btn" id="delete" name="delete">삭제</a>
 							</p>
 						</div>
 					</td>
