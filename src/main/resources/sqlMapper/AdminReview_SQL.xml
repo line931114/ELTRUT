@@ -19,7 +19,7 @@
 		       R.REVIEW_REPSTATE,
 		       R.REVIEW_REPCONTENT,
 		       R.MEMBER_ID
-		FROM REVIEW R
+			FROM REVIEW R
 	        ORDER BY REVIEW_NUMBER DESC
 	]]>
 	</select>
@@ -92,7 +92,7 @@
 		]]>
 	</select>
 	
-	<!-- 리뷰 제목 검색 -->
+	<!-- 리뷰 제목 검색
 	<select id="reviewTitleList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT 
@@ -113,7 +113,7 @@
 		    AND R.REVIEW_TITLE like '%' || #{REVIEW_TITLE} || '%'
 		    ORDER BY REVIEW_NUMBER DESC
 		]]>
-	</select>
+	</select>  -->
 	
 	<!-- 리뷰 답변 상태에 따른 목록 조회 -->
 	<select id="reviewRepState" parameterType="hashmap" resultType="hashmap">
@@ -159,14 +159,14 @@
 	]]>
 	</select>
 	
-	<!--리뷰 글 조회수 증가-->
+	<!--리뷰 글 조회수 증가
 	<update id="selectReviewCount" parameterType="hashmap">
 	<![CDATA[
 		UPDATE REVIEW
 		SET REVIEW_HITCOUNT = REVIEW_HITCOUNT + 1
 		WHERE REVIEW_NUMBER = #{REVIEW_NUMBER}
 	]]>
-	</update>
+	</update> -->
 	
 
 	<!-- 관리자 페이지 답변등록 -->

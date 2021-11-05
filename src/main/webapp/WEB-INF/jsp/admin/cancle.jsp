@@ -47,7 +47,7 @@ function chageLangSelect(id){
 
     </style>
 <body>
-<form action="index" method="post" name="frm" id="frm">
+<form action="admin" method="post" name="frm" id="frm">
 <table class="table table-striped">
       <caption><h1>cancel 전체 목록</h1></caption>
       <thead>

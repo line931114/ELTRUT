@@ -150,7 +150,7 @@ public class LoginController {
 				   Map<String, Object> findPw = loginService.findPw(memberMap);
 
 				   mav.addObject("findPw", findPw);
-				   mav.setViewName("fidnForm3");
+				   mav.setViewName("findForm3");
 				   return mav;	
 		      }
 		   

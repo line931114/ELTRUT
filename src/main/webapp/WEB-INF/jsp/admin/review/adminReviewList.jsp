@@ -48,16 +48,16 @@ function delchk(){
 							</a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--별점 순--</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?scoreNum=1">★</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?scoreNum=2">★★</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?scoreNum=3">★★★</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?scoreNum=4">★★★★</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?cscoreNum=5">★★★★★</option>
+								<option value ="adminReviewList?scoreNum=1">★</option>
+								<option value ="adminReviewList?scoreNum=2">★★</option>
+								<option value ="adminReviewList?scoreNum=3">★★★</option>
+								<option value ="adminReviewList?scoreNum=4">★★★★</option>
+								<option value ="adminReviewList?cscoreNum=5">★★★★★</option>
 							</select>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--답변상태--</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?repState=1">미답변</option>
-								<option value ="/ELTRUT/adminReview/adminReviewList?repState=2">답변완료</option>
+								<option value ="adminReviewList?repState=1">미답변</option>
+								<option value ="adminReviewList?repState=2">답변완료</option>
 								</select>
 						</div>
 						<div class="col-sm-6" style="text-align:right;">
@@ -99,7 +99,7 @@ function delchk(){
 											</a>&nbsp;&nbsp;
 										
 										
-										<c:url var="URL2" value="/adminReview/adminReviewReplyDelete" >
+										<c:url var="URL2" value="/adminReview/ReplyDelete" >
 											<c:param name="REVIEW_NUMBER" value="${adminReviewList.REVIEW_NUMBER}" />
 										</c:url>
 										<a href="${URL2}">

@@ -163,6 +163,7 @@
 	]]>
 	</select>
 	
+	<!--내문의사항-QNA 수정하기  -->
 	<update  id="qnaModify" parameterType="hashmap" >
                 <![CDATA[
             UPDATE CS

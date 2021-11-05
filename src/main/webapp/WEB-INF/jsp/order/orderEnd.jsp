@@ -9,13 +9,13 @@
 <title>주문완료</title>
 </head>
 <body>
-<center><h1>결제완료</h1></center>
-<div style="float:left; margin-left:100px; margin-right:100px;">
+<h1>결제완료</h1>
+<div style="float:left; width:30%">
 <c:choose>
 	<c:when test="${fn:length(goods) > 0}">
 		<c:forEach  items="${goods }" var="G" varStatus="idx">
 <form action="/ELTRUT/orderEnd">
-	<table>
+	<table class="table table-borderless">
 		<tr>
 		<th>주문상품</th>
 			<td>${G.GOODS_NAME } 
@@ -54,16 +54,20 @@
 		</tr>
 			
 	</table>
-	</div>
+	
 	</c:forEach>
 	</c:when>
 		<c:otherwise>
 		주문상품이 없습니다.
 		</c:otherwise>
 </c:choose>
-	<div style="float:left;  margin-left:100px; margin-right:100px;">
+</div>
+<div style="float:left;width:20%; ">
+<button type="button" class="btn btn-link"></button>
+ </div>
+	<div style="float:left; width:50%; ">
 		<c:set var="OM" value="${orderMember }"/>
-		<table>
+		<table class="table table-borderless">
 		<tr>
 		<th>주문번호</th>
 			<td>${ORDER_NUMBER }
@@ -98,8 +102,8 @@
 		</tr>
 		<tr>
 			<th>상세주소</th>	
-				<td>${RECEIVER_ADDRESS1 }</td>
-				<td>${ RECEIVER_ADDRESS2}</td>
+				<td>${RECEIVER_ADDRESS1 }&nbsp;${ RECEIVER_ADDRESS2}</td>
+				
 		</tr>
 		<tr>
 		<th>배송 요청사항</th>
@@ -109,8 +113,15 @@
 		<tr>
 		</table>
 </div>
-		<input type="button" value="메인으로" onclick="location.href='/ELTRUT/main'">
+		<input type="button" value="메인으로" onclick="location.href='/ELTRUT/main'" style="float:right; margin-right:20px;" class="btn btn-dark">
 </form>
+		
+		<c:forEach  items="${goods }" var="G" varStatus="idx">
+<div style="margin-top:600px">
+<button type="button" class="btn btn-link"></button>
+</div>
+</c:forEach>
+		
 		
 </body>
 </html>

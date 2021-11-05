@@ -21,10 +21,8 @@ import b21.spring.eltrut.CommandMap;
 @Controller
 public class ReviewController {
 	
-
 	 @Resource(name = "reviewService")
 	   private ReviewService reviewService;
-	
 	
 	 @RequestMapping(value = "goodsReview")
 	   public ModelAndView goodsReview(CommandMap commandMap, HttpServletResponse response, HttpServletRequest request,
@@ -66,7 +64,7 @@ public class ReviewController {
 		 
 		 System.out.println(commandMap.getMap());
 		 ModelAndView mav = new ModelAndView();
-		 final String filePath =  "C:\\Users\\82109\\Desktop\\21B프로젝트\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
+		 final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 	      if (multipartHttpServletRequest.getFile("REVIEW_IMAGE").getOriginalFilename() != "") {
@@ -376,17 +374,6 @@ public class ReviewController {
 
 		   return mv;
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	 
 }

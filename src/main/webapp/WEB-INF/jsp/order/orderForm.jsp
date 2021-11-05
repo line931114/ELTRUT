@@ -7,12 +7,12 @@
 <html>
 <head>
 <style>
-#form{
+/* #form{
 position: fixed;
 right: 150px;
 bottom:100px;
 top:20px;
-}
+} */
 
 </style>
 <!-- 주소API -->
@@ -99,32 +99,34 @@ top:20px;
 <title>Insert title here</title>
 </head>
 <body>
+
+<div>
 <h1>배송</h1>
+<div style="float:left; width:30%">
 <c:choose>
 	<c:when test="${fn:length(goods) > 0}">
-<div style="float:left;">
 		<c:forEach  items="${goods }" var="G" varStatus="idx">
-<form name="order_form" action="/ELTRUT/orderDetail">
-	<table>
+	<form name="order_form" action="/ELTRUT/orderDetail">
+	<table class="table table-borderless">
 		<tr>
-		<th>주문상품</th>
+		<th>상품</th>
 			<td>${G.GOODS_NAME } 
 			<input type="hidden" name="GOODS_NUMBER" value="${G.GOODS_NUMBER }">
 			<input type="hidden" name="CART_NUMBER" value="${CART_NUMBER }">
 			</td>
 		</tr>
 		<tr>
-		<th>상품 이미지</th>
-			<td><img src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}"  width="200" height="200" alt="" onerror="this.src='/ELTRUT/file/noimg_130.gif'" />
+		<th></th>
+			<td><img class="img-fluid" src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}"  width="200" height="200" alt="" onerror="this.src='/ELTRUT/file/noimg_130.gif'" />
 			</td>
 		</tr>
 		<tr>
-		<th>주문색상</th>
+		<th>색상</th>
 			<td>${G.GOODS_COLOR }
 			</td>
 		</tr>
 		<tr>
-		<th>주문사이즈</th>
+		<th>사이즈</th>
 			<td>${G.GOODS_SIZE }
 			</td>
 		</tr>
@@ -134,7 +136,7 @@ top:20px;
 			</td>
 		</tr>
 		<tr>
-		<th>주문수량</th>
+		<th>수량</th>
 			<td><input type="hidden" name="EA" value="${G.EA }">${G.EA }
 			</td>
 		</tr>
@@ -146,22 +148,30 @@ top:20px;
 			
 	</table>
 	<br/><br/>
-	</div>
+	
 	</c:forEach>
 	</c:when>
 		<c:otherwise>
 		주문상품이 없습니다.
 		</c:otherwise>
 </c:choose>
-	<div id="form">
+</div>
+<div style="float:left;width:30%; ">
+<button type="button" class="btn btn-link"></button>
+ </div>
+ 
+	<div style="float:right; width:40%;" >
 <c:choose>
 	<c:when test="${fn:length(orderMember) > 0}">
 		<c:set var="OM" value="${orderMember }"/>
-		<table>
+		<table class="table table-borderless">
 		<tr>
 		<th>
-		<input type="checkbox" name="check" onclick="memberOn();">등록된 정보 가져오기<br><br>
+		정보 가져오기
 		</th>
+		<td>
+		<input type="checkbox" name="check"  onclick="memberOn();">
+		</td>
 		</tr>
 		<tr>
 		<th>이름</th>
@@ -174,7 +184,7 @@ top:20px;
 			</td>
 		</tr>
 		<th>배송주소</th>
-		</tr>
+		
 		<tr>
 		<th>우편번호</th>
 				<td><input type="text" id="RECEIVER_ZIPCODE"  name="RECEIVER_ZIPCODE" readonly  value="" maxlength="6" required="">
@@ -194,12 +204,26 @@ top:20px;
 			</td>
 		</tr>
 		<tr>
+		<th>총가격:${sum}
+		</th>
+		<td>
+		
+		<input  type="button" value="주문하기" onclick="orderform_check();" class="btn btn-dark" style="float:right;">
+		</td>
 		</table>
 		</c:when>
 		</c:choose>
-		<input type="button" value="주문하기" onclick="orderform_check();">
+		
+		 </div>
+		</form>
 </div>
-</form>
+<c:forEach  items="${goods }" var="G" varStatus="idx">
+<div style="margin-top:600px">
+<button type="button" class="btn btn-link"></button>
+</div>
+</c:forEach>
+		
+	
 		
 </body>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>

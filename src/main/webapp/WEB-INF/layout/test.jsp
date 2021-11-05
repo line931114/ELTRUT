@@ -8,34 +8,36 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="http://localhost:8081/ELTRUT/css/bootstrap.css">
-<!-- 부트스트랩 js 사용 --> 
+<!-- <link rel="stylesheet" href="http://localhost:8081/ELTRUT/css/bootstrap.css">
+부트스트랩 js 사용 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <script type="text/javascript" src="http://localhost:8081/ELTRUT/js/bootstrap.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS --> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
-<!-- 부가적인 테마 --> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
-<!-- 제이쿼리 --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 --> 
+합쳐지고 최소화된 최신 CSS 
+부가적인 테마 
+ 
+
+합쳐지고 최소화된 최신 자바스크립트 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+ -->
+<!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+ -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
 
-
-
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+ -->
 <nav class="navbar navbar-expand-lg bg-transparent  fixed-top">
   <div class="container-fluid ">
   	<div class="nav-menu">
   	<a href="#sidebar" class="btn-lg" data-bs-toggle="offcanvas" role=button" area-controls="sidebar" onclick="openNav()">
-			<span class="glyphicon glyphicon-menu-hamburger" ></span>
+			<span class="bi bi-list" ></span>
 			</a>
   	</div>
   
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-  <a class="navbar-brand" href="http://localhost:8081/ELTRUT/main">
-      <img src="/ELTRUT/file/ELTRUT LOGO.png" alt="" width="310" height="98">
+      <ul class="navbar-nav mr-auto" style="align-items: center;">
+  <a class="navbar-brand" href="http://localhost:9000/ELTRUT/main">
+      <img src="/ELTRUT/file/ELTRUT.png" alt="" width="310" height="98">
     </a>
         <c:choose>
         <c:when test="${empty MEMBER_ID}">
@@ -174,11 +176,11 @@ body { padding-top: 180px; }
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <p>ELTRUT </p> 
   <p>
-  <a class="NEW " data-bs-toggle="collapse" href="#collapseNEW" aria-expanded="true" aria-controls="collapseNEW">
+  <a class="NEW " data-bs-toggle="collapse" href="#collapseNEW" aria-expanded="false" aria-controls="collapseNEW">
     NEW
   </a>
 </p>
-<div class="NEW" id="collapseNEW">
+<div class="NewContents collapse" id="collapseNEW">
   <div class="card card-body">
     <a href="#">CLOTHES</a>
     <a href="#">SHOES</a>
@@ -186,11 +188,11 @@ body { padding-top: 180px; }
 </div>
 
 <p>
-  <a class="BS " data-bs-toggle="collapse" href="#collapseBS" aria-expanded="false" aria-controls="collapseBS">
+  <a class="BS" data-bs-toggle="collapse" href="#collapseBS" aria-expanded="false" aria-controls="collapseBS">
     BEST SELLER
   </a>
 </p>
-<div class="BS" id="collapseBS">
+<div class="BSContents collapse" id="collapseBS">
   <div class="card card-body">
     <a href="#">CLOTHES</a>
     <a href="#">SHOES</a>
@@ -202,21 +204,21 @@ body { padding-top: 180px; }
     COLLECTION
   </a>
 </p>
-<div class="COLLECTION" id="collapseCOLLECTION">
+<div class="COLLECTION collapse" id="collapseCOLLECTION">
   <div class="card card-body">
-    <a href="#">OUTER</a>
-    <a href="#">TOP</a>
-    <a href="#">T-SHIRTS</a>
-    <a href="#">KNIT</a>
-    <a href="#">DRESS</a>
-    <a href="#">PANTS</a>
-    <a href="#">SKIRTS</a>
-    <a href="#">SHOES</a>
+    <a href="main?searchNum=0&isSearch=OUTER">OUTER</a>
+    <a href="main?searchNum=0&isSearch=TOP">TOP</a>
+    <a href="main?searchNum=0&isSearch=T-SHIRTS">T-SHIRTS</a>
+    <a href="main?searchNum=0&isSearch=KNIT">KNIT</a>
+    <a href="main?searchNum=0&isSearch=DRESS">DRESS</a>
+    <a href="main?searchNum=0&isSearch=PANTS">PANTS</a>
+    <a href="main?searchNum=0&isSearch=SKIRTS">SKIRTS</a>
+    <a href="main?searchNum=0&isSearch=SHOES">SHOES</a>
   </div>
 </div>
 
-  <a href="#">COMMERCIAL</a>
-  <a href="#">ABOUT US</a>
+  <a href="https://www.instagram.com/explore/tags/eltrut/">COMMERCIAL</a>
+  <a href="Aboutus">ABOUT US</a>
 </div>
 
 
@@ -224,7 +226,10 @@ body { padding-top: 180px; }
 
 <script>
 function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.cssText=`
+  	width: 250px;
+  	z-index: 1200;
+  `;
 }
 
 function closeNav() {

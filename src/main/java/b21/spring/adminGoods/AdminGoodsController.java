@@ -63,7 +63,7 @@ Logger log = Logger.getLogger(this.getClass());
 				adminGoodsList = adminGoodsService.adminGoodsSearch1(isSearch);
 			else if(searchNum == 2) // 카테고리
 				adminGoodsList = adminGoodsService.adminGoodsSearch2(isSearch);
-			else if(searchNum == 3) // 재고 0인 상품
+			else if(searchNum == 3) // 재고 품절 상품
 				adminGoodsList = adminGoodsService.adminGoodsSearch3(isSearch);
 			else if(searchNum == 4) // 판매량 많은 순 정렬
 				adminGoodsList = adminGoodsService.adminGoodsSearch4(isSearch);
@@ -177,7 +177,7 @@ Logger log = Logger.getLogger(this.getClass());
 		}
 		
 		// 상품 삭제
-		@RequestMapping(value = "/adminGoods/adminGoodsDelete")
+		@RequestMapping(value = "adminGoodsDelete")
 		public ModelAndView goodsDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 			
 			ModelAndView mv = new ModelAndView("redirect:adminGoodsList");

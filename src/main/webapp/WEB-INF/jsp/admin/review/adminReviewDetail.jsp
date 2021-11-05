@@ -12,7 +12,7 @@
 	}
 	function button2_click(frm) {
 		var theForm = document.frm;
-		theForm.action = "adminReview/ReplyDelete?REVIEW_NUMBER=${reviewDetail.REVIEW_NUMBER}";
+		theForm.action = "adminReview/adminReviewReplyDelete?REVIEW_NUMBER=${reviewDetail.REVIEW_NUMBER}";
 	}
 
 	function previewImage(targetObj, View_area) {

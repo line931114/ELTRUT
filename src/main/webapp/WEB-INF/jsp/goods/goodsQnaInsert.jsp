@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
 <meta charset="UTF-8">
 <title>상품 리뷰작성페이지</title>
 
@@ -26,55 +27,72 @@ function validation() {
 </script>
 
 </head>
-<body>
-<h2>${sessionScope.MEMBER_ID }님 해당페이지는 상품 문의하는 곳입니다.</h2>
+<body class="bg-light">
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      
+      <h2>${sessionScope.MEMBER_ID }님 해당페이지는 상품 문의하는 곳입니다.</h2>
+      
+    </div>
+    <div class="row g-5">
+      
+      <div class="col-md-7 col-lg-8">
+		<form class="needs-validation" method="post" name="goodsQnaInsert" action="/ELTRUT/goodsQnaInsert" enctype="multipart/form-data">
+          <div class="row g-3">
 
-	<form method="post" name="goodsQnaInsert" action="/ELTRUT/goodsQnaInsert"
-		enctype="multipart/form-data">
-		<table border="1">
-
-			<tr>
-				<td>작성자</td>
-				<td><input type="text" id="MEMBER_ID" name="MEMBER_ID" readonly
-					value="${sessionScope.MEMBER_ID}"></td>
-			</tr>
-
-			
-			<tr>
-			<td>문의 종류</td>
-			<td>
-				<select name="CS_CATEGORY" id="CS_CATEGORY">
+            <div class="col-7">
+              <label for="lastName" class="form-label">작성자</label>
+              <input type="text" class="form-control" id="MEMBER_ID" name="MEMBER_ID" readonly value="${sessionScope.MEMBER_ID}">
+              
+            </div>
+           
+           <div class="col-7">
+              <label for="username" class="form-label">문의 종류</label>
+              <select class="form-select" name="CS_CATEGORY" id="CS_CATEGORY" style="width: -webkit-fill-available;">
 					<option id="CS_CATEGORY">배송문의</option>
 					<option id="CS_CATEGORY">교환반품문의</option>
 					<option id="CS_CATEGORY">입금확인문의</option>
 					<option id="CS_CATEGORY">기타</option>
 				</select>
-			</td>
-			</tr>
+				</div>
+           
+            <div class="col-7">
+              <label for="firstName" class="form-label">이미지 추가</label>
+              <input type="file" class="form-control" id="CS_IMAGE1" name="CS_IMAGE1">
+              
+            </div>
+
+			<div class="col-7">
+			<label for="username" class="form-label">문의 제목</label>
+            <input type="text" class="form-control" id="CS_TITLE" name="CS_TITLE">
+            </div>
 			
-			
-			<tr>
-				<td>이미지 추가</td>
-				<td><input type="file"id="CS_IMAGE1" name="CS_IMAGE1"></td>
-			</tr>
+            <div class="col-7">
+              <label for="email" class="form-label">문의 내용 </label>
+              <input type="text" class="form-control" id="CS_CONTENT" name="CS_CONTENT">
+              
+            </div>
 
-			<tr>
-				<td>문의 제목</td>
-				<td><input type="text" id="CS_TITLE" name="CS_TITLE"></td>
-			</tr>
+          </div>
+          <hr class="my-4" style="min-width: -webkit-fill-available;">
+          	<input type="hidden" name="GOODS_NUMBER" id="GOODS_NUMBER" value="${GOODS_NUMBER }"> 
+          <div style="text-align: -webkit-center;">
+          <button class="btn btn-primary btn-lg" type="button" onclick="validation();" >작성하기</button>
+          <button class="btn btn-primary btn-lg" type="button" onclick="location.href='/ELTRUT/goodsQna?GOODS_NUMBER=${GOODS_NUMBER}'">돌아가기</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+				
 
-			<tr>
-				<td>문의 내용</td>
-				<td><textarea id="CS_CONTENT" name="CS_CONTENT"
-						rows="5" cols="33"></textarea></td>
-			</tr>
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-		</table>
-		<input type="hidden" name="GOODS_NUMBER" id="GOODS_NUMBER" value="${GOODS_NUMBER }"> 
-		
-		<input type="button" value="작성하기" onclick="validation();">
-		<input type="button"value="돌아가기" onclick="location.href='/ELTRUT/goodsQna?GOODS_NUMBER=${GOODS_NUMBER}'">
-	</form>
+      <script src="form-validation.js"></script>
+  
 
 </body>
 </html>

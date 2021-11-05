@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.adminQna.AdminQnaService;
@@ -35,7 +36,7 @@ public class AdminQnaController {
 	private AdminQNAPaging page;
 	
 	// Q&A 목록
-	@RequestMapping(value = "adminQNAList")
+	@RequestMapping(value = "adminQnaList")
 	public ModelAndView adminQnaList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -81,7 +82,7 @@ public class AdminQnaController {
 			mv.addObject("totalCount", totalCount);
 			mv.addObject("pagingHtml", pagingHtml);
 			mv.addObject("currentPage", currentPage);
-			mv.setViewName("adminQNAList");
+			mv.setViewName("adminQnaList");
 			
 			return mv;
 		}
@@ -126,7 +127,7 @@ public class AdminQnaController {
 				mv.addObject("currentPage", currentPage);
 				mv.addObject("adminQnaList", adminQnaList);
 				mv.addObject("totalCount", totalCount);
-				mv.setViewName("adminQNAList");
+				mv.setViewName("adminQnaList");
 				
 				return mv;
 			}
@@ -167,7 +168,7 @@ public class AdminQnaController {
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("adminQnaList", adminQnaList);
 			mv.addObject("totalCount", totalCount);
-			mv.setViewName("adminQna/adminQnaList");
+			mv.setViewName("adminQnaList");
 			
 			return mv;
 		} catch (Exception ex) {
@@ -188,26 +189,26 @@ public class AdminQnaController {
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("adminQnaList", adminQnaList);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("adminQNAList");
+		mv.setViewName("adminQnaList");
 		
 		return mv;
 	}
 	
 	// Q&A 상세보기
-	@RequestMapping(value = "adminQNADetail")
+	@RequestMapping(value = "adminQnaDetail")
 	public ModelAndView adminQnaDetail(CommandMap commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		Map<String, Object> qnaDetail = adminQnaService.qnaDetail(commandMap.getMap());
-		
+		System.out.println("555555555555555555555555555555");
 		mv.addObject("qnaDetail", qnaDetail);
-		mv.setViewName("adminQNADetail");
+		mv.setViewName("adminQnaDetail");
 		
 		return mv;
 	}
 	
 	// Q&A 답변달기 폼
-	@RequestMapping(value = "/adminQna/adminQnaReplyForm")
+	@RequestMapping(value = "adminQnaReply1")
 	public ModelAndView adminQnaReplyForm(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
@@ -215,27 +216,28 @@ public class AdminQnaController {
 			Map<String, Object> qnaDetail = adminQnaService.qnaDetail(commandMap.getMap());
 			mv.addObject("qnaDetail", qnaDetail);
 		}
-		mv.setViewName("adminQna/adminQnaReplyForm");
+		System.out.println("11111111111111111111111111111111111111");
+		mv.setViewName("adminQnaReply");
 		return mv;
 	}
 	
 	// Q&A 답변 달기
-	@RequestMapping(value = "adminQNAReply")
+	@RequestMapping(value = "adminQnaReply", method=RequestMethod.POST)
 	public ModelAndView adminQnaReply(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		adminQnaService.updateReplyStep(commandMap.getMap());
-		mv.setViewName("redirect:/adminQna/adminQnaDetail?CS_NUMBER=" + commandMap.get("CS_NUMBER"));
+		mv.setViewName("redirect:adminQnaDetail?CS_NUMBER=" + commandMap.get("CS_NUMBER"));
 		
 		return mv;
 	}
 	
 	// Q&A 관리자 강제 삭제
-	@RequestMapping(value = "/adminQna/adminQnaDelete")
+	@RequestMapping(value = "adminQnaDelete")
 	public ModelAndView adminQnaDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String filePath ="C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+		String filePath ="C:\\Users\\rosal\\ELUTE ADMIN\\src\\main\\webapp\\file\\qnaFile\\";
 		String image1 = null;
 		
 		if (request.getParameter("CS_IMAGE1") != null) {
@@ -249,18 +251,18 @@ public class AdminQnaController {
 		}
 		
 		adminQnaService.adminQnaDelete(commandMap.getMap());
-		mv.setViewName("redirect:/adminQnaList");
+		mv.setViewName("redirect:adminQnaList");
 		
 		return mv;
 	}
 	
 	// Q&A 답변 삭제
-	@RequestMapping(value = "/adminQna/adminQnaReplyDelete")
+	@RequestMapping(value = "adminQnaReplyDelete")
 	public ModelAndView adminQnaReplyDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		adminQnaService.qnaReplyDelete(commandMap.getMap());
-		mv.setViewName("redirect:/adminQna/adminQnaDetail?CS_NUMBER=" + commandMap.get("CS_NUMBER"));
+		mv.setViewName("redirect:/adminQnaDetail?CS_NUMBER=" + commandMap.get("CS_NUMBER"));
 		
 		return mv;
 	}

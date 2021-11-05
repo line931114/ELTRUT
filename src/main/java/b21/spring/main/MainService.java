@@ -13,5 +13,7 @@ public interface MainService {
 	
 	Map<String,Object>  header_baskets(Map<String,Object>map) throws Exception;
 		
+	public List<Map<String, Object>> adminGoodsList(Map<String, Object> map) throws Exception;
 	
+	public List<Map<String, Object>> adminGoodsSearch2(String isSearch);
 }

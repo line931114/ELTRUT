@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
 <meta charset="utf-8">
 <title>상품교환,환불 페이지</title>
 <script>
@@ -34,63 +35,91 @@ function cancle_Exchange() {
 
 </script>
 </head>
-<body>
-<h3>상품교환,환불 페이지</h3>
-	<form method="post" name="cancel" action="/ELTRUT/enquiryCheck" onsubmit ="return cancel_Exchange()">
-		<table border="1" height="100%">
+<body class="bg-light">
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      
+      <h2>상품교환,환불 페이지</h2>
+      
+    </div>
+    <div class="row g-5">
+      
+      <div class="col-md-7 col-lg-8">
+		<form class="needs-validation" method="post" name="cancel" action="/ELTRUT/cancel" onsubmit ="return cancel_Exchange()">
+          <div class="row g-3">
 
-			<tr>
-				<th>상품번호</th>
-				<th>상품명</th>
-				<th>주문금액</th>
-				<th>배송비</th>
-				<th>수량</th>
-			</tr>
+            <div class="col-7">
+              <label for="lastName" class="form-label">상품번호</label>
+              <input type="text" class="form-control" value="${oc.GOODS_NUMBER }" readonly>
+              
+            </div>
+           
+            <div class="col-7">
+              <label for="firstName" class="form-label">상품명</label>
+              <input type="text" class="form-control" value="${oc.GOODS_NAME }" readonly>
+              
+            </div>
 
-			<tr>
-				<strong>
-					<td>${oc.GOODS_NUMBER }</td>
-					<td>${oc.GOODS_NAME }</td>
-					<td>${oc.ORDER_TOTAL_PRICE }</td>	
-					<td>3000</td>
-					<td>${oc.GOODS_NUMBER }</td>			
-				</strong>
-			</tr>			
-</table>
-=============================================
-<br>
-<table border="1">
-	<tr>
-	<th>사유선택</th>
-	<td>
-		<select name="CANCEL_CATEGORY" id="CANCEL_CATEGORY">
-		<option id="CANCEL_CATEOGRY">교환</option>
-		<option id="CANCEL_CATEOGRY">환불</option>
-	</select>
-	</td>
-	</tr>
-	
-	<tr>
-	<th>제목</th>
-	<td><textarea id="CANCEL_TITLE" name="CANCEL_TITLE" rows="1" cols="33"></textarea></td>
-	</tr>
-	
-	
-	<tr>
-	<th>사유입력</th>
-	<td><textarea id="CANCEL_CONTENT" name="CANCEL_CONTENT" rows="5" cols="33"></textarea></td>
-	</tr>
-	<tr>
-	<th>환불예정금액</th>
-	<td>${oc.ORDER_TOTAL_PRICE-3000 }</td>
-	</tr>
-	
-</table>
- 
-<input type="hidden" name="ORDER_NUMBER" id="ORDER_NUMBER" value="${oc.ORDER_NUMBER }"> 
+			<div class="col-7">
+			<label for="username" class="form-label">주문금액</label>
+            <input type="text" class="form-control" value="${oc.ORDER_TOTAL_PRICE }" readonly>
+            </div>
+			
+            <div class="col-7">
+              <label for="email" class="form-label">배송비 </label>
+              <input type="text" class="form-control" value="3000" readonly>
+              
+            </div>
 
-<input type="submit" value="글 작성하기" >
-<input type="button" value="이전 페이지로 이동" onclick="location.href='/ELTRUT/orderInfo'">
-</form>
+            <div class="col-7">
+              <label for="address" class="form-label">수량</label>
+              <input type="text" class="form-control" value="${oc.ORDER_AMOUNT }" readonly>
+              
+            </div>
+				<hr class="my-4" style="min-width: -webkit-fill-available;">
+				
+				<div class="col-7">
+              <label for="username" class="form-label">사유선택</label>
+              <select class="form-select" name="CANCEL_CATEGORY" id="CANCEL_CATEGORY" style="width: -webkit-fill-available; margin-bottom:5%;">
+				<option id="CANCEL_CATEOGRY">교환</option>
+				<option id="CANCEL_CATEOGRY">환불</option>
+			</select>
+				</div>
+				
+            <div class="col-7">
+              <label for="address2" class="form-label">제목</label>
+              <input type="text" class="form-control" id="CANCEL_TITLE" name="CANCEL_TITLE" >
+            </div>
+            
+            <div class="col-7">
+              <label for="address2" class="form-label">사유입력</label>
+              <input type="text" class="form-control" id="CANCEL_CONTENT" name="CANCEL_CONTENT" >
+            </div>
+            
+            <div class="col-7">
+              <label for="address2" class="form-label">환불예정금액</label>
+              <input type="text" class="form-control" value="${oc.ORDER_TOTAL_PRICE-3000 }"  readonly>
+            </div>
+          </div>
+          <hr class="my-4" style="min-width: -webkit-fill-available;">
+          <input type="hidden" name="ORDER_NUMBER" id="ORDER_NUMBER" value="${oc.ORDER_NUMBER }"> 
+          <div style="text-align: -webkit-center;">
+          <button class="btn btn-primary btn-lg" type="submit" >글 작성하기</button>
+          <button class="btn btn-primary btn-lg" type="button" onclick="location.href='/ELTRUT/orderInfo'">이전 페이지로 이동</button>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+				
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      <script src="form-validation.js"></script>
+  
+
 </body>
 </html>

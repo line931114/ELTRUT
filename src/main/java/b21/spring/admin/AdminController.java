@@ -21,19 +21,19 @@ public class AdminController {
 	@Resource(name="AdminServicea")
 	private AdminService adminService;
 	
-	@RequestMapping(value = "index")
+	@RequestMapping(value = "admin")
 	public ModelAndView adminMemberList(CommandMap commandMap, HttpServletRequest request) throws Exception {
 
 
 		ModelAndView mv = new ModelAndView();
 		List<Map<String, Object>> cancleList = adminService.allCancelList(commandMap.getMap());
-		mv.setViewName("index");
+		mv.setViewName("admin");
 		mv.addObject("List", cancleList);
 			return mv;
 		}
 	
 	
-	@RequestMapping(value = "index" ,method = RequestMethod.POST)
+	@RequestMapping(value = "admin" ,method = RequestMethod.POST)
 	public ModelAndView adminMemberLis(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		System.out.println("**********************"+request.getParameter("cancle_ordernumber"));
 		System.out.println("**********************"+request.getParameter("cancle_cat"));
@@ -44,24 +44,14 @@ public class AdminController {
 		
 		
 		List<Map<String, Object>> cancleList = adminService.allCancelList(commandMap.getMap());
-		mv.setViewName("index");
+		mv.setViewName("admin");
 		mv.addObject("List", cancleList);
 		
-		
-		
-		
+	
 			return mv;
 		}
 	
 	
-	
-	
-	
-	
-	
-	
 	}
-	
-	    
-	               
+	              
 	

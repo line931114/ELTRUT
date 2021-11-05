@@ -109,10 +109,10 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Q&A답변 등록 페이지입니다.</div>
 		<div class="panel-body">
-			<form:form id="frm" name="frm" action="frm" method="post" enctype="multipart/form-data" onsubmit="return joinValidation(this)">
+			<form:form id="frm" name="frm" action="1" method="post" enctype="multipart/form-data" onsubmit="return joinValidation(this)">
 				<input type="hidden" id="CS_NUMBER" name="CS_NUMBER" value="${qnaDetail.CS_NUMBER}" />
 				<input type="hidden" id="GOODS_NUMBER" name="GOODS_NUMBER" value="${qnaDetail.GOODS_NUMBER}" />
-				<input type="hidden" id="MEMBER_NUMBER" name="MEMBER_NUMBER" value="${qnaDetail.MEMBER_NUMBER}" />
+				<input type="hidden" id="MEMBER_ID" name="MEMBER_ID" value="${qnaDetail.MEMBER_ID}" />
 				<input type="hidden" class="form-control" id="CS_IMAGE1" name="CS_IMAGE1" value="${qnaDetail.CS_IMAGE1}" />
 				<div class="form-group">
 					<label>QNA 글번호</label> 

@@ -128,7 +128,7 @@ if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.val
 
 <div class="centered">
 <br><br>
-<p>아이디/비밀번호를 잊으셨나요? <a href="/ELTRUT/findForm" data-label="아이디/비밀번호 찾기">여기를 클릭</a>하여 확인하실 수 있습니다.</p>
+<p>아이디/비밀번호를 잊으셨나요? <a href="/ELTRUT/findForm" data-label="아이디/비밀번호 찾기" style="color: royalblue;">여기</a>를 클릭 하여 확인하실 수 있습니다.</p>
 </div>
 
         </form>

@@ -4,13 +4,17 @@
 
 <mapper namespace="review">
 
-<!--상품후기  -->
+<!--상품후기는 일단 GOODSDETAIL 상품상세보기에서 작성이가능하며
+상품후기 같은 경우는 구입한 회원의 한에서 작성이 가능, QNA는 구입하지 않은 사용자도 가능
+-->
+
+	<!--GOODS_NUMBER에 작성된 상품후기 확인  -->
 	<select id="goodsReview" parameterType="hashMap" resultType="hashMap">
-		<![CDATA[
-        SELECT *
+	<![CDATA[
+		SELECT *
 		FROM REVIEW
 		WHERE GOODS_NUMBER=${GOODS_NUMBER}
-        ]]>
+	]]>
 	</select>
 	
 	
@@ -20,46 +24,45 @@
 			SELECT *
 			FROM REVIEW
 			WHERE MEMBER_ID=#{MEMBER_ID} AND REVIEW_NUMBER=#{REVIEW_NUMBER}
-        ]]>
+		]]>
 	</select>
 	
 	
-	
-	
+	<!--상품후기수정-->
 	<update id="reviewModify" parameterType="hashMap" >
 		<![CDATA[
-      UPDATE REVIEW
-	  SET REVIEW_TITLE = #{REVIEW_TITLE}, 
-	  REVIEW_CONTENT = #{REVIEW_CONTENT}, 
-	  REVIEW_IMAGE=#{REVIEW_IMAGE}
-	  WHERE MEMBER_ID = #{MEMBER_ID} 
-	  AND REVIEW_NUMBER= #{REVIEW_NUMBER}
-        ]]>
+			UPDATE REVIEW
+			SET REVIEW_TITLE = #{REVIEW_TITLE}, 
+			REVIEW_CONTENT = #{REVIEW_CONTENT}, 
+			REVIEW_IMAGE=#{REVIEW_IMAGE}
+			WHERE MEMBER_ID = #{MEMBER_ID} 
+			AND REVIEW_NUMBER= #{REVIEW_NUMBER}
+		]]>
 	</update>
 	
+	<!--상품삭제-->
 	<delete id="reviewDelete" parameterType="hashmap">
 	<![CDATA[
-			delete 
-			from review
-			where review_number=#{REVIEW_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
+		delete 
+		from review
+		where review_number=#{REVIEW_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
 	]]>
 	</delete>
 	
 	
+	<!--후기등록을 위한 조건, 해당 MEMBER_ID의 상품을 조회했을 때 ORDER_STATE=2 '배송완료'인 회원만 가능-->
 	<select id="reviewInsertCheck" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
-			SELECT *
-			FROM REVIEW
-			WHERE MEMBER_ID=(SELECT MEMBER_ID
+							 SELECT MEMBER_ID, ORDER_NUMBER
                  		 	 FROM ORDERLIST
-                		 	 WHERE ORDER_STATE=2) AND MEMBER_ID=#{MEMBER_ID} AND GOODS_NUMBER=#{GOODS_NUMBER}       ]]>
+                		 	 WHERE ORDER_STATE=2) AND MEMBER_ID=#{MEMBER_ID} AND GOODS_NUMBER=#{GOODS_NUMBER}       
+        ]]>
 	</select>
-			
-			
-			
+					
+	<!--상품 후기 등록-->
 	<insert id="reviewInsert" parameterType="hashMap">
 		<![CDATA[
-        	INSERT INTO REVIEW
+        		INSERT INTO REVIEW
 			(ORDER_NUMBER,
 			MEMBER_ID,
 			REVIEW_NUMBER,
@@ -72,7 +75,7 @@
 			REVIEW_REPDATE,
 			GOODS_NUMBER,
 			REVIEW_REPSTATE
-			)VALUES(
+		)VALUES(
 			#{ORDER_NUMBER},
 			#{MEMBER_ID},
 			REVIEW_NUMBER_SEQ.CURRVAL,
@@ -85,34 +88,39 @@
 			SYSDATE,
 			#{GOODS_NUMBER},
 			'미답변')
-]]>
+	]]>
 	</insert>		
 	
 	
+	<!--이미지를 등록하기 위해서 REVIEW_NUMBER의 시퀀스를 미리 뽑음-->
 	<select id="reviewNumber" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 			 SELECT REVIEW_NUMBER_SEQ.NEXTVAL AS REVIEW_NUMBER
-			  FROM DUAL	]]>
+			  FROM DUAL	
+		]]>
 	</select>
 			
+	<!--GOODS_NUMBER에 해당하는 QNA 확인-->
 	<select id="goodsQna" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 
-		select *
-		from cs
-		where goods_number=#{GOODS_NUMBER}			
+			SELECT *
+			FROM CS
+			WHERE GOODS_NUMBER=#{GOODS_NUMBER}			
 
-	]]>
+		]]>
 	</select>
-			
-	
+
+	<!--상품 QNA 삭제-->
 	<delete id="goodsQnaDelete" parameterType="hashmap">
 	<![CDATA[
-			delete 
-			from cs
-			where cs_number=#{CS_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
+			DELETE 
+			FROM CS
+			WHERE CS_NUMBER=#{CS_NUMBER} AND MEMBER_ID=#{MEMBER_ID}	
 	]]>
 	</delete>
+	
+	
 	
 	<update id="goodsQnaModify" parameterType="hashMap" >
 		<![CDATA[
@@ -135,7 +143,7 @@
         ]]>
 	</select>
 	
-
+	<!--상품 QNA 등록-->
 	<insert id="goodsQnaInsert" parameterType="hashMap">
 		<![CDATA[
         	INSERT INTO CS(
@@ -169,6 +177,7 @@
 		]]>
 	</insert>	
 	
+	<!--이미지를 등록하기 위해서 CS_NUMBER의 시퀀스를 미리 뽑음-->
 	<select id="qnaNumber" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 			 SELECT CS_NUMBER_SEQ.NEXTVAL AS CS_NUMBER

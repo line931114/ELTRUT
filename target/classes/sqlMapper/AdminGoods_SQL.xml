@@ -3,8 +3,14 @@
 
 <mapper namespace="admin">
 
-	<!-- 관리자 상품 목록 확인 -->
+		<!-- 전체 상품 수 -->
+        <select id="countAdminGoods" resultType="integer">
+		<![CDATA[
+			SELECT COUNT(GOODS_NUMBER) FROM GOODS
+		]]>
+        </select>
 	
+	<!-- 관리자 상품 목록 확인 -->
 	<select id="selectAdminGoodsList" parameterType="hashmap" resultType="hashmap">
                 <![CDATA[
                         SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,GOODS_AMOUNT,GOODS_IMAGE_1,GOODS_IMAGE_2,
@@ -13,21 +19,21 @@
                       FROM GOODS  
                         ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
                 ]]>
-</select>
+	</select>
 	
 	<!-- 관리자 상품 검색 이름 -->
 	<select id="adminGoodsSearch0" parameterType="String" resultType="hashmap">
                 <![CDATA[
-                        SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
-                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL,
-                        GOODS_AMOUNT, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
-                      FROM GOODS 
+			SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
+                       		GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL,
+                       		GOODS_AMOUNT, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
+			decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
+			FROM GOODS 
                         WHERE
-                        GOODS_NUMBER IN (SELECT GOODS_NUMBER FROM GOODS WHERE GOODS_NAME LIKE '%'||#{isSearch}||'%')
-                        ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC ,GOODS_DATE DESC               
+                        	GOODS_NUMBER IN (SELECT GOODS_NUMBER FROM GOODS WHERE GOODS_NAME LIKE '%'||#{isSearch}||'%')
+                        	ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC ,GOODS_DATE DESC               
                 ]]>
-        </select>
+	</select>
 	
 	<!-- 관리자 상품 검색 상품번호 -->
 	<select id="adminGoodsSearch1" parameterType="String" resultType="hashmap">
@@ -57,19 +63,19 @@
                 ]]>
         </select>
         	
-	<!-- 관리자 상품 검색 재고0상태 -->
-        <select id="adminGoodsSearch3"  resultType="hashmap">
-                <![CDATA[
-                        SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
+	<!-- 관리자 상품 검색 재고가 없을경우 -->
+	<select id="adminGoodsSearch3"  resultType="hashmap">
+	<![CDATA[
+		SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
                         GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL,
                         GOODS_AMOUNT, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
-                      FROM GOODS 
-                    WHERE
-               GOODS_AMOUNT=0
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
+		FROM GOODS 
+		WHERE
+		GOODS_AMOUNT=0
                         ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC,GOODS_DATE DESC
                 ]]>
-        </select>
+	</select>
         
 	<!-- 관리자 상품 검색 판매량순 -->
 	<select id="adminGoodsSearch4" parameterType="String" resultType="hashmap">
@@ -77,60 +83,51 @@
                         SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
                         GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL,
                         GOODS_AMOUNT, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
-                      FROM GOODS 
-                        ORDER BY GOODS_SELLCOUNT DESC,GOODS_COLOR ASC, SIZE_ORDER ASC,GOODS_DATE DESC
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
+		FROM GOODS 
+		ORDER BY GOODS_SELLCOUNT DESC,GOODS_COLOR ASC, SIZE_ORDER ASC,GOODS_DATE DESC
                 ]]>
-        </select>
+	</select>
         
-  	<!-- 관리자 상품 검색 최신순 -->
-        <select id="adminGoodsSearch5" parameterType="String" resultType="hashmap">
-                <![CDATA[
+	<!-- 관리자 상품 검색 최신순 -->
+	<select id="adminGoodsSearch5" parameterType="String" resultType="hashmap">
+	<![CDATA[
                         SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
                         GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL,
                         GOODS_AMOUNT, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
-                      FROM GOODS 
-                        ORDER BY GOODS_DATE DESC,GOODS_COLOR ASC, SIZE_ORDER ASC
-                ]]>
-        </select>
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER
+		FROM GOODS 
+		ORDER BY GOODS_DATE DESC,GOODS_COLOR ASC, SIZE_ORDER ASC
+	]]>
+	</select>
         
-        <!-- 전체 상품 수 -->
-        <select id="countAdminGoods" resultType="integer">
-                <![CDATA[
-                        SELECT COUNT(GOODS_NUMBER) FROM GOODS
-                ]]>
-        </select>
         
-        <!-- 주문 취소시 상품 수량 복구 -->
+		<!--주문 취소시 상품 수량 복구
         <update id="addAmount" parameterType="hashmap">
                 <![CDATA[
                         UPDATE GOODS SET GOODS_AMOUNT=GOODS_AMOUNT+#{ORDER_AMOUNT},GOODS_SELLCOUNT=GOODS_SELLCOUNT-#{ORDER_AMOUNT}
                         WHERE GOODS_NUMBER=#{GOODS_NUMBER}
                 ]]>
-        </update>
-	
-	
-   
-		
-			<!-- 상품 등록 -->
+        </update>-->
+			
+	<!-- 상품 등록 -->
 		<insert id="insertAdminGoods" parameterType="hashmap" useGeneratedKeys="true" keyProperty="GOODS_NUMBER">
-                <selectKey keyProperty="GOODS_NUMBER" resultType="Integer" order="BEFORE">
-                        SELECT GOODS_NUMBER_SEQ.NEXTVAL FROM DUAL
-                </selectKey>
-                <![CDATA[
-                        INSERT INTO GOODS ( 
-                      GOODS_NUMBER, GOODS_NAME, GOODS_PRICE,        
-                        GOODS_CATEGORY1, GOODS_CATEGORY2,GOODS_SIZE,
-                        GOODS_COLOR,GOODS_AMOUNT,GOODS_IMAGE_1,GOODS_IMAGE_2,GOODS_THUMBNAIL,GOODS_SELLCOUNT, GOODS_DATE
-                         ) VALUES ( 
-                        #{GOODS_NUMBER}, #{GOODS_NAME}, #{GOODS_PRICE},
-                        #{GOODS_CATEGORY1}, #{GOODS_CATEGORY2},  #{GOODS_SIZE}, #{GOODS_COLOR}, #{GOODS_AMOUNT},
-                   #{GOODS_IMAGE_1, jdbcType=VARCHAR}, #{GOODS_IMAGE_2, jdbcType=VARCHAR}, #{GOODS_THUMBNAIL, jdbcType=VARCHAR}, 0, SYSDATE)
+			<selectKey keyProperty="GOODS_NUMBER" resultType="Integer" order="BEFORE">
+                       		 SELECT GOODS_NUMBER_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
+		<![CDATA[
+                      	  	INSERT INTO GOODS ( 
+			GOODS_NUMBER, GOODS_NAME, GOODS_PRICE,        
+			GOODS_CATEGORY1, GOODS_CATEGORY2,GOODS_SIZE,
+			GOODS_COLOR,GOODS_AMOUNT,GOODS_IMAGE_1,GOODS_IMAGE_2,GOODS_THUMBNAIL,GOODS_SELLCOUNT, GOODS_DATE
+			) VALUES ( 
+                        	#{GOODS_NUMBER}, #{GOODS_NAME}, #{GOODS_PRICE},
+                        	#{GOODS_CATEGORY1}, #{GOODS_CATEGORY2},  #{GOODS_SIZE}, #{GOODS_COLOR}, #{GOODS_AMOUNT},
+			#{GOODS_IMAGE_1, jdbcType=VARCHAR}, #{GOODS_IMAGE_2, jdbcType=VARCHAR}, #{GOODS_THUMBNAIL, jdbcType=VARCHAR}, 0, SYSDATE)
                 ]]>
-        </insert>
+	</insert>
         
-<!--         상품 세분화 등록 
+		<!--상품 세분화 등록 
         <insert id="insertAdminGoodsCategory" parameterType="hashmap">
 		<![CDATA[
 			INSERT INTO GOODS (
@@ -141,7 +138,7 @@
 		]]>
 	</insert>-->
 	
-		<!-- 상품 이미지(본문:상세보기) 등록 -->
+	<!-- 		 상품 이미지(본문:상세보기) 등록 
 		<insert id="insertAdminGoodsImage" parameterType="hashmap">
 		<![CDATA[
 			INSERT INTO GOODS (
@@ -149,27 +146,31 @@
 			) VALUES (
 			#{GOODS_NUMBER}, #{GOODS_IMAGE_2} )
 		]]>
-	</insert>
+	</insert> -->
 
-		<!-- 상품 썸네일 이미지 등록
-	 -->	<update id="insertAdminGoodsThumbnail" parameterType="hashmap">
+
+		<!-- 상품을 이미지를 등록하는 과정에서 NULL값을 처리하지 못해서 생긴 문제인듯 처음에 모든 이미지들을 NULL값으로 받고, UPDATE 방식으로 이미지를 처리 -->
+
+		<!-- 상품 썸네일 이미지 등록 -->
+	 	<update id="insertAdminGoodsThumbnail" parameterType="hashmap">
 		<![CDATA[
 			UPDATE GOODS SET GOODS_THUMBNAIL= #{GOODS_THUMBNAIL} WHERE GOODS_NUMBER=#{GOODS_NUMBER}
 		]]>
-	</update> 
+		</update> 
 	
-		<!-- 상품 썸네일 이미지 등록
-	 -->	<update id="insertAdminGoodsThumbnail1" parameterType="hashmap">
+		<!-- 상품 이미지1 등록 -->
+	 	<update id="insertAdminGoodsThumbnail1" parameterType="hashmap">
 		<![CDATA[
 			UPDATE GOODS SET GOODS_IMAGE_1= #{GOODS_IMAGE_1} WHERE GOODS_NUMBER=#{GOODS_NUMBER}
 		]]>
-	</update> 
-	
+		</update> 
+		
+		<!-- 상품 이미지2 등록 -->
 	 	<update id="insertAdminGoodsThumbnail2" parameterType="hashmap">
 		<![CDATA[
 			UPDATE GOODS SET GOODS_IMAGE_2= #{GOODS_IMAGE_2} WHERE GOODS_NUMBER=#{GOODS_NUMBER}
 		]]>
-	</update> 
+		</update> 
 	
         
         
@@ -185,37 +186,20 @@
                 ]]>
         </update>
         
-        <!-- 상품 종류 수정 -->
-		<update id="modifyGoodsCategory" parameterType="hashmap">
-		<![CDATA[
-			UPDATE GOODS_KIND SET GOODS_COLOR=#{MD_GOODS_COLOR}, GOODS_SIZE=#{MD_GOODS_SIZE},
-			GOODS_AMOUNT=GOODS_AMOUNT+#{addAmount} WHERE GOODS_KIND_NUMBER=#{GOODS_CATEGORY1}
-		]]>
-	</update>
-
-		<!-- 상품 이미지(본문:상세보기) 수정 -->
-		<update id="modifyGoodsImage" parameterType="hashmap">
-		<![CDATA[
-			UPDATE GOODS_IMAGE_2 
-			SET GOODS_IMAGE_2=#{GOODS_IMAGE_2} 
-			WHERE GOODS_IMAGE_2=#{ORIGINAL_IMAGE}
-		]]>
-	</update>
         
-        
-        <!-- 상품수정폼으로 이동 -->
+	<!-- 상품 번호에대한 상품수정폼으로 이동 -->
 	<select id="selectOneGoods" parameterType="hashmap" resultType="hashmap">
-                <![CDATA[
-                        SELECT GOODS_NUMBER, GOODS_NAME,GOODS_PRICE,
-                       GOODS_THUMBNAIL,GOODS_CATEGORY1, GOODS_CATEGORY2,
-                    GOODS_SIZE,GOODS_AMOUNT,
+	<![CDATA[
+		SELECT GOODS_NUMBER, GOODS_NAME,GOODS_PRICE,
+		GOODS_THUMBNAIL,GOODS_CATEGORY1, GOODS_CATEGORY2,
+		GOODS_SIZE,GOODS_AMOUNT,
                         GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
-                      FROM GOODS
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
+		FROM GOODS
                         WHERE GOODS_NUMBER=#{GOODS_NUMBER}
                         ORDER BY GOODS_COLOR ASC, SIZE_ORDER ASC
                 ]]>
-</select>
+	</select>
         
         <!-- 상품 이미지(본문) 정보 -->
 		<select id="selectOneGoodsImage" parameterType="hashmap" resultType="hashmap">
@@ -227,21 +211,6 @@
 		]]>
 	</select>
 	
-	
-        
-        <!-- 상품 종류(카테고리)삭제 -->
-        <delete id="deleteGoodsCategory" parameterType="hashmap">
-                <![CDATA[
-                        DELETE FROM GOODS WHERE GOODS_CATEGORY1=#{GOODS_CATEGORY1}
-                ]]>
-        </delete>
-        
-        <!-- 상품 본문 이미지(상세보기) 삭제 -->
-        <delete id="deleteGoodsDetailImages" parameterType="hashmap">
-                <![CDATA[
-                        DELETE FROM GOODS WHERE GOODS_IMAGE_2=#{GOODS_IMAGE_2}
-                ]]>
-        </delete>
         
         <!-- 상품 삭제 -->
         <delete id="deleteAdminGoods" parameterType="hashmap">

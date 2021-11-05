@@ -2,38 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminOrderCancel">
-<!-- 해당 주문 번호에 대한 캔슬 유무 확인 -->
-<select id="confirmCancel" resultType="hashmap" parameterType="hashmap">
-        <![CDATA[
-                SELECT CANCEL_CONTENT, CANCEL_REGDATE 
-                FROM CANCEL 
-                WHERE ORDER_NUMBER = #{ORDER_NUMBER }
-        ]]>
-</select>
-<!-- 주문 관리 목록(취소/교환/환불) -->
-<select id="allCancelList" resultType="hashmap" parameterType="hashmap">
-        <![CDATA[
-               SELECT a.CANCEL_NUMBER, a.ORDER_NUMBER, a.CANCEL_CONTENT, 
-TO_CHAR(a.CANCEL_REGDATE, 'YYYY-MM-DD') as CANCEL_REGDATE, a.CANCEL_TITLE, a.CANCEL_CATEGORY,c.goods_name,b.order_state
-                FROM CANCEL a,orderlist b,goods c
-                WHERE a.order_number=b.order_number and b.goods_number=c.goods_number
-                ORDER BY ORDER_NUMBER DESC
-        ]]>
-</select>
-<!--   주문 취소 삭제 -->
-<delete id="cancelDelete" parameterType="hashmap">
-        <![CDATA[
-                DELETE CANCEL 
-                WHERE ORDER_NUMBER = #{ORDER_NUMBER}
-        ]]>
-</delete>
 
-<update id="updatecancle" parameterType="hashmap">
-        <![CDATA[
-                UPDATE ORDERLIST
-                SET ORDER_STATE = #{cancle_cat}
-                WHERE ORDER_NUMBER= #{cancle_ordernumber}
-        ]]>
-</update>
+
+	<!-- 해당 주문 번호에 대한 캔슬 유무 확인 -->
+	<select id="confirmCancel" resultType="hashmap" parameterType="hashmap">
+	<![CDATA[
+		SELECT CANCEL_CONTENT, CANCEL_REGDATE 
+		FROM CANCEL
+		WHERE ORDER_NUMBER = #{ORDER_NUMBER }
+	]]>
+	</select>
+	
+	
+	<!-- 주문 관리 목록(취소/교환/환불) 
+	상품을 교환,환불할 경우 CANCEL테이블의 INSERT하기 때문에 주문목록(ORDERLIST),취소(CANCEL)의 ORDER_NUMBER를 매칭시켜 조회-->
+	<select id="allCancelList" resultType="hashmap" parameterType="hashmap">
+	<![CDATA[
+		SELECT a.CANCEL_NUMBER, a.ORDER_NUMBER, a.CANCEL_CONTENT, 
+		TO_CHAR(a.CANCEL_REGDATE, 'YYYY-MM-DD') as CANCEL_REGDATE, a.CANCEL_TITLE, a.CANCEL_CATEGORY,c.goods_name,b.order_state
+                	FROM CANCEL a,orderlist b,goods c
+               	 WHERE a.order_number=b.order_number and b.goods_number=c.goods_number
+               	 ORDER BY ORDER_NUMBER DESC
+	]]>
+	</select>
+
+
+	<!--   주문 취소 삭제 -->
+	<delete id="cancelDelete" parameterType="hashmap">
+	<![CDATA[
+		DELETE CANCEL 
+		WHERE ORDER_NUMBER = #{ORDER_NUMBER}
+	]]>
+	</delete>
+
+	<!--INDEX(관리자메인)화면에서 상품취소목록이 뜨고, ORDER_STATE를 수정할 수 있음-->
+	<update id="updatecancle" parameterType="hashmap">
+	<![CDATA[
+		UPDATE ORDERLIST
+		SET ORDER_STATE = #{cancle_cat}
+		WHERE ORDER_NUMBER= #{cancle_ordernumber}
+	]]>
+	</update>
 
 </mapper>

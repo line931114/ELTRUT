@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goods">
-<select id="GoodsList" parameterType="hashmap" resultType="hashmap">
-                <![CDATA[
-                        SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
-                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
-                      FROM GOODS  
-                        ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
-                ]]>
-</select> 
 
-<select id="search" parameterType="hashmap" resultType="hashmap">
-                <![CDATA[
-                       
-                        
-                        SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
-                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
-                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
-                      FROM GOODS  where GOODS_NAME like '%'||#{isSearch}||'%'
-                        ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
-                ]]>
-</select> 
+<!-- 주문을 하는 과정이 생각보다 까다로움,
+1. 장바구니에 들어있는 상품을 주문함
+2. orderForm.jsp로 넘어갈 때 ordermember, orderGoods를 사용함
+2-1. 기존에 저장되어있는 회원정보와, 주문한 상품들의 갯수를 알아야되기때문에
+3. 상품을 주문을 하게되면 거쳐야되는 작업들도 많음
+3-1 결제를 했으니 배송내역을 생성함 createDeliveryList
+3-2 배송내역을 생성했으니 주문내역이(ORDERLIST) 생성됨
+3-3 주문을 했으니, 기존에 CARTLIST에 저장된 장바구니는 삭제해야됨, 
+ 	배송내역생성->장바구니삭제->주문내역생성 -->
 
-<!-- 상품 상세보기 - 상품 가져오기 -->
+	<!-- ORDER BY를 통해 정렬된 전체 상품 조회가능 main.jsp에서 보여지는 상품 정렬 -->
+	<select id="GoodsList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
+		GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
+		FROM GOODS  
+		ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
+	]]>
+	</select> 
+
+	<!-- TILES MAIN_HEDAER에서 사용되는 검색 -->
+
+	<select id="search" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+                                      
+		SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
+		GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
+		decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
+		FROM GOODS  where GOODS_NAME like '%'||#{isSearch}||'%'
+		ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
+          	     	
+	 ]]>
+	</select> 
+
+	<!-- GOODS_DETAIL 상품 상세보기 - 상품 가져오기 -->
 	<select id="selectOneGoods" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 			SELECT A.*,
@@ -34,15 +48,10 @@
 		]]>
 	</select>
 	
-	<!-- 회원/비회원 상품 주문하기 -->
-	<!-- [1단계 상품상세보기에서 구매하기 눌렀을때 -> 선택한 상품/회원정보 보여주는 orderform
-		주문자정보 가져오기 + 포인트테이블에서 개별 포인트 sum해서 가져오기
-		1)구매자정보,배송지정보에 맴버테이블에서 꺼내온 값 보여주고
-		2)배송지정보에서 수정한 내역은 RECEIVER_ 로 수정해서 컨트롤러로 전송
-	-->
+	<!-- 상품주문시, 회원정보 가져오기 -->
 	<select id="orderMember" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
-        SELECT 
+			SELECT 
                         M.MEMBER_ID,
                         M.MEMBER_NAME,
                         M.MEMBER_PHONE,
@@ -50,9 +59,9 @@
                         M.MEMBER_ZIPCODE,
                         M.MEMBER_ADDRESS1,
                         M.MEMBER_ADDRESS2
-                FROM MEMBER M
-                WHERE M.MEMBER_ID = #{MEMBER_ID}
-                GROUP BY 
+			FROM MEMBER M
+			WHERE M.MEMBER_ID = #{MEMBER_ID}
+			GROUP BY 
                         M.MEMBER_ID, 
                         M.MEMBER_NAME,
                         M.MEMBER_PHONE,
@@ -60,11 +69,11 @@
                         M.MEMBER_ZIPCODE,
                         M.MEMBER_ADDRESS1,
                         M.MEMBER_ADDRESS2
-        ]]>
+     		   ]]>
 	</select>
 	
 
-	<!-- orderGoods = orderService.orderGoods(commandMap.getMap()); -->
+	<!-- 장바구니에서 넘어온 GOODS_NUMBER, EA (CART_AMOUNT)를 이용해 상품주문을 함 -->
 	<select id="orderGoods" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 			SELECT 
@@ -110,26 +119,38 @@
 	
 	<!-- 주문내역 생성 -->
 	<insert id="createOrderList" parameterType="hashMap">
-		<![CDATA[
-               INSERT INTO ORDERLIST (
-        ORDER_NUMBER,
-        MEMBER_ID,
-        GOODS_NUMBER,
-        ORDER_AMOUNT,
-        ORDER_DATE,
-        ORDER_TOTAL_PRICE,
-        ORDER_PAY_STATE,
-        ORDER_STATE
-        ) VALUES (
-        ${ORDER_NUMBER},
-        '${MEMBER_ID}',
-        '${GOODS_NUMBER}',
-        '${ORDER_AMOUNT}',
-        SYSDATE,
-        '${ORDER_TOTAL_PRICE}',
-        '0',
-        '0'
-        )
-]]>
+	<![CDATA[
+		INSERT INTO ORDERLIST (
+		ORDER_NUMBER,
+		MEMBER_ID,
+		GOODS_NUMBER,
+		ORDER_AMOUNT,
+		ORDER_DATE,
+		ORDER_TOTAL_PRICE,
+		ORDER_PAY_STATE,
+		ORDER_STATE
+		) VALUES (
+		${ORDER_NUMBER},
+		'${MEMBER_ID}',
+		'${GOODS_NUMBER}',
+		'${ORDER_AMOUNT}',
+		SYSDATE,
+		'${ORDER_TOTAL_PRICE}',
+		'0',
+		'0')
+	]]>
 	</insert>
+	
+	<select id="search1" parameterType="hashmap" resultType="hashmap">
+                <![CDATA[
+                       
+                        
+                        SELECT GOODS_NUMBER, GOODS_CATEGORY1, GOODS_CATEGORY2, GOODS_NAME,
+                        GOODS_PRICE, GOODS_SELLCOUNT, GOODS_THUMBNAIL, GOODS_SIZE, GOODS_COLOR,GOODS_DATE,
+                      decode(GOODS_SIZE, 's', '1','S', '1', 'm', '2','M', '2',  'l', '3','L', '3') as SIZE_ORDER 
+                      FROM GOODS  where GOODS_CATEGORY like '%'||#{isSearch}||'%'
+                        ORDER BY GOODS_NUMBER DESC, GOODS_COLOR ASC, SIZE_ORDER ASC, GOODS_DATE DESC
+                ]]>
+	</select>
+	
 </mapper>

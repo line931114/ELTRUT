@@ -19,32 +19,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.eltrut.CommandMap;
+import b21.spring.paging.Paging;
 @Controller
 public class MainController {
 
 	@Resource(name="MainService")
 	private MainService mainService;
 	
-//	@RequestMapping()
-//	public ModelAndView move(CommandMap commandMap,HttpServletRequest request) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		HttpSession session=request.getSession();
-//		String MEMBER_ID=(String) session.getAttribute("MEMBER_ID");
-//		if(MEMBER_ID==null) {
-//			mav.addObject("MEMBER_ID",null);
-//		}
-//		else {
-//			System.out.println("***********************************************\n"+MEMBER_ID);
-//			mav.addObject("MEMBER_ID",MEMBER_ID);
-//			commandMap.put("MEMBER_ID", MEMBER_ID);
-//			Map<String,Object> header_basket=mainService.header_baskets(commandMap.getMap());
-//			mav.addObject("header_basket",header_basket);
-//		}
-//		mav.setViewName("main");
-//		System.out.println("******************************************************************************\n");
-//		return mav;
-//		
-//	}
+	
+	//페이징 변수
+			private int searchNum;
+			private String isSearch;
+			
+			private int currentPage = 1;
+			private int totalCount;
+			private int blockCount = 20;
+			private int blockPage = 10;
+			private String pagingHtml;
+			private Paging page;
+			
 	
 	@RequestMapping("/main0")
 	public ModelAndView main0(CommandMap commandMap,HttpServletRequest request) throws Exception {
@@ -83,16 +76,64 @@ public class MainController {
 	
 	@RequestMapping("/main")
 	public ModelAndView main(CommandMap commandMap,HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		List<Map<String,Object>>goods = mainService.goodsList(commandMap.getMap());
+		ModelAndView mav = new ModelAndView("main");
+		if(request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty() //
+				|| request.getParameter("currentPage").equals("0")) {
+			currentPage = 1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		
-	
+
+
+		List<Map<String, Object>> adminGoodsList = mainService.adminGoodsList(commandMap.getMap());
 		
-		System.out.println(goods);
+		if(request.getParameter("isSearch") != null) {
+			isSearch = request.getParameter("isSearch");
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			
+			if(searchNum == 0) {
+				adminGoodsList = mainService.adminGoodsSearch2(isSearch);
+				mav.addObject("goods", adminGoodsList);
+			}else
+				adminGoodsList = mainService.adminGoodsList(commandMap.getMap());
+				System.out.println("---------------------------");
+				
+				mav.addObject("goods", adminGoodsList);
+			
+			totalCount = adminGoodsList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminGoodsList", searchNum, isSearch);
+			pagingHtml = page.getPagingHtml().toString();
+			
+			int lastCount = totalCount;
+			
+			if(page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+			
+			adminGoodsList = adminGoodsList.subList(page.getStartCount(), lastCount);
+			
+			mav.addObject("isSearch", isSearch);	//
+			System.out.println("00000000000000000000000000000000");
+			System.out.println(isSearch);
+			
+			
 		
-		
-		mav.setViewName("main");
-		mav.addObject("goods", goods);
+		}
+		else {
+			adminGoodsList = mainService.adminGoodsList(commandMap.getMap());
+			System.out.println("---------------------------");
+			
+			mav.addObject("goods", adminGoodsList);
+		}
+//		List<Map<String,Object>>goods = mainService.goodsList(commandMap.getMap());
+//		
+//	
+//		
+//		System.out.println(goods);
+//		
+//		
+//		mav.setViewName("main");
+//		mav.addObject("goods", goods);
 		
 		
 		
@@ -101,6 +142,7 @@ public class MainController {
 		if(MEMBER_ID==null) {
 			mav.addObject("MEMBER_ID",null);
 		}
+		
 		else {
 			System.out.println("***********************************************\n"+MEMBER_ID);
 			mav.addObject("MEMBER_ID",MEMBER_ID);
@@ -109,11 +151,9 @@ public class MainController {
 			mav.addObject("header_basket",header_basket);
 		}
 		
-		
-		return mav;
-		
-	}
 	
+		return mav;
+	}
 	@RequestMapping(value="/main", method=RequestMethod.POST)
 	public ModelAndView main1(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -130,6 +170,25 @@ public class MainController {
 	public ModelAndView footer0(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("footerFunction/privacy");
+		return mv;
+	}
+	
+	@RequestMapping(value="/Aboutus")
+	public ModelAndView Aboutus(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("Aboutus");
+		return mv;
+	}
+	@RequestMapping(value="/help")
+	public ModelAndView help(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("help");
+		return mv;
+	}
+	@RequestMapping(value="/terms")
+	public ModelAndView terms(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/terms");
 		return mv;
 	}
 

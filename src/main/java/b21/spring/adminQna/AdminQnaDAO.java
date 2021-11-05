@@ -24,7 +24,7 @@ public class AdminQnaDAO extends AbstractDAO {
 	
 	// 관리자 페이지 답변달기
 	public void updateReplyStep(Map<String, Object> map) throws Exception {
-		update("admin.insertQnaReply", map);
+		update("admin.updateReplyStep", map);
 	}
 	
 	// 관리자 Q&A 강제 삭제

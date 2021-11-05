@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
 <meta charset="UTF-8">
 <title>구매내역</title>
 
-    <style>
+<!--     <style>
     div {
         width: 100%;
         height: 200px;
@@ -27,7 +28,7 @@
     	width="50%"
     	text-align:center;
     }
-    </style>
+    </style> -->
 
 
 
@@ -71,96 +72,110 @@ function orderDetail(number){
 </head>
 
 
-<body>
-<div class="top">
-<h2>마이페이지- 구매내역 확인</h2>
-</div>
-<form method="post" name="order_Exchange" action="/ELTRUT/orderExchange">
+<body class="bg-light">
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      
+      <h2>마이페이지- 구매내역 확인</h2>
+      
+    </div>
+    <div class="row g-5">
+      
+      <div class="col-md-7 col-lg-8" style="width: 100%; max-width: 100%;">
+<form class="needs-validation" method="post" name="order_Exchange" action="/ELTRUT/orderExchange">
 <c:choose>
 	<c:when test="${not empty O}">
 		<c:forEach items="${O }" var="O" varStatus="status">
-		=====================================================================================
-			
-			<div class="left">
-		<img src="/ELTRUT/file/goodsFile/${O.GOODS_THUMBNAIL}" width="200" height="200" alt=""  onerror="this.src='/ELTRUT/file/noimg_130.gif'" />
-					
-			</div>
-			<div class="right">
-				<table border="1">
-				<tr>
-				<td><h3><strong>배송상태</strong></h3></td>
-				</tr>
-				
-				<tr>
-				<td>주문번호 : ${O.ORDER_NUMBER }</td> 
-				</tr>
-				
-			<tr>
-				<td>
+			<hr class="my-4">
+			<input type="image" class="form-control" src="/ELTRUT/file/goodsFile/${O.GOODS_THUMBNAIL}" width="200" height="200" alt=""  onerror="this.src='/ELTRUT/file/noimg_130.gif'"
+				style="max-inline-size: fit-content; float: left;" />
+            <div style="text-align: -webkit-right;text-align-last: left;">
+            
+			<div class="col-7">
+              <h4>배송상태</h4>
+            </div>
+            <div class="col-7">
+              <label for="email" class="form-label">주문번호 </label>
+              <input type="text" class="form-control" value="${O.ORDER_NUMBER }">
+              
+            </div>
+				 <div class="col-7">
 					<c:choose>
 						<c:when test="${O.ORDER_STATE==0 }">
-						주문상태 : 배송대기
+						 <label for="address" class="form-label">주문상태</label>
+						 <input type="text" class="form-control" value="배송대기">
 						</c:when>
 						
 						<c:when test="${O.ORDER_STATE==1 }">
-						주문상태 : 배송중
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="배송중">
 						</c:when>
 					
 						<c:when test="${O.ORDER_STATE==2 }">
-						주문상태 : 배송완료
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="배송완료">
 						</c:when>
 					
 						<c:when test="${O.ORDER_STATE==3 }">
-						주문상태 : 교환신청
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="교환신청">
 						</c:when>
 					
 						<c:when test="${O.ORDER_STATE==4 }">
-						주문상태 : 교환완료
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="교환완료">
 						</c:when>
 						
 						<c:when test="${O.ORDER_STATE==5 }">
-						주문상태 : 반품신청
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="반품신청">
 						</c:when>
 						
 						<c:when test="${O.ORDER_STATE==6 }">
-						주문상태 : 반품완료
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="반품완료">
 						</c:when>
 						
 						<c:when test="${O.ORDER_STATE==7 }">
-						주문상태 : 주문취소
+						<label for="address" class="form-label">주문상태</label>
+						<input type="text" class="form-control" value="주문취소">
 						</c:when>
 					</c:choose>	
-				</td>
-			</tr>
+						</div>
+				<div class="col-7">
+              <label for="address" class="form-label">주문날짜</label>
+              <input type="text" class="form-control" value="${O.ORDER_DATE }">
+              
+            </div>
+            
+				<div class="col-7">
+              <label for="address" class="form-label">주문 총 가격</label>
+              <input type="text" class="form-control" value="${O.ORDER_TOTAL_PRICE}"style="margin-bottom: 5%;">
+              
+            </div>
 				
-				<tr>
-				<td>주문날짜 : ${O.ORDER_DATE }</td>
-				</tr>
-				
-				<tr>
-				<td>주문 총 가격 : ${O.ORDER_TOTAL_PRICE}</td>
-				</tr>
 				
 				
-				</table>
 				<input type="hidden" name=currentState${status.index} id="ORDER_STATE" value="${O.ORDER_STATE }">
 				
 				<input type="hidden" name="GOOD_THUMBNAIL" id="GOOD_THUMBNAIL" value="${O.GOOD_THUMBNAIL }">
 				
-				<input type="hidden" name=currentNumber${status.index } id="ORDER_NUMBER" value="${O.ORDER_NUMBER }">
+				<input type="hidden" name=currentNumber${status.index} id="ORDER_NUMBER" value="${O.ORDER_NUMBER }">
 				
 				<input type="hidden" name="ORDER_TOTAL_PRICE" id="ORDER_TOTAL_PRICE" value="${O.ORDER_TOTAL_PRICE }">
 				
 				<input type="hidden" name="MEMBER_ID" id="MEMBER_ID" value="${O.MEMBER_ID }">
 				
 				<input type="hidden" name="goodsNumber${status.index }" id="GOODS_NUMBER" value="${O.GOODS_NUMBER }">
-				
+				</div>
+          			<div style="text-align: -webkit-center;text-align: -webkit-right;">
+          			<button class="btn btn-primary btn-lg" type="button" onclick="orderDetail(goodsNumber${status.index });">제품상세보기</button>
+          			<button class="btn btn-primary btn-lg" type="button" onclick="orderCancle(currentNumber${status.index },currentState${status.index});">주문취소</button>
+          			<button class="btn btn-primary btn-lg" type="button" onclick="orderExchange(currentNumber${status.index },currentState${status.index});">반품,교환</button>
+          			</div>
+          			
 				<!--제품 상세보기를 누르면, 해당상품의 상품detail로 넘어가도록 맵핑하는 방법을 시도하면좋을듯. 상품번호로 매칭을 시켜서??  -->
-				<input type="button" value="제품상세보기" onclick="orderDetail(goodsNumber${status.index });">
-				<input type="button" value="주문취소" onclick="orderCancle(currentNumber${status.index },currentState${status.index});">				
-				<input type="button" value="반품,교환" onclick="orderExchange(currentNumber${status.index },currentState${status.index});">
-				
-</div>	
 		</c:forEach>
 		</c:when>
 		<c:otherwise>
@@ -168,5 +183,9 @@ function orderDetail(number){
 		</c:otherwise>
 </c:choose>
 </form>
+</div>	
+</div>
+</main>
+</div>
 </body>
 </html>

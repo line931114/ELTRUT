@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 
@@ -14,7 +15,6 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="<c:url value='/js/common.js'/>" charset="utf-8"></script>
-
 <script>
 
 function GOODS_CATEGORY1Change() {
@@ -53,8 +53,8 @@ function GOODS_CATEGORY1Change() {
  group[7][1]=new Option("MINI","MINI");
  group[7][2]=new Option("MIDI","MIDI")
  group[8][0]=new Option("SHOES 소분류 선택","");
- group[8][1]=new Option("HEELS","MINI");
- group[8][2]=new Option("FLAT","MIDI")
+ group[8][1]=new Option("HEELS","HEELS");
+ group[8][2]=new Option("FLAT","FLAT")
  group[8][3]=new Option("BOOTS","BOOTS")
  
  
@@ -69,125 +69,108 @@ function GOODS_CATEGORY1Change() {
 </script>
 </head>
 <body>
-
-<div class="row" style="padding-left:15px;width:900px;">    
-	<h1 class="page-header">상품등록</h1>
-</div>
-	<form id="frm" name="frm" action="/adminGoodsInsertForm" enctype="multipart/form-data">
-		<table class="board_view">
-			<colgroup>
-				<col width="15%">
-				<col width="*"/>
-			</colgroup>
-			<caption>상품 등록</caption>
-			<tbody>
-				<tr>
-					<th scope="row">상품명</th>
-					<td><input type="text" id="GOODS_NAME" name="GOODS_NAME" class="wdp_90"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">가격</th>
-					<td><input type="text" id="GOODS_PRICE" name="GOODS_PRICE" class="wdp_90"></input></td>
-				</tr>
-				<tr>
-					<th scope="row">카테고리</th>
-					<td>
-						<select id="GOODS_CATEGORY1" name="GOODS_CATEGORY1" onchange="GOODS_CATEGORY1Change();" size=1>
-						<OPTION value=''>대분류</OPTION>
-						<OPTION value='OUTER'>OUTER</OPTION>
-						<OPTION value='TOP'>TOP</OPTION>
-						<OPTION value='T-SHIRTS'>T-SHIRTS</OPTION>
-						<OPTION value='KNIT'>KNIT</OPTION>
-						<OPTION value='DRESS'>DRESS</OPTION>
-						<OPTION value='PANTS'>PANTS</OPTION>
-						<OPTION value='SKIRTS'>SKIRTS</OPTION>
-						<OPTION value='SHOES'>SHOES</OPTION>
-						 
-						</select>
-						<SELECT id="GOODS_CATEGORY2" name="GOODS_CATEGORY2" size=1>
-						 <OPTION value=''>대분류를 먼저 선택하세요</OPTION>
-						</SELECT>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">썸네일 이미지</th>
-					<td><input type="file" id="GOODS_THUMBNAIL" name="GOODS_THUMBNAIL"></td>
-				</tr>
-				
-				<tr>
-					<td colspan="2" class="view_text">
-						<textarea rows="5" cols="100" title="내용" id="GOODS_SHORTDESC" name="GOODS_SHORTDESC" placeholder="기본 설명"></textarea>
-						<br/><br/>
-						<textarea rows="10" cols="100" title="내용" id="GOODS_DESC" name="GOODS_DESC" placeholder="상세 설명"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-					<a href="#this" class="btn" id="addKind">컬러/사이즈/재고 추가</a><br/>
-						<div id="kindDiv">
-							<p>
-							<select id="GOODS_COLOR" name="GOODS_COLOR" size=1>
-								<OPTION value=''>색상</OPTION>
-								<OPTION value='BLACK'>BLACK</OPTION>
-								<OPTION value='GRAY'>GRAY</OPTION>
-								<OPTION value='BROWN'>BROWN</OPTION>
-								<OPTION value='BURGUNDY'>BURGUNDY</OPTION>
-								<OPTION value='PINK'>PINK</OPTION>
-								<OPTION value='PURPLE'>PURPLE</OPTION>
-								<OPTION value='WHITE'>WHITE</OPTION>
-								<OPTION value='NAVY'>NAVY</OPTION>
-								<OPTION value='BLUE'>BLUE</OPTION>
-								<OPTION value='GREEN'>GREEN</OPTION>
-								<OPTION value='YELLOW'>YELLOW</OPTION>
-								<OPTION value='RED'>RED</OPTION>
-								<OPTION value='SKYBLUE'>SKYBLUE</OPTION>
-								<OPTION value='BEIGE'>BEIGE</OPTION>
+	<main class="container" style="margin-left: 50px">
+        <div class="row g-5">
+            <div class="col-12">
+                <h2 class="mb-3">상품추가</h2>
+                <form name="frm" id="frm" novalidate="" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-6"style="margin-top: 2%; width:25%">
+                            <label for="firstName" class="form-label">상품명</label>
+                            <input type="text" class="form-control me-2" id="GOODS_NAME" name="GOODS_NAME" placeholder="" value="" required="">
+                        
+                         <div class="col-6">
+                            <label for="lastName" class="form-label">가격</label>
+                            <input type="text" class="form-control" id="GOODS_PRICE" name="GOODS_PRICE" placeholder="" value="" required="">
+                        </div>
+                       </div>
+                        <div class="col-12"style="margin-top: 2%;">
+                            <label for="firstName" class="form-label">카테고리</label>
+                            <div class="d-flex">
+                                <select id="GOODS_CATEGORY1" class="form-select me-3" name="GOODS_CATEGORY1" onchange="GOODS_CATEGORY1Change();" size="1">
+                                    <option value="">대분류</option>
+                                    <option value="OUTER">OUTER</option>
+                                    <option value="TOP">TOP</option>
+                                    <option value="T-SHIRTS">T-SHIRTS</option>
+                                    <option value="KNIT">KNIT</option>
+                                    <option value="DRESS">DRESS</option>
+                                    <option value="PANTS">PANTS</option>
+                                    <option value="SKIRTS">SKIRTS</option>
+                                    <option value="SHOES">SHOES</option>
+                                </select>
+                                
+                                <select id="GOODS_CATEGORY2" class="form-select" name="GOODS_CATEGORY2" size="1">
+                                    <option value="">대분류를 먼저 선택하세요</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top: 2%; ">
+                            <label for="username" class="form-label">썸네일 이미지</label>
+                            <div class="input-group has-validation">
+                                
+                            
+                            <div class="mb-3">
+								  <label for="formFileMultiple" class="form-label"></label>
+								 <input class="form-control" type="file" id="GOODS_THUMBNAIL" name="GOODS_THUMBNAIL" multiple="">
+								</div>
+								</div>
+                        </div>
+						<div class="mb-3" style="margin-top: 2%; width:50%"> 
+						  <label for="exampleFormControlTextarea1" class="form-label">기본 설명</label>
+						<textarea class="form-control mt-3 me-3" id="GOODS_SHORTDESC" name="GOODS_SHORTDESC" rows="3" cols="25" placeholder="기본설명" style="margin-bottom: 3%; "></textarea>
+						</div>
+						<div class="col-12">
+						
+						</div>
+                        <div class="col-12">
+						<div class="d-flex mt-3" id="kindDiv" style="margin-top: 2%;">
+							<select class="form-select me-2" id="GOODS_COLOR" name="GOODS_COLOR" size="1" style="height: 27px;">
+								<option value="">색상</option>
+								<option value="BLACK">BLACK</option>
+								<option value="GRAY">GRAY</option>
+								<option value="BROWN">BROWN</option>
+								<option value="BURGUNDY">BURGUNDY</option>
+								<option value="PINK">PINK</option>
+								<option value="PURPLE">PURPLE</option>
+								<option value="WHITE">WHITE</option>
+								<option value="NAVY">NAVY</option>
+								<option value="BLUE">BLUE</option>
+								<option value="GREEN">GREEN</option>
+								<option value="YELLOW">YELLOW</option>
+								<option value="RED">RED</option>
+								<option value="SKYBLUE">SKYBLUE</option>
+								<option value="BEIGE">BEIGE</option>
 							</select>
 							
 							<!-- <input type="text" placeholder='색상' id="text" name="GOODS_COLOR"> -->
-							<input type="text" placeholder='사이즈' id="GOODS_SIZE" name="GOODS_SIZE"> 
-							<input type="text" placeholder='수량' id="GOODS_AMOUNT" name="GOODS_AMOUNT">
-							<a href="#this" class="btn" id="delete" name="delete">삭제</a>
-							</p>
+							<input class="me-2" type="text" placeholder="사이즈" id="GOODS_SIZE" name="GOODS_SIZE"> 
+							<input class="me-2" type="text" placeholder="수량" id="GOODS_AMOUNT" name="GOODS_AMOUNT">
+							
 						</div>
-					</td>
-				</tr>
-<!-- 				<tr>
-					<td colspan="2">
-					
-					<a href="#this" class="btn" id="addFile">이미지 추가</a>
-						<div id="fileDiv">
-							<p>
-							<input type="file" id="GOODS_IMAGE_1" name="GOODS_IMAGE_1">
-							<a href="#this" class="btn" id="delete" name="delete">삭제</a>
-							</p>
 						</div>
-					</td>
-				</tr> -->
-				
-				<tr>
-					<th scope="row">이미지 1</th>
-					<td><input type="file" id="GOODS_IMAGE_1" name="GOODS_IMAGE_1"></td>
-				</tr>
-				
-				<tr>
-					<th scope="row">이미지 2</th>
-					<td><input type="file" id="GOODS_IMAGE_2" name="GOODS_IMAGE_2"></td>
-				</tr>
-				
-				
-				
-				
-				
-			</tbody>
-		</table>
-		
-		<br/><br/>
-		<a href="#this" class="btn" id="write">작성하기</a>
-		<a href="#this" class="btn" id="list">목록으로</a>
-	</form>
-	<br/>
-	<br/>
+                       
+
+	                        <div class="mb-3">
+							  <label for="formFileMultiple" class="form-label">이미지 1</label>
+							  <input class="form-control" type="file" id="GOODS_IMAGE_1" name="GOODS_IMAGE_1"  style="width: 25%; height:auto;">
+							</div>
+							
+							<div class="mb-3">
+							  <label for="formFileMultiple" class="form-label">이미지 2</label>
+							  <input class="form-control" type="file" id="GOODS_IMAGE_2" name="GOODS_IMAGE_2"  style="width: 25%; height:auto;">
+							</div>
+							 </div>
+							<div class="row" style="margin-top: 3%;">
+							<a href="#this" class="col btn btn-primary me-3" id="write">작성하기</a>
+							<a href="#this" class="col btn btn-primary " id="list">목록으로</a>
+							</div>
+							
+							
+		                </form>
+		            </div>
+		        </div>
+		    </main>
+		</body>
 	
 	<form id="commonForm" name="commonForm"></form>
 	<script type="text/javascript">
@@ -298,6 +281,6 @@ function GOODS_CATEGORY1Change() {
 			obj.parent().remove();
 		} */
 		
+		
 	</script>
-</body>
 </html>

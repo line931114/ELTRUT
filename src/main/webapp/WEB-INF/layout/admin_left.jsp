@@ -77,7 +77,7 @@
 				<a href ="adminReviewList">구매후기</a>
 				</div>
 				<div class="panel-body">
-				<a href="adminQNAList">Q&A</a>
+				<a href="adminQnaList">Q&A</a>
 				</div>
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 				<a href="orderList">주문 목록</a>
 				</div>
 				<div class="panel-body">
-				<a href="index">취소 관리</a>
+				<a href="admin">취소 관리</a>
 				</div>
 			</div>
 	

@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import b21.spring.adminGoods.AdminGoodsService;
 import b21.spring.eltrut.CommandMap;
 import b21.spring.paging.Paging;
 
 @Controller
 public class AdminOrderController {
 
-	@Resource(name = "adminGoodsService")
-	private AdminGoodsService adminGoodsService;
 
 	@Resource(name = "adminOrderService")
 	private AdminOrderService adminOrderService;
@@ -128,11 +125,11 @@ public class AdminOrderController {
 		mv.addObject("size", orderDetail.size());
 		mv.addObject("orderBasic", orderDetail.get(0));
 
-		Map<String, Object> confirmCancel = new HashMap<String, Object>();
-		confirmCancel = adminOrderService.confirmCancel(commandMap.getMap());
-		if (confirmCancel != null) {
-			mv.addObject("orderCancel", confirmCancel);
-		}
+		/*
+		 * Map<String, Object> confirmCancel = new HashMap<String, Object>();
+		 * confirmCancel = adminOrderService.confirmCancel(commandMap.getMap()); if
+		 * (confirmCancel != null) { mv.addObject("orderCancel", confirmCancel); }
+		 */
 
 		mv.setViewName("adminOrderDetail");
 		return mv;

@@ -31,8 +31,17 @@ public class MainServiceImpl implements MainService{
 		return mainDAO.header_baskets(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> adminGoodsList(Map<String, Object> map) throws Exception {
+		List<Map<String, Object>> adminGoodsList = mainDAO.adminGoodsList(map);
+		return adminGoodsList;
+	}
 	
-	
-	
+	// 상품 검색(카테고리 검색)
+		@Override
+		public List<Map<String, Object>> adminGoodsSearch2(String isSearch) {
+			List<Map<String, Object>> adminGoodsList = mainDAO.adminGoodsSearch2(isSearch);
+			return adminGoodsList;
+		}
 	
 }

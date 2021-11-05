@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	function button1_click(frm) {
 		var theForm = document.frm;
-		theForm.action = "adminQnaReplyForm?CS_NUMBER=${qnaDetail.CS_NUMBER}";
+		theForm.action = "adminQnaReply1?CS_NUMBER=${qnaDetail.CS_NUMBER}";
 	}
 	function button2_click(frm) {
 		var theForm = document.frm;
@@ -142,12 +142,12 @@
 				</div>
 				<div class="form-group">
 					<label>QNA 답변 제목</label> 
-					<input type="text" class="form-control" id="CS_REPTITLE" name="CS_REPTITLE" 
+					<input type="text" class="form-control" id="CS_REPTITLE" readonly name="CS_REPTITLE" 
 					value="${qnaDetail.CS_REPTITLE}" style="width: initial;" />
 				</div>
 				<div class="form-group">
 					<label>답변내용</label>
-					<textarea class="form-control" id="CS_REPCONTENT" name="CS_REPCONTENT" rows="10" cols="30" readonly>${qnaDetail.CS_REPCONTENT}</textarea>
+					<textarea class="form-control" id="CS_REPCONTENT" name="CS_REPCONTENT" readonly rows="10" cols="30" >${qnaDetail.CS_REPCONTENT}</textarea>
 				</div>
 				<c:if test="${qnaDetail.CS_REPCONTENT ne null}">
 					<div class="form-group">

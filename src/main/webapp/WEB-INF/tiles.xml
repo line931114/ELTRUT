@@ -40,19 +40,19 @@
 			value="/WEB-INF/jsp/admin/member/adminMemberList1.jsp" />
 	</definition>
 	
-	<definition name="adminQNAList" extends="layout">		
+	<definition name="adminQnaList" extends="layout">		
 		<put-attribute name="body"
-			value="/WEB-INF/jsp/admin/qna/adminQNAList.jsp" />
+			value="/WEB-INF/jsp/admin/qna/adminQnaList.jsp" />
 	</definition>
 	
-	<definition name="adminQNADetail" extends="layout">		
+	<definition name="adminQnaDetail" extends="layout">		
 		<put-attribute name="body"
-			value="/WEB-INF/jsp/admin/qna/adminQNADetail.jsp" />
+			value="/WEB-INF/jsp/admin/qna/adminQnaDetail.jsp" />
 	</definition>
 	
-	<definition name="adminQNAReply" extends="layout">		
+	<definition name="adminQnaReply" extends="layout">		
 		<put-attribute name="body"
-			value="/WEB-INF/jsp/admin/qna/adminQNAReply.jsp" />
+			value="/WEB-INF/jsp/admin/qna/adminQnaReply.jsp" />
 	</definition>
 	
 	<definition name="orderList" extends="layout">		
@@ -75,7 +75,7 @@
 			value="/WEB-INF/jsp/admin/adminSales.jsp" />
 	</definition>
 	
-	<definition name="index" extends="layout">		
+	<definition name="admin" extends="layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/cancle.jsp" />
 	</definition>
@@ -95,17 +95,21 @@
 			value="/WEB-INF/jsp/admin/review/adminReviewReply.jsp" />
 	</definition>
 	
-	
-	
-	
-	
-	
-	
-	
 	<definition name="main_layout" template="/WEB-INF/layout/main_base.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/main_header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/layout/main_footer.jsp" />
 		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="cart_layout" template="/WEB-INF/layout/main_base.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/cart_header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/main_footer.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="cartList" extends="cart_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/cart/cartList.jsp" />
 	</definition>
 	
 	
@@ -257,13 +261,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/goods/goodsQnaInsert.jsp" />
 	</definition>
+
+	<definition name="help" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/footerFunction/help.jsp" />
+	</definition>
 	
 	
-	<!--장바구니 -->
+	<!--장바구니 
 	<definition name="cartList" extends="main_layout">		
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/cart/cartList.jsp" />
-	</definition>
+	</definition> -->
 	
 	<!--상품주문 -->
 	<definition name="order" extends="main_layout">		
@@ -281,5 +290,9 @@
 			value="/WEB-INF/jsp/order/orderEnd.jsp" />
 	</definition>
 	
+	<definition name="Aboutus" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/footerFunction/Aboutus.jsp" />
+	</definition>
 	
 </tiles-definitions>

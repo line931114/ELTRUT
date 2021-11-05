@@ -25,24 +25,14 @@
 
 </head>
 <body>
-
-    <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <img src="/ELTRUT/file/ADLOGO.png" class="img-fluid">
-      </a>
-     <p class="navbar-text navbar-right">Signed in as <a href="#logout" class="navbar-link"> 21B</a></p>
-    </div>
-  </div>
-</nav>
-    
-    
-</nav>
-
-
-
-
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<a class="" href="#"> 
+					<img src="/ELTRUT/file/ADLOGO.png" >
+				 </a>
+				  <p class="navbar-text navbar-right">Signed in as <a href="logout" class="navbar-link"> 21B</a></p>
+			</div>
+		</nav>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 --> 

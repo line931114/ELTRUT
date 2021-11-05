@@ -32,7 +32,7 @@ public class OrderController {
 	@RequestMapping(value = "order")
 	public ModelAndView orderFormLoginAop(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		//회원구매 AND 비회원구매
-
+		
 		HttpSession session = request.getSession();
 		
 		
@@ -55,6 +55,10 @@ public class OrderController {
 			Map<String, Object> orderMember = orderService.orderMember(commandMap.getMap());
 
 			mv.addObject("orderMember", orderMember);
+			
+		
+			
+			
 
 		}
 		//주문자정보뽑아주기 끝//
@@ -92,7 +96,14 @@ public class OrderController {
 		System.out.println("굿즈사이즈" + goods.size());
 
 		mv.addObject("goods", goods);
-
+		
+		int sum=0;
+		
+		for(Map<String,Object> index: goods) {
+			sum+=Integer.valueOf(index.get("TOTALPRICE").toString());;
+			
+		}
+		mv.addObject("sum", sum);
 		return mv;
 	}
 	

@@ -115,18 +115,20 @@ public class AdminMemberController {
 		}
 	}
 
-	// 회원 상세정보에서 한번에 수정가능
-	@RequestMapping(value = "/member/adminMemberDetail")
-	public ModelAndView adminMemberDetail(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView();
-
-		Map<String, Object> member = adminMemberService.memberDetail(commandMap.getMap());
-
-		mv.addObject("member", member);
-		mv.setViewName("adminmodifyform");
-
-		return mv;
-	}
+	/*
+	 * // 회원 상세정보에서 한번에 수정가능
+	 * 
+	 * @RequestMapping(value = "/member/adminMemberDetail") public ModelAndView
+	 * adminMemberDetail(CommandMap commandMap) throws Exception { ModelAndView mv =
+	 * new ModelAndView();
+	 * 
+	 * Map<String, Object> member =
+	 * adminMemberService.memberDetail(commandMap.getMap());
+	 * 
+	 * mv.addObject("member", member); mv.setViewName("adminmodifyform");
+	 * 
+	 * return mv; }
+	 */
 
 	
 	@RequestMapping(value = "/adminMemberList1")

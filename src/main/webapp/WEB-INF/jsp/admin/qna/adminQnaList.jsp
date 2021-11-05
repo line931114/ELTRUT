@@ -42,22 +42,22 @@ function delchk(){
 					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 					<div class="row" style="margin-bottom:5px;">
 						<div class="col-sm-6">
-							<a href="/ELTRUT/adminQnaList">
+							<a href="adminQnaList">
 								<button type="button" class="btn btn-outline btn-default">전체</button>
 							</a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--카테고리--</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?categoryNum=1">상품문의</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?categoryNum=2">배송문의</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?categoryNum=3">입금문의</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?categoryNum=4">교환&반품문의</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?categoryNum=5">기타문의</option>
+								<option value ="adminQnaList?categoryNum=1">상품문의</option>
+								<option value ="adminQnaList?categoryNum=2">배송문의</option>
+								<option value ="adminQnaList?categoryNum=3">입금문의</option>
+								<option value ="adminQnaList?categoryNum=4">교환&반품문의</option>
+								<option value ="adminQnaList?categoryNum=5">기타문의</option>
 							</select>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--답변상태--</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?repState=1">답변대기</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?repState=2">답변완료</option>
-								<option value ="/ELTRUT/adminQna/adminQnaList?repState=3">문의종료</option>
+								<option value ="adminQnaList?repState=1">답변대기</option>
+								<option value ="adminQnaList?repState=2">답변완료</option>
+								<option value ="adminQnaList?repState=3">문의종료</option>
 							</select>
 						</div>
 						<div class="col-sm-6" style="text-align:right;">
@@ -82,7 +82,7 @@ function delchk(){
 								</thead>
 								<tbody>
 								<c:forEach var="adminQnaList"  items="${adminQnaList}" varStatus="stat">
-								<c:url var="viewURL" value="admin/qna/adminQNADetail" >
+								<c:url var="viewURL" value="adminQnaDetail" >
 										<c:param name="CS_NUMBER" value="${adminQnaList.CS_NUMBER }" />
 									</c:url>								
 									<tr class="gradeA even" role="row">

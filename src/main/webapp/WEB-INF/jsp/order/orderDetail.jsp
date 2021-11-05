@@ -15,12 +15,13 @@ function orderPay(){
 </head>
 <body>
 <center><h1>주문</h1></center>
-<div style="float:left; margin-left:100px; margin-right:100px;">
+<div style="float:left; width:30%">
 <c:choose>
 	<c:when test="${fn:length(goods) > 0}">
 		<c:forEach  items="${goods }" var="G" varStatus="idx">
+		
 <form action="/ELTRUT/orderEnd">
-	<table>
+	<table class="table table-borderless">
 		<tr>
 		<th>주문상품</th>
 			<td>${G.GOODS_NAME } 
@@ -60,22 +61,27 @@ function orderPay(){
 		</tr>
 			
 	</table>
-	</div>
+	
 	</c:forEach>
 	</c:when>
 		<c:otherwise>
 		주문상품이 없습니다.
 		</c:otherwise>
 </c:choose>
-	<div style="float:left;  margin-left:100px; margin-right:100px;">
+</div>
+<div style="float:left;width:20%; ">
+<button type="button" class="btn btn-link"></button>
+ </div>
+	<div style="float:left; width:50%; ">
 <c:choose>
 	<c:when test="${fn:length(orderMember) > 0}">
 		<c:set var="OM" value="${orderMember }"/>
-		<table>
+		<table class="table table-borderless">
 		<tr><input type="hidden" name="CHECK" value="${CHECK }"  >
 		<th>이름</th>
 			<td><input type="text" id="RECEIVER_NAME" name="RECEIVER_NAME" value="${RECEIVER_NAME }" readonly>
 			</td>
+			
 		</tr>
 		<tr>
 		<th>연락처</th>
@@ -104,9 +110,17 @@ function orderPay(){
 		</c:when>
 		</c:choose>
 </div>
-		<input type="button" value="카카오페이" onclick="orderPay(); this.onclick=null;">
-		<input type="submit" value="결제완료" >
+	<div style="float:right; margin-right:20px;">
+		<img src="/ELTRUT/file/payment_icon_yellow_small.png" onclick="orderPay(); this.onclick=null;">
+		<input type="submit" value="결제완료" style="margin-left:20px;" class="btn btn-dark">
+	</div>
 </form>
+
+<c:forEach  items="${goods }" var="G" varStatus="idx">
+<div style="margin-top:600px">
+<button type="button" class="btn btn-link"></button>
+</div>
+</c:forEach>
 		
 </body>
 </html>
