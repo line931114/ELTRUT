@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +30,12 @@
 
 
 <body>
+
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysYear">
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set> 
+
+
 
 	
     <script type="text/javascript">
@@ -60,9 +69,9 @@
 
 
 <form action="adminSales" method="post">
-<input type="date" value="2021-10-26" min="1900-01-01" max="9999-12-31" name="order_date_start" id="order_date_start">
+<input type="date" value="<c:out value="${sysYear}" />" min="1900-01-01" max="9999-12-31" name="order_date_start" id="order_date_start">
 ~
-<input type="date" value="2021-10-26" min="1900-01-01" max="9999-12-31" name="order_date_end" id="order_date_end">
+<input type="date" value="<c:out value="${sysYear}" />" min="1900-01-01" max="9999-12-31" name="order_date_end" id="order_date_end">
 <span>
 <input type="hidden" value="5" name="jung">
 <input type="submit" value="검색" onsubmit="check();">

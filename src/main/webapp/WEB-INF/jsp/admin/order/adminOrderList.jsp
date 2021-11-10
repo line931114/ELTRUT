@@ -58,7 +58,7 @@
 
 					<c:when test="${list.ORDER_PAY_STATE eq '0'}">결제대기 </c:when>
 					<c:when test="${list.ORDER_PAY_STATE eq '1'}">결제완료 </c:when>
-					<c:when test="${list.ORDER_PAY_STATE eq '3'}">결제취소 </c:when>
+					<c:when test="${list.ORDER_PAY_STATE eq '2'}">결제취소 </c:when>
 					
 					<c:otherwise> ... </c:otherwise>
 					</c:choose>

@@ -172,22 +172,22 @@ ECOVERO™는 섬유 생산 과정에서 환경에 미치는 영향을 줄이는
          <br>
          
          <td>${GD.GOODS_SHORTDESC}</td>
-
-         <br>
+		
+        <br> <br>
          
-         <td>${GD.GOODS_PRICE }</td>
+         <td>${GD.GOODS_PRICE } 원</td> 
          </br>
          <br>
          
-         <td>${GD.GOODS_COLOR }</td>
+         <td><input type="hidden" value="${GD.GOODS_COLOR }">${GD.GOODS_COLOR }</td>
          </br>
          <td>
          <br>
          <select id="option" style="width:225px">
                      <option value="">사이즈 선택</option>
                      <option
-                     value="${GD.GOODS_COLOR }-${GD.GOODS_SIZE }">
-                     ${GD.GOODS_COLOR } - ${GD.GOODS_SIZE }
+                     value="${GD.GOODS_SIZE }">
+                    ${GD.GOODS_SIZE }
                      (${GD.GOODS_AMOUNT }개)</option>
                        </select>
                        </br>

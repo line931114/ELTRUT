@@ -88,8 +88,8 @@ function orderDetail(number){
 	<c:when test="${not empty O}">
 		<c:forEach items="${O }" var="O" varStatus="status">
 			<hr class="my-4">
-			<input type="image" class="form-control" src="/ELTRUT/file/goodsFile/${O.GOODS_THUMBNAIL}" width="200" height="200" alt=""  onerror="this.src='/ELTRUT/file/noimg_130.gif'"
-				style="max-inline-size: fit-content; float: left;" />
+            <img class="d-block " src="/ELTRUT/file/goodsFile/${O.GOODS_THUMBNAIL}" width="200" height="200" style="max-inline-size: fit-content; float: left;" >
+            
             <div style="text-align: -webkit-right;text-align-last: left;">
             
 			<div class="col-7">

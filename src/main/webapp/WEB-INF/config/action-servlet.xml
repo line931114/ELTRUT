@@ -44,20 +44,18 @@
 			</list>
 		</property> 
 	</bean>
-	 <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    
-  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <property name="host" value="smtp.gmail.com" />
-    <property name="port" value="587" />
-    <property name="username" value="dlrhkdxod@gmail.com" />
-    <property name="password" value="dlrhkdgh1!" />
-    <property name="javaMailProperties">
-    <props>
-      <prop key="mail.smtp.auth">true</prop>
-      <prop key="mail.smtp.starttls.enable">true</prop>
-    </props>
-    </property>
-  </bean>
+  
+   <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    </bean>
+      
+<mvc:interceptors> 
+        <mvc:interceptor> 
+            <mvc:mapping path="/**" />
+                 <bean class="b21.spring.Interceptor.CartInterceptor">
+                 </bean> 
+        </mvc:interceptor>
+    </mvc:interceptors>
+  
     
     
     

@@ -20,8 +20,5 @@ public class JoinDAO extends AbstractDAO{
 	}
 	
 	
-	public int checkMember(Map<String, Object> map) throws Exception {
-		return selectMemberId("member.checkmember", map);
-	}
 	
 }

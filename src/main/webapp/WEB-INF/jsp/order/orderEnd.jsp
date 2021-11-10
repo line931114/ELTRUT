@@ -5,123 +5,121 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/ELTRUT/css/myPage.css"/>
 <meta charset="UTF-8">
 <title>주문완료</title>
 </head>
-<body>
-<h1>결제완료</h1>
-<div style="float:left; width:30%">
-<c:choose>
+<body class="bg-light" >
+<div class="container">
+  <main>
+    
+    <c:choose>
 	<c:when test="${fn:length(goods) > 0}">
+        <div class="row mb-2" style="justify-content: left;-webkit-text-stroke-width: medium;width: 70%;">
+    <div class="col-md-6">
+        <div class="col p-4 d-flex flex-column position-static">
 		<c:forEach  items="${goods }" var="G" varStatus="idx">
-<form action="/ELTRUT/orderEnd">
-	<table class="table table-borderless">
-		<tr>
-		<th>주문상품</th>
-			<td>${G.GOODS_NAME } 
+
+        <form class="needs-validation" action="/ELTRUT/orderEnd">
+        
+          <label for="firstName" class="form-label">주문상품</label>
+              <input type="text" class="form-control" value="${G.GOODS_NAME }" readonly>
+          <label for="firstName" class="form-label">상품 이미지</label>
+              <input type="image" class="img-thumbnail"  src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}"  width="330" height="442" alt="" onerror="this.src='/ELTRUT/file/noimg_130.gif'" />
+        	<label for="lastName" class="form-label">주문색상</label>
+              <input type="text" class="form-control" value="${G.GOODS_COLOR }" readonly>
+       		<label for="username" class="form-label">주문사이즈</label>
+                <input type="text" class="form-control" value="${G.GOODS_SIZE }" readonly>
+        	<label for="email" class="form-label">상품금액</label>
+              <input type="email" class="form-control" value="${G.GOODS_PRICE }" readonly>
+              <label for="address" class="form-label">주문수량</label>
+              <input type="text" class="form-control" value="${G.EA }" readonly>
+              <label for="address2" class="form-label">주문금액</label>
+              <input type="text" class="form-control" value="${G.TOTALPRICE }" readonly>
+              <input type="hidden" name="EA" value="${G.EA }">
 			<input type="hidden" name="GOODS_NUMBER" value="${G.GOODS_NUMBER }">
-			</td>
-		</tr>
-		<tr>
-		<th>상품 이미지</th>
-			<td><img src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}"  width="200" height="200" alt="" onerror="this.src='/ELTRUT/file/noimg_130.gif'" />
-			</td>
-		</tr>
-		<tr>
-		<th>주문색상</th>
-			<td>${G.GOODS_COLOR }
-			</td>
-		</tr>
-		<tr>
-		<th>주문사이즈</th>
-			<td>${G.GOODS_SIZE }
-			</td>
-		</tr>
-		<tr>
-		<th>상품금액</th>
-			<td>${G.GOODS_PRICE }
-			</td>
-		</tr>
-		<tr>
-		<th>주문수량</th>
-			<td><input type="hidden" name="EA" value="${G.EA }">${G.EA }
-			</td>
-		</tr>
-		<tr>
-		<th>주문금액</th>
-			<td><input type="hidden" name="goods_total" value="${G.TOTALPRICE }">${G.TOTALPRICE }
-			</td>
-		</tr>
-			
-	</table>
-	
-	</c:forEach>
+			<input type="hidden" name="CART_NUMBER" value="${CART_NUMBER }">
+			<input type="hidden" name="goods_total" value="${G.TOTALPRICE }">${G.TOTALPRICE }
+			<hr class="my-4">
+		</c:forEach>
+        </div>
+    </div>
+  </div>
 	</c:when>
-		<c:otherwise>
-		주문상품이 없습니다.
-		</c:otherwise>
+	<c:otherwise>
+		<H3>주문상품이 없습니다.</H3>	
+	</c:otherwise>
 </c:choose>
-</div>
-<div style="float:left;width:20%; ">
-<button type="button" class="btn btn-link"></button>
- </div>
-	<div style="float:left; width:50%; ">
+
 		<c:set var="OM" value="${orderMember }"/>
-		<table class="table table-borderless">
-		<tr>
-		<th>주문번호</th>
-			<td>${ORDER_NUMBER }
-			</td>
-		</tr>
-		<tr>
-		<th>주문자</th>
-			<td>${BUYER_NAME }
-			</td>
-		</tr>
-		<tr>
-		<th>주문자 연락처</th>
-			<td>${BUYER_NUMBER }
-			</td>
-		</tr>
-		<tr>
-		<th>수령인</th>
-			<td>${RECEIVER_NAME }
-			</td>
-		</tr>
-		<tr>
-		<th>수령자 연락처</th>
-			<td>${RECEIVER_PHONE }
-			</td>
-		</tr>
-		<th><h4>배송주소</h4></th>
-		</tr>
-		<tr>
-		<th>우편번호</th>
-				<td>${RECEIVER_ZIPCODE }
-				</td>
-		</tr>
-		<tr>
-			<th>상세주소</th>	
-				<td>${RECEIVER_ADDRESS1 }&nbsp;${ RECEIVER_ADDRESS2}</td>
+
+    <div class="row g-5" style="width: 100%; position: fixed; left: 300px; top: 100px;">
+      <h2>주문완료</h2>
+      <div class="col-md-7 col-lg-8">
+          <div class="row g-3">
+            
+            <div class="col-7">
+              <label for="lastName" class="form-label">주문번호</label>
+              <input type="text" class="form-control" value="${ORDER_NUMBER }" readonly>
+              
+            </div>
+
+            <div class="col-7">
+              <label for="username" class="form-label">주문자</label>
+                <input type="text" class="form-control" value="${BUYER_NAME }" readonly>
+              
+              </div>
+              
+            <div class="col-7">
+              <label for="username" class="form-label">주문자 연락처</label>
+                <input type="text" class="form-control" value="${BUYER_NUMBER }" readonly>
+              
+              </div>
+              
+            <div class="col-7">
+              <label for="username" class="form-label">수령인</label>
+                <input type="text" class="form-control" value="${RECEIVER_NAME }" readonly>
+              
+              </div>
+              
+            <div class="col-7">
+              <label for="username" class="form-label">수령인 연락처</label>
+                <input type="text" class="form-control" value="${RECEIVER_PHONE }" readonly>
+              
+              </div>
+
+            <div class="col-7">
+              <label for="address" class="form-label">우편번호</label>
+              <input type="text" class="form-control" value="${ RECEIVER_ZIPCODE}" readonly>
+              
+            </div>
+
+            <div class="col-7">
+              <label for="address2" class="form-label">상세주소</label>
+              <input type="text" class="form-control" value="${RECEIVER_ADDRESS1 } - ${RECEIVER_ADDRESS2 }" readonly>
+            </div>
+            
+            <div class="col-7">
+              <label for="address" class="form-label">배송 요청사항</label>
+              <input type="text" class="form-control" value="${DELIVERY_MESSAGE }" readonly>
+              
+            </div>
+            <div class="col-7">
+              <button class="btn btn-primary btn-lg" type="button" onclick="location.href='/ELTRUT/main'" style="margin-top: 2%;">메인으로</button>
+            </div>
+            
+          </div>
+      </div>
+    </div>
+	</form>
+  </main>
+</div>
 				
-		</tr>
-		<tr>
-		<th>배송 요청사항</th>
-			<td>${DELIVERY_MESSAGE }
-			</td>
-		</tr>
-		<tr>
-		</table>
-</div>
-		<input type="button" value="메인으로" onclick="location.href='/ELTRUT/main'" style="float:right; margin-right:20px;" class="btn btn-dark">
-</form>
-		
-		<c:forEach  items="${goods }" var="G" varStatus="idx">
-<div style="margin-top:600px">
-<button type="button" class="btn btn-link"></button>
-</div>
-</c:forEach>
-		
-		
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+      <script src="form-validation.js"></script>
+  
+
 </body>
 </html>

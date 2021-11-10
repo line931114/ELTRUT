@@ -65,6 +65,7 @@
                     }
                 });
                 //성공시 이동할 페이지
+                window.opener.document.getElementById("payCheck").value ="pCheck";
                 window.close();
             } else {
                 msg = '결제에 실패하였습니다.';

@@ -55,7 +55,7 @@
 		<![CDATA[
 							 SELECT MEMBER_ID, ORDER_NUMBER
                  		 	 FROM ORDERLIST
-                		 	 WHERE ORDER_STATE=2) AND MEMBER_ID=#{MEMBER_ID} AND GOODS_NUMBER=#{GOODS_NUMBER}       
+                		 	 WHERE ORDER_STATE=2 AND MEMBER_ID=#{MEMBER_ID} AND GOODS_NUMBER=#{GOODS_NUMBER}       
         ]]>
 	</select>
 					
@@ -104,7 +104,7 @@
 	<select id="goodsQna" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[
 
-			SELECT *
+			SELECT CS_NUMBER, GOODS_NUMBER, MEMBER_ID, CS_CATEGORY,CS_TITLE, CS_CONTENT, CS_IMAGE1, TO_CHAR(CS_REGDATE, 'YYYY-MM-DD') AS CS_REGDATE, CS_REPCONTENT,CS_REPSTATE
 			FROM CS
 			WHERE GOODS_NUMBER=#{GOODS_NUMBER}			
 

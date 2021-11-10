@@ -33,6 +33,7 @@ function GOODS_CATEGORY1Change() {
  group[2][0]=new Option("TOP 소분류 선택","");
  group[2][1]=new Option("SHIRTS","SHIRTS");
  group[2][2]=new Option("BLOUSE","BLOUSE");
+ group[2][3]=new Option("TOP","TOP");
  group[3][0]=new Option("T-SHIRTS 소분류 선택","");
  group[3][1]=new Option("LONG SLEEVE","LONG SLEEVE");
  group[3][2]=new Option("HALF SLEEVE","HALF SLEEVE");

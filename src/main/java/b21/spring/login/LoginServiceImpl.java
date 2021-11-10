@@ -36,5 +36,14 @@ public class LoginServiceImpl implements LoginService{
 		return loginDAO.findFail0(map);
 	}
 
+	@Override
+	public Map<String, Object> kakaoLogin(String user_email) throws Exception {
+		return loginDAO.selectKakao(user_email);
+	}
+
+	@Override
+    public int checkMember(String user_email) throws Exception {
+        return loginDAO.checkMember(user_email);
+    }
 	
 }

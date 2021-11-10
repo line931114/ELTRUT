@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+adminQnaDetail<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -130,7 +130,7 @@
 							<label>등록 이미지</label>
 						</div>
 						<div class="form-group">
-							<img src="/ELTURT/file/qnaFile/${qnaDetail.CS_IMAGE1}" alt="" onerror="this.src='/ELTURT/file/noimg_130.gif'" style="width: 650px;" />
+							<img src="/ELTRUT/file/qnaFile/${qnaDetail.CS_IMAGE1}" alt="" onerror="this.style.display='none';" style="width: 650px;" />
 						</div>
 					</c:when>
 				</c:choose>

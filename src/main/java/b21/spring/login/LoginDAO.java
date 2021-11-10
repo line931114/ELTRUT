@@ -31,5 +31,14 @@ public class LoginDAO extends AbstractDAO{
 		return (Map<String,Object>)selectOne("member.findId_fail",map);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Map<String,Object> selectKakao(String user_email) throws Exception{
+		return (Map<String,Object>)selectOne("member.kakaoLogin",user_email);
+	}
+	
+	public int checkMember(String user_email) throws Exception {
+        return selectMemberId("member.checkMember", user_email);
+    }
+	
 	
 }

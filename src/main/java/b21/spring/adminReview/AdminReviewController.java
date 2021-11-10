@@ -234,7 +234,7 @@ public class AdminReviewController {
 	public ModelAndView adminReviewDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String filePath ="C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
+		String filePath ="C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
 		String image1 = null;
 		
 		if (request.getParameter("REVIEW_IMAGE") != null) {

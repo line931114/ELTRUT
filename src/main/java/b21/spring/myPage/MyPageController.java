@@ -344,7 +344,7 @@ public class MyPageController {
 	@RequestMapping(value="/qnaModify" ,method = RequestMethod.POST )
 	public ModelAndView qnaModify1(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		 final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+		 final String filePath =  "C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 	      if (multipartHttpServletRequest.getFile("CS_IMAGE1").getOriginalFilename() != "") {

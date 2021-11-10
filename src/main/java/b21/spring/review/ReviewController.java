@@ -64,7 +64,7 @@ public class ReviewController {
 		 
 		 System.out.println(commandMap.getMap());
 		 ModelAndView mav = new ModelAndView();
-		 final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
+		 final String filePath =  "C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 	      if (multipartHttpServletRequest.getFile("REVIEW_IMAGE").getOriginalFilename() != "") {
@@ -93,12 +93,8 @@ public class ReviewController {
 	      }
 	      reviewService.reviewModify(commandMap.getMap());
 	      
-		 // 상품후기 가져오기
-	      List<Map<String, Object>> goodsReview = reviewService.goodsReview(commandMap.getMap());
-	      
-	      System.out.println(goodsReview);
-	      mav.addObject("goodsReview", goodsReview);
-	      mav.setViewName("goodsReview");
+		   mav.addObject("GOODS_NUMBER",commandMap.get("GOODS_NUMBER"));
+		   mav.setViewName("redirect:/goodsReview");
 	      return mav;
 	 }
 	 @RequestMapping(value = "/reviewDelete")
@@ -110,12 +106,8 @@ public class ReviewController {
 	      ModelAndView mv = new ModelAndView();
 	      reviewService.reviewDelete(commandMap.getMap());
 	      
-	      // 상품후기 가져오기
-	      List<Map<String, Object>> goodsReview = reviewService.goodsReview(commandMap.getMap());
-	      
-	      System.out.println(goodsReview);
-	      mv.addObject("goodsReview", goodsReview);
-	      mv.setViewName("goodsReview");
+		   mv.addObject("GOODS_NUMBER",commandMap.get("GOODS_NUMBER"));
+		   mv.setViewName("redirect:/goodsReview");
 	      return mv;
 	   }
 	 
@@ -165,7 +157,7 @@ public class ReviewController {
 			/* System.out.println(request.getParameter("REVIEW_NUMBER")); */
 		   System.out.println(commandMap.getMap());
 		   
-		   final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
+		   final String filePath =  "C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\reviewFile\\";
 			 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 		      if (multipartHttpServletRequest.getFile("REVIEW_IMAGE").getOriginalFilename() != "") {
@@ -200,7 +192,9 @@ public class ReviewController {
 		   
 		   List<Map<String, Object>> goodsReview = reviewService.goodsReview(commandMap.getMap());
 		   mv.addObject("goodsReview", goodsReview);
-		   mv.setViewName("goodsReview");
+		   
+		   mv.addObject("GOODS_NUMBER",commandMap.get("GOODS_NUMBER"));
+		   mv.setViewName("redirect:/goodsReview");
 
 		   return mv;
 	 }
@@ -234,12 +228,9 @@ public class ReviewController {
 	      ModelAndView mv = new ModelAndView();
 	      reviewService.goodsQnaDelete(commandMap.getMap());
 	      
-	      // 상품후기 가져오기
-	      List<Map<String, Object>> goodsQna = reviewService.goodsQna(commandMap.getMap());
-	      
-	      System.out.println(goodsQna);
-	      mv.addObject("goodsQna", goodsQna);
-	      mv.setViewName("goodsQna");
+
+	      mv.addObject("GOODS_NUMBER", commandMap.get("GOODS_NUMBER"));
+	      mv.setViewName("redirect:/goodsQna");
 	      return mv;
 	   }
 	 
@@ -265,7 +256,7 @@ public class ReviewController {
 		 ModelAndView mav = new ModelAndView();
 		 
 		 System.out.println(commandMap.getMap());
-		 final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+		 final String filePath =  "C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
 		 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 		 
@@ -294,15 +285,13 @@ public class ReviewController {
 	    	  commandMap.put("CS_IMAGE1","null");
 	    	  //전달되는 이미지가없을경우 null로?? 전달
 	      }
-	    System.out.println(commandMap.getMap());
+	   
 		reviewService.goodsQnaModify(commandMap.getMap());
-		
-		 List<Map<String, Object>> goodsQna = reviewService.goodsQna(commandMap.getMap());
-	      
-	      System.out.println(goodsQna);
-	      mav.addObject("goodsQna", goodsQna);
-	      mav.addObject("GOODS_NUMER",commandMap.get("GOODS_NUMBER"));
-	      mav.setViewName("goodsQna");
+
+	      System.out.println(commandMap.get("GOODS_NUMBER"));
+
+	      mav.addObject("GOODS_NUMBER",commandMap.get("GOODS_NUMBER"));
+	      mav.setViewName("redirect:/goodsQna");
 	      return mav;
 	   }
 	 
@@ -333,7 +322,7 @@ public class ReviewController {
 		   System.out.println(commandMap.getMap());
 		   
 		   
-		   final String filePath =  "C:\\java\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
+		   final String filePath =  "C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
 			 MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 		      if (multipartHttpServletRequest.getFile("CS_IMAGE1").getOriginalFilename() != "") {
@@ -366,11 +355,9 @@ public class ReviewController {
 		   
 		   reviewService.goodsQnaInsert(commandMap.getMap());
 		   
-		   List<Map<String, Object>> goodsQna = reviewService.goodsQna(commandMap.getMap());
-		      
-		   System.out.println(goodsQna);
-		   mv.addObject("goodsQna", goodsQna);
-		   mv.setViewName("goodsQna");
+		   Map<String, Object> number = commandMap.getMap();
+		   mv.addObject("GOODS_NUMBER",number.get("GOODS_NUMBER"));
+		   mv.setViewName("redirect:/goodsQna");
 
 		   return mv;
 	 }

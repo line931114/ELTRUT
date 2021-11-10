@@ -5,13 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 
 
 <title>장바구니</title>
 
 <style type="text/css">
+
+input[type=checkbox] + label { 
+
+display: inline-block; 
+
+cursor: pointer; 
+
+line-height: 22px; 
+
+padding-left: 22px; 
+
+background: url("https://img.icons8.com/material-outlined/24/000000/minus-math.png") left/22px no-repeat; 
+
+}
+
+input[type=checkbox]:checked + label { background-image: url("https://img.icons8.com/material-outlined/24/000000/minus-math.png"); }
 
 .row-header{
    color:  #000000;
@@ -76,7 +91,7 @@
       <c:when test="${fn:length(cartList) > 0}">
    <div class="checkbox_group">
         <input type="checkbox" name="checkAll" id="check_all"  >
-        <label>전체선택</label>
+        전체선택
             
         <form class="cart" id="frm" action="/ELTRUT/order" >
    
@@ -107,7 +122,7 @@
          <input type="hidden" id="EA" name="EA" value="${C.CART_AMOUNT }">
          <input type="hidden" id="GOODS_NUMBER" name="GOODS_NUMBER" value="${C.GOODS_NUMBER }">
          <input type="hidden" name=currentNumber${idx.index}  value="${C.CART_NUMBER}"/>
-         <input type="hidden" name=currentAmount${idx.index}  value="${C.CART_AMOUNT}"/>
+         <input type="hidden" id=currentAmount${idx.index} name=currentAmount${idx.index}  value="${C.CART_AMOUNT}"/>
          
          <br>${C.GOODS_COLOR }
          <br>${C.GOODS_SIZE }
@@ -115,13 +130,13 @@
          
          <br>변경 수량 :<input type="text" id="CART_AMOUNT${idx.count }" name="CART_AMOUNT" value="${C.CART_AMOUNT }"> --%>
          
-         <br><input type=hidden id="sell_price"  value="${GD.GOODS_PRICE }">
+         <br><input type=hidden id="sell_price"  value="${C.GOODS_PRICE }">
             
             <img src="https://img.icons8.com/material-outlined/24/000000/minus-math.png" onclick="del();"/>
-            <input type="text" id="CART_AMOUNT" name="CART_AMOUNT" value="1" size="3" onchange="change();">
+            <input type="text" id="CART_AMOUNT" name="CART_AMOUNT" value="${C.CART_AMOUNT}" size="3" onchange="change();">
             <img src="https://img.icons8.com/material-outlined/24/000000/plus-math--v1.png" onclick="add();"/><br>
             
-         <br>${C.GOODS_PRICE*C.CART_AMOUNT}원
+         <br><input type="text" id="sum" value="${C.GOODS_PRICE*C.CART_AMOUNT}원">
                   <%-- <input type="hidden" name="totalPrice" value="${C.GOODS_PRICE*C.CART_AMOUNT}"> --%>
          
          <br>
@@ -176,7 +191,7 @@ $(function(){
     }
 }) 
 function cartUpdate(frm){
-   if(confirm("해당 상품 수량을 변경하시겠습니까?")){
+   if(confirm("상품 수량을 변경하시겠습니까?")){
       $(frm).attr("action","/ELTRUT/optionModify").submit();
    }else{
       
@@ -220,7 +235,34 @@ $(".checkbox_group").on("click", ".chkbox", function() {
      $("#total_sum").html(sum + " 원");
      $("#amount").val(sum);
  }
- 
+ //이걸로 버튼역할을 해보쟝
+ var sum=0;
+ function add() {
+ var num = $("#CART_AMOUNT").val();
+ var price = $("#sell_price").val();
+ var max = $("#GOODS_AMOUNT").val();
+ if(parseInt(num)<parseInt(max)){
+             ++num;
+             sum= num*price; 
+     $("#CART_AMOUNT").val(num);
+     $("#EA").val(num);
+     $("#sum").val(sum+"원");
+	 }
+     }
+ function del() {
+ var num = $("#CART_AMOUNT").val();
+ var price = $("#sell_price").val();
+ var min = 1;
+ if(num>min){
+             --num;
+             sum= num*price;
+     $("#CART_AMOUNT").val(num);
+     $("#EA").val(num);
+     $("#sum").val(sum+"원");
+	 }
+     }
+
+
 </script>
 </body>
 </html>

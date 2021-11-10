@@ -204,7 +204,7 @@ function GOODS_CATEGORY1Change() {
 				</tr>
 				<tr>
 					<td colspan="4" class="view_text">
-						<textarea rows="5" cols="100" title="내용" id="CONTENTS" name="GOODS_SHORTDESC" >${goodsBasic.GOODS_SHORTDESC}</textarea>
+						<textarea rows="5" cols="100" title="내용" id="CONTENTS" name="GOODS_SHORTDESC" >${adminGoodsDetail.GOODS_SHORTDESC}</textarea>
 						<br/><br/>
 					</td>
 				</tr>

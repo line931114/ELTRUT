@@ -6,23 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface JoinService {
 
-	//ȸ������
 	void insertMember(Map<String, Object> map, HttpServletRequest request) throws Exception;
 	
-	int checkMember(Map<String, Object> map) throws Exception;
-	
 	int checkId(String mem_id) throws Exception;
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

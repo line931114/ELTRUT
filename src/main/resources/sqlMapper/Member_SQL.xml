@@ -32,14 +32,6 @@
 	]]>
 	</select>
 	
-	<!-- 해당이메일 존재여부 확인 -->
-	<select id="checkMember" parameterType="hashmap" resultType="java.lang.Integer">
-	<![CDATA[
-	select count(member_email) from member where member_email = #{MEMBER_EMAIL}
-	]]>
-	</select>
-	
-	
 	<!-- 아이디찾기 -->
 	<select id="findId" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
@@ -80,5 +72,23 @@
 		
 	]]>
 	</select>
+	
+	<!-- 카카오로그인, 회원정보수정 -->
+	<select id="kakaoLogin" parameterType="String" resultType="hashmap">
+	<![CDATA[
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_EMAIL = #{user_email}
+	]]>
+	</select>	
+
+	<!-- 해당이메일 존재여부 확인 -->
+	<select id="checkMember" parameterType="String" resultType="int">
+	<![CDATA[
+	select count(member_email) from member where member_email = #{user_email}
+	]]>
+	</select>
+	
+	
 
 </mapper>

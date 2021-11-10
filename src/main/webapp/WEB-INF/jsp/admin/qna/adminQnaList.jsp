@@ -95,7 +95,7 @@ function delchk(){
 										<td style="text-align:center;vertical-align:middle;"><fmt:formatDate value="${adminQnaList.CS_REPDATE}" pattern="YY.MM.dd HH:mm" /></td>
 										<td style="text-align:center;vertical-align:middle;">
 											<a href="${viewURL}">
-												<input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png">
+												<input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png" >
 											</a>&nbsp;&nbsp;
 										<c:url var="viewURL2" value="adminQnaDelete" >
 											<c:param name="CS_NUMBER" value="${adminQnaList.CS_NUMBER}" />

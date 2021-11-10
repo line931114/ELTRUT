@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import b21.spring.eltrut.CommandMap;
+import b21.spring.join.JoinService;
 
 @Controller
 public class LoginController {
@@ -20,9 +21,16 @@ public class LoginController {
 	@Resource(name="loginService")
 	private LoginService loginService;
 	
+	@Resource(name="joinService")
+	private JoinService joinService;
+	
 	@RequestMapping(value="/loginForm")
-	public ModelAndView loginForm() {
+	public ModelAndView loginForm(CommandMap commandMap, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		
+		Map<String, Object> chk = commandMap.getMap();	      
+		
+		mav.addObject("message",chk.get("message"));
 		mav.setViewName("loginForm");
 		return mav;
 	}
@@ -47,12 +55,7 @@ public class LoginController {
 	         System.out.println("비밀번호 1 : " + chk.get("MEMBER_PASSWORD") + "\n비밀번호 2 : " + commandMap.get("MEMBER_PASSWORD"));
 	         System.out.println("chk: " + chk);
 	         System.out.println("admin: " + chk.get("MEMBER_ADMIN"));
-	         			
-	         
-
-	         
-	         
-	         
+	         				         
 	         //틀렸을때
 	         if (!String.valueOf(chk.get("MEMBER_PASSWORD")).equals(commandMap.get("MEMBER_PASSWORD"))) {
 	        	 	mv.setViewName("loginForm");
@@ -60,22 +63,16 @@ public class LoginController {
 		            return mv;
 	        
 	         } else {	//멤버 비밀번호가 입력한 비밀번호 값이 같으면
-	        	 
-	        	 	
-	        	 
-	        	 
-		        	
-		            
+	        	             
 		            session.setAttribute("MEMBER_ID", commandMap.get("MEMBER_ID"));	//세션에 아이디를 넣어라
 		            mv.addObject("MEMBER", chk);	//
 		            //수정
 		            if ( String.valueOf(chk.get("MEMBER_ADMIN")).equals("1")) { //관리자일떄
-		            	 mv.setViewName("redirect:/adminMemberList");
+		            	 mv.setViewName("redirect:/admin");
 		            	 return mv;
 			        	 
 		}
-		            
-		            
+		            	            
 		            //일반회원일때
 		            
 		            mv.setViewName("redirect:/main");
@@ -89,7 +86,42 @@ public class LoginController {
 		         }
 	      }
 	}
-	               
+	 
+	
+	@RequestMapping(value="/kakaoLogin")
+	public ModelAndView kakaoLogin(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String user_email=request.getParameter("user_email");
+		System.out.println(user_email);
+		int check = loginService.checkMember(user_email);
+		if(check==0) {
+			mv.addObject("user_email",user_email);
+			mv.setViewName("kakaoJoin");
+			return mv;
+		}else if(check==1) {
+		Map<String, Object> kakao = loginService.kakaoLogin(user_email);
+		System.out.println(kakao);
+		HttpSession session = request.getSession();
+	      if(kakao ==null) {
+	    	  mv.setViewName("loginForm");
+		      mv.addObject("message", "해당 아이디가 없습니다.");
+		      return mv;
+	      }else {
+	    	  	session.setAttribute("MEMBER_ID",kakao.get("MEMBER_ID"));	//세션에 아이디를 넣어라
+	    	  	mv.addObject("MEMBER", kakao);
+	    	  	mv.setViewName("redirect:/main");
+	            session.setAttribute("MEMBER_NAME", kakao.get("MEMBER_NAME"));
+	            session.setAttribute("MEMBER_NUMBER", kakao.get("MEMBER_NUMBER"));
+	            session.setAttribute("MEMBER_PHONE", kakao.get("MEMBER_PHONE"));
+	            session.setAttribute("MEMBER_EMAIL", kakao.get("MEMBER_EMAIL"));
+	            session.setAttribute("MEMBER_ADMIN", kakao.get("MEMBER_ADMIN"));
+
+	            return mv;
+	      }
+	      } return mv;
+	}
+	
+	
 	   @RequestMapping(value = "/logout")		//로그아웃
 	   public ModelAndView logout(HttpServletRequest request, CommandMap commandMap) {
 	      HttpSession session = request.getSession(false);
@@ -154,8 +186,5 @@ public class LoginController {
 				   return mav;	
 		      }
 		   
-
-		}
-	   
-	   
+		}	   	   
 	}

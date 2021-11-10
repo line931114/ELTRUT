@@ -131,7 +131,7 @@
 							<label>등록 이미지</label>
 						</div>
 						<div class="form-group">
-							<img src="/ELTURT/file/reviewFile/${reviewDetail.REVIEW_IMAGE}" alt="" onerror="this.src='/ELTURT/file/noimg_130.gif'" style="width: 650px;" />
+							<img src="/ELTRUT/file/reviewFile/${reviewDetail.REVIEW_IMAGE}" onerror="this.style.display='none';" style="width: 650px;" />
 						</div>
 					</c:when>
 				</c:choose>

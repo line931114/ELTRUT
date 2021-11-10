@@ -59,7 +59,7 @@ function delete1(number){
 			
 			<div class="col-7">
 			<label for="username" class="form-label">문의 이미지</label>
-			<input type="image" class="form-control" src="/ELTRUT/file/qnaFile/${O.CS_IMAGE1}" width="100" height="100" alt=""  onerror="this.src='/ELTRUT/file/noimg.png'" />
+			<input type="image"  src="/ELTRUT/file/qnaFile/${O.CS_IMAGE1}" class="img-thumbnail"  alt=""  onerror="this.style.display='none';" />
             
             </div>
             

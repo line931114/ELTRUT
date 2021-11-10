@@ -70,8 +70,8 @@ function validation() {
 				</div>
 
 			<div class="col-7">
-			<label for="username" class="form-label">기존 이미지</label>
-			<input type="image" class="form-control" src="/ELTRUT/file/qnaFile/${O.CS_IMAGE1}" width="100" height="100" alt=""  onerror="this.src='/ELTRUT/file/noimg.png'" />
+			<label for="username" class="img-thumbnail">기존 이미지</label>
+			<input type="image" class="img-thumbnail" src="/ELTRUT/file/qnaFile/${O.CS_IMAGE1}"  alt=""  onerror="this.style.display='none';" />
             <input type="file" class="form-control" id="CS_IMAGE1" name="CS_IMAGE1" value="${O.CS_IMAGE1 }">
             </div>
 			

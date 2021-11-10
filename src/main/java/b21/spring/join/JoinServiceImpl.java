@@ -18,10 +18,6 @@ public class JoinServiceImpl implements JoinService{
 		joinDAO.insertMember(map);
 	}
 
-	@Override
-	public int checkMember(Map<String, Object> map) throws Exception {
-		return joinDAO.checkMember(map);
-	}
 
 	@Override
 	public int checkId(String mem_id) throws Exception {

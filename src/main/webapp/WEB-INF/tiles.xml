@@ -294,5 +294,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/footerFunction/Aboutus.jsp" />
 	</definition>
+		
+	<!-- 카카오로그인 --> 
+	<definition name="kakaoJoin" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/kakaoJoin.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

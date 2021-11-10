@@ -29,7 +29,7 @@ function delete1(number){
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>문의사항을 확인하실수있습니다.</h2>
+      <h2>반품/교환 목록을 확인 하실수있습니다.</h2>
     </div>
     <c:choose>
 	<c:when test="${not empty O}">

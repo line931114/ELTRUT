@@ -51,12 +51,12 @@
       <h5 style="height: 24px;">FOLLOW US</h5>
       <ul class="nav flex-column">
       <p></p>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_이광호</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_정혜림</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_손수완</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_장세영</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_정원철</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">#21B_이지수</a></li>
+        <li class="nav-item mb-2"><a href="Kwangho" class="nav-link p-0 text-muted">#21B_이광호</a></li>
+        <li class="nav-item mb-2"><a href="Hyerim" class="nav-link p-0 text-muted">#21B_정혜림</a></li>
+        <li class="nav-item mb-2"><a href="Suwan" class="nav-link p-0 text-muted">#21B_손수완</a></li>
+        <li class="nav-item mb-2"><a href="Saeyoung" class="nav-link p-0 text-muted">#21B_장세영</a></li>
+        <li class="nav-item mb-2"><a href="WonCheol" class="nav-link p-0 text-muted">#21B_정원철</a></li>
+        <li class="nav-item mb-2"><a href="Jisu" class="nav-link p-0 text-muted">#21B_이지수</a></li>
         </ul>
     </div>
     

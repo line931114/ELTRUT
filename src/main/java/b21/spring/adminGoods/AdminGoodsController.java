@@ -193,11 +193,8 @@ Logger log = Logger.getLogger(this.getClass());
 			Date date=new Date();
 			List<Map<String,Object>>chk = adminGoodsService.TotalSales(commandMap.getMap());
 			int sum=0;
-			System.out.println("map객체 ㅁㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㄹㅁㄴㅇㄹㅇ"+chk);
 			for(Map<String,Object> map : chk) {
-			    System.out.println("한줄씩 ㅇㅁㄴㄹㄴㄹㅁㅇㄴㄹㅇㅁㄴㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㄴㅇㅁㄹㄴㅇ"+map);
-			    System.out.println("변환한 값 ㄴㅁㅇㄴㄹㅁㅇㄴㄹㅇㄴㅁㄹㄴ"+ Integer.parseInt(  map.get("SALES").toString()));
-			    sum+= Integer.parseInt(  map.get("SALES").toString());
+			     sum+= Integer.parseInt(  map.get("SALES").toString());
 			   
 			  
 			}
@@ -217,14 +214,10 @@ Logger log = Logger.getLogger(this.getClass());
 				
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			ModelAndView mav = new ModelAndView();
-			System.out.println("**************************"+commandMap);
 					
 			List<Map<String,Object>>chk = adminGoodsService.TotalSales(commandMap.getMap());
 			int sum=0;
-			System.out.println("map객체 ㅁㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㄹㅁㄴㅇㄹㅇ"+chk);
 			for(Map<String,Object> map : chk) {
-			    System.out.println("한줄씩 ㅇㅁㄴㄹㄴㄹㅁㅇㄴㄹㅇㅁㄴㄹㅇㄴㅁㄹㅇㄴㄹㅇㄴㅁㄹㅇㄴㅁㄹㅇㄴㅁㄹㄴㅇㅁㄹㄴㅇ"+map);
-			    System.out.println("변환한 값 ㄴㅁㅇㄴㄹㅁㅇㄴㄹㅇㄴㅁㄹㄴ"+ Integer.parseInt(  map.get("SALES").toString()));
 			    sum+= Integer.parseInt(  map.get("SALES").toString());
 			   
 			  
@@ -276,20 +269,15 @@ Logger log = Logger.getLogger(this.getClass());
 				  
 				  
 				  
-				  System.out.println("*************order_date_start="+firstdate);
-				  System.out.println("*************order_date_end="+commandMap.get("order_date_end").toString());
 			 }
 			
 			 
 			 
-			 System.out.println("*************firstdate="+firstdate);
-			 System.out.println("*************enddate="+enddate);
 			
 			commandMap.put("order_date_start", firstdate);
 			 commandMap.put("order_date_end",enddate);
 			 List<Map<String,Object>>List = adminGoodsService.DateSales(commandMap.getMap());
 			 
-			 System.out.println("*******************"+chk);
 			 mav.addObject("List",List);
 			 mav.setViewName("adminSales");
 			

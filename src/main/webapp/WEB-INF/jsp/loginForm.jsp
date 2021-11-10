@@ -90,6 +90,35 @@ if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.val
   document.login_form.submit();
 }
 </script>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        window.Kakao.init("a002b580fa3347283a090730a39fb5f8");
+
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile_nickname,account_email,talk_message', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                success: function(response) {
+                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            const kakao_account = res.kakao_account;
+                            console.log(kakao_account)
+                   var user_email =res.kakao_account.email;
+                    window.location.href='/ELTRUT/kakaoLogin?user_email='+user_email //리다이렉트 되는 코드
+                        }
+                    });
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+</script>
+
+
+
 <title>로그인</title>
 </head>
 <body>
@@ -124,6 +153,12 @@ if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.val
            <input type="button" value="회원가입"  onclick="location.href='/ELTRUT/joinStep1'">
 			</div>
 		</div>
+		
+		<div>
+			<a href="javascript:kakaoLogin();"><img src="/ELTRUT/file/kakao_login.png" alt="카카오계정 로그인" style="height: 50px;margin-top: 1%;"/></a>
+		</div>
+		
+		
 </div>
 
 <div class="centered">

@@ -166,6 +166,8 @@ public class MainController {
 	}
 	
 	
+	//main_footer 에서 사용되는 회사정책, Function
+	
 	@RequestMapping(value="/privacy")
 	public ModelAndView footer0(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -189,6 +191,51 @@ public class MainController {
 	public ModelAndView terms(CommandMap commandMap, HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("footerFunction/terms");
+		return mv;
+	}
+	
+	//main_footer에서 이동되는 follow us
+	
+	@RequestMapping(value="/Kwangho")
+	public ModelAndView kwangho(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/1_Kwangho");
+		return mv;
+	}
+	@RequestMapping(value="/Hyerim")
+	public ModelAndView Hyerim(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/2_Hyerim");
+		return mv;
+	}
+	@RequestMapping(value="/Saeyoung")
+	public ModelAndView Saeyoung(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/3_Saeyoung");
+		return mv;
+	}
+	@RequestMapping(value="/Suwan")
+	public ModelAndView Suwan(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/4_Suwan");
+		return mv;
+	}
+	@RequestMapping(value="/Jisu")
+	public ModelAndView Jisu(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/5_Jisu");
+		return mv;
+	}
+	@RequestMapping(value="/WonCheol")
+	public ModelAndView Woncheol(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/6_Woncheol");
+		return mv;
+	}
+	@RequestMapping(value="INFO")
+	public ModelAndView INFO(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("footerFunction/eltrut/INFO");
 		return mv;
 	}
 

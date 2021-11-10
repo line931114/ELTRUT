@@ -17,4 +17,8 @@ public interface LoginService {
 	
 	//아이디찾기실패
 	Map<String,Object> findFail0(Map<String,Object>map)throws Exception;
+	
+	Map<String,Object>kakaoLogin(String user_email)throws Exception;
+
+	int checkMember(String user_email) throws Exception;
 }

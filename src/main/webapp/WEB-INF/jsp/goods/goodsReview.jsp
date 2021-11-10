@@ -60,79 +60,66 @@ function delete1(number,id,goods){
   <main>
     <div class="py-5 text-center">
       <h2>상품후기 페이지</h2>
+    <form >
     </div>
-        <form class="needs-validation" >
+       
         <h4 align="right">
          <button class="btn btn-primary btn-lg" type="button" onclick="insertCheck();">후기작성</button>
          <input type="hidden" id="MEMBER" name="MEMBER" value="${sessionScope.MEMBER_ID }">
         </h4>
         
+        
+    <table class="table table-striped" style="text-align-last: center" >
+      	<thead>
+     		<tr>
+     	 		<th style="width:100px">번호</th>
+     	 		<th style="width:210px">리뷰 이미지</th>
+     	 		<th style="width:200px">제목</th>
+     	 		<th style="width:250px">내용</th>
+     	 		<th style="width:210px">작성자</th>
+     	 		<th></th>
+     	 		<th></th>
+     		</tr>
+     	</thead>
+     </table>    
+        
+        
+        
     <c:choose>
 	<c:when test="${not empty goodsReview}">
 		<c:forEach items="${goodsReview }" var="G" varStatus="status">
 
-    <div class="row g-5">
-      
-      <div class="col-md-7 col-lg-8">
-          <div class="row g-3">
-            <div class="col-7">
-              <label for="firstName" class="form-label">리뷰번호</label>
-              <input type="text" class="form-control" value="${G.REVIEW_NUMBER }" readonly>
-              
-            </div>
+	 <table class="table table-striped" style="text-align-last: center" >
+      <tbody>
+      	<thead>
+     		<tr>
+     	 		<td style="width:100px;height:80px; vertical-align: middle; "><input type="hidden" class="form-control" value="${G.REVIEW_NUMBER }" readonly>${G.REVIEW_NUMBER }</td>
+     	 		<td style="width:200px;height:80px; vertical-align: middle; "><img src="/ELTRUT/file/reviewFile/${G.REVIEW_IMAGE}" onerror="this.style.display='none';" class="img-thumbnail" /></td>														
+     	 		<td style="width:200px;height:80px; vertical-align: middle;; "><input type="hidden" class="form-control" value="${G.REVIEW_TITLE }" readonly>${G.REVIEW_TITLE }</td>
+     	 		<td style="width:250px;height:80px; vertical-align: middle; "><input type="hidden" class="form-control" value="${G.REVIEW_CONTENT }" readonly>${G.REVIEW_CONTENT }</td>     	 		
+     	 		<td style="width:200px;height:80px; vertical-align: middle; "><input type="hidden" class="form-control" value="${G.MEMBER_ID }" readonly>${G.MEMBER_ID }</td>
+     	 		
+				<td style="vertical-align: middle;">  <button class="btn btn-primary btn-lg" type="button" onclick="modify1(reviewNumber${status.index},memberId${status.index});">수정</button></td>
+        		<td style="vertical-align: middle;">  <button class="btn btn-primary btn-lg" type="button" onclick="delete1(reviewNumber${status.index},memberId${status.index},goodsNumber${status.index});">삭제</button></td>
+     		</tr>
+     	</thead>
+      </tbody>		   				
+     </table>
 
-            <div class="col-7">
-              <label for="lastName" class="form-label">작성자</label>
-              <input type="text" class="form-control" value="${G.MEMBER_ID }" readonly>
-              
-            </div>
-
-            <div class="col-7">
-              <label for="username" class="form-label">리뷰제목</label>
-                <input type="text" class="form-control" value="${G.REVIEW_TITLE }" readonly>
-              
-              </div>
-			
-			<div class="col-7">
-			<label for="username" class="form-label">리뷰 이미지</label>
-			<input type="image" class="form-control" src="/ELTRUT/file/reviewFile/${G.REVIEW_IMAGE}" width="100" height="100" alt=""  onerror="this.src='/ELTRUT/file/noimg.png'" />
-            
-            </div>
-            
-            <div class="col-7">
-              <label for="email" class="form-label">리뷰내용</label>
-              <input type="email" class="form-control" value="${G.REVIEW_CONTENT }" readonly>
-              
-            </div>
-
-            <div class="col-7">
-              <label for="address" class="form-label">관리자 댓글</label>
-              <input type="hidden" class="form-control" value="" readonly>
-              
-            </div>
-
-          </div>
-          <hr class="my-4">
 			<input type="hidden" name="goodsNumber${status.index}" id="GOODS_NUMBER" value="${G.GOODS_NUMBER }">
 			<input type="hidden" name="reviewNumber${status.index}" id="REVIEW_NUMBER" value="${G.REVIEW_NUMBER }">
 			<input type="hidden" name="memberId${status.index}" id="MEMBER_ID" value="${G.MEMBER_ID }">
-          <div style="text-align: -webkit-center;">
-          <button class="btn btn-primary btn-lg" type="button" onclick="modify1(reviewNumber${status.index},memberId${status.index});">수정</button>
-          <button class="btn btn-primary btn-lg" type="button" onclick="delete1(reviewNumber${status.index},memberId${status.index},goodsNumber${status.index});">삭제</button>
-          </div>
-          <hr class="my-4">
-      </div>
-    </div>
+      
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
 		<H3>"상품후기가 없습니다."</H3>	
 	</c:otherwise>
 </c:choose>
-        </form>
+       
   </main>
 </div>
-				
+		 </form>		
 
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

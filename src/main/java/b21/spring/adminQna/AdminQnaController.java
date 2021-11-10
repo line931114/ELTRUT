@@ -237,7 +237,7 @@ public class AdminQnaController {
 	public ModelAndView adminQnaDelete(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		String filePath ="C:\\Users\\rosal\\ELUTE ADMIN\\src\\main\\webapp\\file\\qnaFile\\";
+		String filePath ="C:\\JAVA\\stsApp\\ELTRUT\\src\\main\\webapp\\file\\qnaFile\\";
 		String image1 = null;
 		
 		if (request.getParameter("CS_IMAGE1") != null) {

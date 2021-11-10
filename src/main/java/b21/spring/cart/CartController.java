@@ -39,7 +39,8 @@ public class CartController {
 			cartService.cartInsert(commandMap.getMap());
 		} else { // 비회원 장바구니 등록
 			
-			mv.addObject("message", "로그인후 이용해주세요.");
+			mv.addObject("message", "상품 구매는 로그인후 이용가능합니다.");
+			mv.setViewName("redirect:/loginForm");
 			return mv;
 				}
 		return mv;
