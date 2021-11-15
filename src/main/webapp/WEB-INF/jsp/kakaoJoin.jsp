@@ -169,12 +169,12 @@ function agreementCheck(){
 <div class="container">
   <main>
     <div class="py-5 text-center">
-       <h2>카카오회원으로 가입</h2>
+       <h2>카카오,네이버회원으로 가입</h2>
       <p class="lead">ELTRUT 페이지에서 오신 것을 환영합니다, 상품을 구매하기 위해선 회원가입을 진행해주세요.</p>
     </div>
 		    <hr class="my-4">
       <div class="col-md-7 col-lg-8" style="line-height: 2;">
-        <h4 class="mb-3">카카오회원정보</h4>
+        <h4 class="mb-3">카카오,네이버회원정보</h4>
       <form method="post" name="join_form" action="/ELTRUT/joinComplete">	
 	   <div class="row g-5">
             <div class="col-sm-6">
@@ -282,7 +282,7 @@ function agreementCheck(){
    			</div>
 			
             <div class="col-sm-2" > 
-       			 <input type="button" value="카카오회원으로 가입하기" onclick="joinform_check();" class="btn btn-secondary btn-sm">
+       			 <input type="button" value="가입하기" onclick="joinform_check();" class="btn btn-secondary btn-sm">
 			</div>
 		</div>
 	</form>

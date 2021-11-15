@@ -238,6 +238,14 @@ public class MainController {
 		mv.setViewName("footerFunction/eltrut/INFO");
 		return mv;
 	}
+	@RequestMapping(value="naverLogin")
+	public ModelAndView naverLogin(CommandMap commandMap, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("naverLogin");
+		return mv;
+	}
+	
+	
 
 	
 }

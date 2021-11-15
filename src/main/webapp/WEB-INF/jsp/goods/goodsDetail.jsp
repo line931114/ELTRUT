@@ -62,6 +62,12 @@ function change () {
 <script>
 
 function Throw(){
+	
+	if($("#option").val() == ''){
+        alert('사이즈와 색상을 선택해주세요.');
+        return false;
+    }
+	
         if(confirm("장바구니에 담으시겠습니까?")){
         $('#cartIn').submit();
         }else{

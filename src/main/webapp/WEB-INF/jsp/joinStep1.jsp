@@ -200,7 +200,7 @@ function agreementCheck(){
             <div class="col-sm-6">
               <label for="email" class="form-label">이메일</label>
                <div>
-              	<input type="email" class="form-control" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="" maxlength="20" placeholder="your@example.com">  
+              	<input type="email" class="form-control" name="MEMBER_EMAIL" id="MEMBER_EMAIL" value="" maxlength="30" placeholder="your@example.com">  
                </div>
             </div>
             

@@ -23,7 +23,7 @@ a { color: #000; }
   
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" style="align-items: center;">
-  <a class="navbar-brand" href="http://localhost:9001/ELTRUT/main">
+  <a class="navbar-brand" href="main">
       <img src="/ELTRUT/file/ELTRUT.png" alt="" width="310" height="98">
     </a>
         <c:choose>

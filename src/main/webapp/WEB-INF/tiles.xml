@@ -301,5 +301,10 @@
 			value="/WEB-INF/jsp/kakaoJoin.jsp" />
 	</definition>
 	
+	<definition name="naverLogin" extends="main_layout">		
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/naverLogin.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

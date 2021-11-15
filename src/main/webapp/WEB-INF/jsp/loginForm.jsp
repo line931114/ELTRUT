@@ -117,8 +117,8 @@ if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.val
         }
 </script>
 
-
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <title>로그인</title>
 </head>
 <body>
@@ -155,11 +155,21 @@ if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.val
 		</div>
 		
 		<div>
-			<a href="javascript:kakaoLogin();"><img src="/ELTRUT/file/kakao_login.png" alt="카카오계정 로그인" style="height: 50px;margin-top: 1%;"/></a>
+			<a href="javascript:kakaoLogin();"><img src="/ELTRUT/file/kakao_login.png" alt="카카오계정 로그인" style="height: 40px;margin-top: 3%;"/></a>
 		</div>
 		
-		
-</div>
+		<div style="height: 50px;margin-top: 1%; " id="naver_id_login"></div>
+
+  <!-- //네이버 로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("5LAnxikAbCZNCyaKwbUp", "http://localhost:9001/ELTRUT/naverLogin");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("green",4);
+  	naver_id_login.setState(state);	
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+   </script>
+ 
 
 <div class="centered">
 <br><br>

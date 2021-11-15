@@ -24,7 +24,7 @@
                <tr id="goods${idx.count}">
           <div class="col-xs-4 col-md-3">
           <a href="goodsDetail?GOODS_NUMBER=${G.GOODS_NUMBER }" id="GoodsName" name="GoodsName" class="thumbnail" >
-            <img src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}" class="img-thumbnail" style="width:300px; height:400px;">
+            <img src="/ELTRUT/file/goodsFile/${G.GOODS_THUMBNAIL}" class="img-thumbnail" style="width:300px; height:400px; margin-top:10%;">
             </a>       
         <a href="goodsDetail?GOODS_NUMBER=${G.GOODS_NUMBER }  id="GoodsName" name="GoodsName" style="color: black;">
         <br>${G.GOODS_NAME } <br> ${G.GOODS_PRICE }원 </a>
