@@ -12,12 +12,14 @@
 	   http://www.springframework.org/schema/aop/spring-aop.xsd">
 	   
 	<!-- 컨트롤러를 자동으로 등록할 수 있도록 -->
-	<context:component-scan base-package="b21"></context:component-scan>
+	<context:component-scan base-package="b21.spring"></context:component-scan>
 
 	<!--css 자동 등록  -->
 	<mvc:resources location="/css/**" mapping="/css/**"/>
 	<mvc:resources location="/file/**" mapping="/file/**" />
 	<mvc:resources location="/js/**" mapping="/js/**"/>
+	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	
 	
 	<!-- Map을 이용해 데이터를 주고 받을 수 있도록 -->
 	<mvc:annotation-driven>

@@ -75,16 +75,13 @@ public class AbstractDAO {
 		return sqlSession.selectList(queryId, params);
 	}
 	
-	
 
-	// ê°??…?•œ ?šŒ?› ?•„?´?”” ê²??ƒ‰
 	@SuppressWarnings("rawtypes")
 	public List searchMemberList0(String map, Object params) {
 		printQueryId(map);
 		return sqlSession.selectList(map, params);
 	}
-	
-	// ê°??…?•œ ?šŒ?› ?•„?´?”” ì¤‘ë³µ ?™•?¸
+
 	@SuppressWarnings("rawtypes")
 	public int selectMemberId(String queryId, Object params) {
 		printQueryId(queryId);
@@ -92,10 +89,7 @@ public class AbstractDAO {
 	}
 
 
-	// ?´ë¦? ê²??ƒ‰
 
-
-	// ê°??…?•œ ?šŒ?› ?´ë¦? ê²??ƒ‰
 	@SuppressWarnings("rawtypes")
 	public List searchMemberList1(String queryId, Object params) {
 		printQueryId(queryId);
@@ -103,15 +97,6 @@ public class AbstractDAO {
 	}
 
 
-	// ?šŒ?›?•„?´?””ë¡? ê²??ƒ‰
-
-	// ê°??…?•œ ?šŒ?› ? „?™”ë²ˆí˜¸ ê²??ƒ‰
-
-
-	// ?šŒ?›?•„?´?””ë¡? ê²??ƒ‰
-
-
-	// ê°??…?•œ ?šŒ?› ? „?™”ë²ˆí˜¸ ê²??ƒ‰
 
 	@SuppressWarnings("rawtypes")
 	public List searchMemberList2(String queryId, Object params) {
@@ -121,39 +106,26 @@ public class AbstractDAO {
 
 
 
-	// E-Mail ê²??ƒ‰
-
-	// ê°??…?•œ ?šŒ?› ?´ë©”ì¼ ê²??ƒ‰
-
-
-
-	// E-Mail ê²??ƒ‰
-	// ê°??…?•œ ?šŒ?› ?´ë©”ì¼ ê²??ƒ‰
-
-
-	// ê°??…?•œ ?šŒ?› ?´ë©”ì¼ ê²??ƒ‰
-
 	@SuppressWarnings("rawtypes")
 	public List searchMemberList3(String queryId, Object params) {
 		printQueryId(queryId);
 		return sqlSession.selectList(queryId, params);
 	}
 	
-	// ê¸?? œëª? ê²??ƒ‰
+
 	@SuppressWarnings("rawtypes")
 	public List searchTitleList(String queryId, Object params, String isSearch) {
 		printQueryId(queryId);
 		return sqlSession.selectList(queryId, params);
 	}
 
-	// ê¸??‚´?š© ê²??ƒ‰
 	@SuppressWarnings("rawtypes")
 	public List searchContentList(String queryId, Object params, String isSearch) {
 		printQueryId(queryId);
 		return sqlSession.selectList(queryId, params);
 	}
 	
-	// ?˜?´ì§?
+
 	@SuppressWarnings("unchecked")
 	public Object selectPagingList(String queryId, Object params){
 		printQueryId(queryId);

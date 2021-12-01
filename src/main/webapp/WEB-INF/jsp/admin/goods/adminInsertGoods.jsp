@@ -251,8 +251,8 @@ function GOODS_CATEGORY1Change() {
 		}
 		
 		function fn_insertGood(){
-			var comSubmit = new ComSubmit("frm");/* 
-			comSubmit.setUrl("<c:url value='/adminGoodsInsert' />"); */
+			var comSubmit = new ComSubmit("frm"); 
+			//comSubmit.setUrl("<c:url value='/adminGoodsInsert' />");
 			comSubmit.submit();
 		}
 		

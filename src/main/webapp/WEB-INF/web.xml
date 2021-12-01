@@ -14,7 +14,7 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
          </init-param>
-  </filter>
+	</filter>
 
       <filter-mapping>
          <filter-name>encodingFilter</filter-name>
@@ -38,6 +38,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -47,5 +48,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:config/spring/context-*.xml</param-value>
   	</context-param>
+
+
 
 </web-app>

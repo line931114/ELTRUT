@@ -147,9 +147,7 @@ public class ReviewController {
 		   ModelAndView mv = new ModelAndView();
 		  
 		   Map<String, Object> id = reviewService.reviewNumber(commandMap.getMap());
-		   
 		   Object REVIEW_NUMBER = (Object) id.get("REVIEW_NUMBER"); 
-		   
 		   commandMap.put("REVIEW_NUMBER", REVIEW_NUMBER);
 		   
 		   

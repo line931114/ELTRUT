@@ -14,7 +14,6 @@
       <h2>개인정보 조회</h2>
       
     </div>
-
     <div class="row g-5">
       
       <div class="col-md-7 col-lg-8">

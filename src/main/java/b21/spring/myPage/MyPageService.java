@@ -3,9 +3,6 @@ package b21.spring.myPage;
 import java.util.List;
 import java.util.Map;
 
-
-
-
 public interface MyPageService {
 
 	//회원정보조회

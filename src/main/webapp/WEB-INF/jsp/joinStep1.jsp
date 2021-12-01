@@ -204,7 +204,9 @@ function agreementCheck(){
                </div>
             </div>
             
-            <div class="col-sm-6"></div>
+            <div class="col-sm-6">
+            <input type="button" value="이메일인증하기">
+            </div>
             
             <div class="col-sm-6">
               <label for="text" class="form-label">핸드폰번호</label>
